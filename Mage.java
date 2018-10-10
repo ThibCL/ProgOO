@@ -1,0 +1,93 @@
+package org.centrale.projet.objet;
+
+import java.util.Random;
+
+/**
+ * Cette classe représente les personnages de type Mage (sous-classe de Personnage) ;
+ * C'est un personnage magique
+ * @author Mathilde
+ */
+public class Mage extends Personnage implements Combattant{
+   
+/**
+ * Constructeur de Mage qui prend en parametre toutes les valeurs des attributs a initialiser
+ * @param nom
+ * @param pV
+ * @param ptM
+ * @param pA
+ * @param pP
+ * @param pM
+ * @param rM
+ * @param dA
+ * @param dM
+ * @param distMax
+ * @param ptP
+ * @param p 
+ */
+    public Mage(String nom, int pV, int ptM, int pA, int pP, int pM, int rM, int dA, int dM, int distMax, int ptP, Point2D p){
+        super(nom, pV, ptM, pA, pP, pM, rM, dA, dM, distMax, ptP,  p);
+    }
+    
+/**
+ * Constructeur de Mage qui initialise les attributs a partir des attributs du Mage mis en parametre
+ * @param m 
+ */
+    public Mage(Mage m){
+        super(m);
+    }
+    
+/**
+ * Constructeur de Mage par default qui initialise les attributs à des valeurs choisies par default
+ * Le mage ne peut attaquer qu'avec de la magie
+ */
+    public Mage(){
+        super();
+        this.setPtMana(25);
+        this.setPourcentageMag(50);
+        this.setDegAtt(0);
+        this.setDegMag(25);
+    }
+    
+    
+    
+    
+    /**
+     * Méthode permettant d'afficher le mage
+     */
+        public void affiche(){
+        System.out.println("C'est un personnage de type Mage :"
+                +"\nNom : "+getNom() +
+                "; \nPoints de vie: "+getPtVie()+
+                "; \nPoints Mana : "+getPtMana()+
+                "; \nPourcentage de magie : "+getPourcentageMag()+
+                "; \nPourcentage de résistance à la magie : "+getPourcentageResisMag()+
+                "; \nDegats de magie : "+getDegMag()+
+                "; \nDistance maximale d'attaque : "+getDistAttMax()+
+                "; \nPourcentage d'attaque : "+getPourcentageAtt()+
+                "; \nPourcentage parade : "+getPourcentagePar()+
+                "; \nDegats d'attaque : "+getDegAtt()+
+                "; \nPoints de parade : "+getPtPar()+
+                ";");
+        getPos().affiche();
+    }
+        
+    /**
+     * Méthode peremtttant au mage d'attaquer. Il utilise la magie et peut atteindre toutes les créatures à moins de distMax de lui.
+     * @param c 
+     */
+    public void combattre(Creature c){
+        if ((this.getPos().distance(c.getPos()) < this.getDistAttMax())&&((this.getPtMana() > 0))){
+            this.setPtMana(this.getPtMana()-1);
+            Random lanceDe = new Random();
+            int RandAtt = lanceDe.nextInt(101);
+            if (RandAtt <= this.getPourcentageMag()) {
+                System.out.println("Attaque réussie! Le défenseur perd "+this.getDegMag()+" points de vie");
+                c.setPtVie(c.getPtVie()-this.getDegMag());
+            }
+            else {
+                System.out.println("Attaque ratée!");
+            }
+        }
+    }
+    
+}

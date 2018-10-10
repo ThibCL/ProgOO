@@ -1,0 +1,101 @@
+
+package org.centrale.projet.objet;
+import java.util.Scanner; 
+/**
+ *
+ * @author Thibault
+ */
+public class Joueur {
+    /**
+     * Nom du joueur 
+     */
+    private String nomJoueur;
+    /**
+     * Personnage associé au joueur
+     */
+    private Personnage perso;
+
+
+    public String getNomJoueur() {
+        return nomJoueur;
+    }
+    
+   
+    public Personnage getPerso() {
+        return perso;
+    }
+
+    public void setNomJoueur(String nomJoueur) {
+        this.nomJoueur = nomJoueur;
+    }
+
+    public void setPerso(Personnage perso) {
+        this.perso = perso;
+    }
+    /**
+     * Méthode qui permet au joueur de choisir son personnage et le nom de celui ci
+     */
+    public void choisirperso(){
+        System.out.println("Veuillez entrer un type de personnage: "
+                + "\n -Archer"
+                + "\n -Guerrier"
+                + "\n -Mage"
+                + "\n -Paysan");
+        Scanner saisieUtilisateur = new Scanner(System.in); 
+        String str = saisieUtilisateur.next(); 
+        switch(str){
+            case "Archer": this.perso= new Archer();
+            case "Guerrier": this.perso=new Guerrier();
+            case "Mage": this.perso=new Mage();
+            case "Paysan": this.perso=new Paysan();
+        }
+        System.out.println("Entrez le nom de votre personnage ");
+        String nm = saisieUtilisateur.next();
+        this.perso.setNom(nm);
+        
+    }
+    
+    /**
+     * fonction qui permet au joeur de décider d'attaquer une autre creature
+     * @param w 
+     */
+    public void combattreperso(World w){
+        
+        
+    }
+            
+    /**
+     * méthode qui permet au joueur de décider ou deplacer son perso, la méthode vérifie si il y a une case autour de libre
+     * et si c'est le cas demande des coordonnées au joueur jusqu'a ce que le deplacement soit possible. Une fois que le 
+     * deplacement est possible la méthode appelle la méthode déplacer de creature
+     * @param w 
+     */
+    public void deplaceperso(World w){
+        if(this.perso.deplpossible(w)==false){
+            System.out.println("Impossible de se ddéplacer tu dois te battre");
+            //this.combattreperso();
+        }
+        
+        else{
+            Scanner scan = new Scanner(System.in);
+            System.out.println("Entrez un position X");
+            int x=scan.nextInt();
+            System.out.println("Entrez un position Y");
+            int y=scan.nextInt();
+            while (w.getMatMonde()[this.perso.getPos().getX()+x][this.perso.getPos().getY()+y]==1){
+                System.out.println("Entrez un position X");
+                x=scan.nextInt();
+                System.out.println("Entrez un position Y");
+                y=scan.nextInt();
+
+            }
+            this.perso.deplacer(w, x, y);
+            
+        }
+        
+    }
+    
+    
+    
+    
+}
