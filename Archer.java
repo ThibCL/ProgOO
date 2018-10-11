@@ -4,7 +4,7 @@ import java.util.Random;
 
 /**
  * Cette classe représente les personnages de type archer (sous-classe de Personnage)
- * test pour github
+ * test pour github avec le nouveau nom de dossier 
  * @author Mathilde
  * 
  */
