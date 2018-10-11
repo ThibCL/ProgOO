@@ -51,6 +51,13 @@ public class Archer extends Personnage implements Combattant {
  */
     public Archer(){
         super();
+        Random intAlea= new Random();
+        int i = 10+intAlea.nextInt(20);
+        setPourcentagePar(i);
+        i = 5+intAlea.nextInt(5);
+        setPtPar(i);
+        i = 1+intAlea.nextInt(5);
+        setDistAttMax(i);
         nbFleches=10;
     }
     
@@ -87,7 +94,8 @@ public class Archer extends Personnage implements Combattant {
      */
     public void combattre(Creature c){
         
-        if (this.getPos().distance(c.getPos()) == 1 ){
+        //Combat corps à corps : on met 1.42 pour permettre d'attaquer les protagonistes sur les cases en diagonale
+        if (this.getPos().distance(c.getPos()) < 1.42 ){
             Random lanceDe = new Random();
             int RandAtt = lanceDe.nextInt(101);
             if (RandAtt <= this.getPourcentageAtt()) {
@@ -111,8 +119,10 @@ public class Archer extends Personnage implements Combattant {
             else {
                 System.out.println("Attaque ratée!");
             }
-        }        
-        else if ((this.getPos().distance(c.getPos()) >1 )&&(this.getPos().distance(c.getPos()) < this.getDistAttMax())&&((this.getNbFleches() > 0))){
+        }
+
+        //Combat à distance 
+        else if ((this.getPos().distance(c.getPos()) >1.42 )&&(this.getPos().distance(c.getPos()) < this.getDistAttMax())&&((this.getNbFleches() > 0))){
             this.setNbFleches(this.getNbFleches()-1);
             Random lanceDe = new Random();
             int RandAtt = lanceDe.nextInt(101);

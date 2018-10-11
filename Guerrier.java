@@ -40,6 +40,13 @@ public class Guerrier extends Personnage implements Combattant {
  */
     public Guerrier(){
         super();
+        Random intAlea= new Random();
+        int i = 50+intAlea.nextInt(25);
+        setPourcentageAtt(i);
+        i = 20+intAlea.nextInt(25);
+        setDegAtt(i);
+        i = 25+intAlea.nextInt(15);
+        setPourcentageResisMag(35);
     }
     
 /**
@@ -69,7 +76,9 @@ public void affiche(){
      */
 
 public void combattre(Creature c){
-        if (this.getPos().distance(c.getPos()) == 1 ){
+        
+        //Combat corps à corps : on met 1.42 pour permettre d'attaquer les protagonistes sur les cases en diagonale
+        if (this.getPos().distance(c.getPos()) < 1.42 ){
             Random lanceDe = new Random();
             int RandAtt = lanceDe.nextInt(101);
             if (RandAtt <= this.getPourcentageAtt()) {

@@ -34,6 +34,9 @@ public class Loup extends Monstre implements Combattant {
  */
     public Loup(){
         super();
+        Random intAlea= new Random();
+        int i = 20+intAlea.nextInt(15);
+        setDegAtt(i);
     }
     
 /**
@@ -53,11 +56,14 @@ public class Loup extends Monstre implements Combattant {
 
  /**
      * Méthode permettant de combattre une créature par un combat corps à corps (la créature attaquée
-     * doit être sur une case adjacente à la créature qui attaque. 
+     * doit être sur une case adjacente au loup qui attaque)
+     * 
      * @param c créature attaquée
      */
 public void combattre(Creature c){
-        if (this.getPos().distance(c.getPos()) == 1 ){
+    
+        //Combat corps à corps : on met 1.42 pour permettre d'attaquer les protagonistes sur les cases en diagonale
+        if (this.getPos().distance(c.getPos()) <1.42 ){
             Random lanceDe = new Random();
             int RandAtt = lanceDe.nextInt(101);
             if (RandAtt <= this.getPourcentageAtt()) {

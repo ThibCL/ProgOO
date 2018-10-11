@@ -83,9 +83,9 @@ public abstract class Personnage extends Creature {
         super();
         ptMana=0;
         pourcentageMag=0;
-        pourcentageResisMag=50;
+        pourcentageResisMag=40;
         degMag=0;
-        distAttMax=4;
+        distAttMax=1;
     }
     
     public String getNom(){

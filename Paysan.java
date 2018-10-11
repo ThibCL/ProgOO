@@ -1,5 +1,7 @@
 package org.centrale.projet.objet;
 
+import java.util.Random;
+
 /**
  * Cette classe permet de représenter un personnage de type Paysan (sous-classe de Personnage)
  * @author Mathilde
@@ -38,6 +40,14 @@ public class Paysan extends Personnage {
  */
     public Paysan(){
         super();
+        Random intAlea= new Random();
+        int i = 50+intAlea.nextInt(25);
+        setPourcentageAtt(0); //le paysan ne peut pas attaquer 
+        setDegAtt(0);
+        i = 35+intAlea.nextInt(30); //le paysan ne sait pas trop se défendre
+        setPourcentagePar(50);
+        i = 5+intAlea.nextInt(15);
+        setPtPar(i);
     }
     
     /**

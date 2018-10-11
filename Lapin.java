@@ -1,5 +1,7 @@
 package org.centrale.projet.objet;
 
+import java.util.Random;
+
 /**
  * Cette classe représente les monstres de type Lapin (sous-classe de Monstre)
  * @author Mathilde
@@ -32,6 +34,13 @@ public class Lapin extends Monstre{
  */
     public Lapin(){
         super();
+        Random intAlea= new Random();
+        int i = 60+intAlea.nextInt(20);
+        setPtVie(i);
+        setPourcentageAtt(0); //le lapin ne peut pas attaquer 
+        i = 50+intAlea.nextInt(20);
+        setPourcentagePar(i); //mais il peut éviter facilement le combat grace à sa rapidité
+        setDegAtt(0);
     }
 
 /**

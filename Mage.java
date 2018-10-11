@@ -42,10 +42,23 @@ public class Mage extends Personnage implements Combattant{
  */
     public Mage(){
         super();
-        this.setPtMana(25);
-        this.setPourcentageMag(50);
-        this.setDegAtt(0);
-        this.setDegMag(25);
+        Random intAlea= new Random();
+        int i = 15+intAlea.nextInt(15);
+        setPtMana(i);
+        i = 40+intAlea.nextInt(30);
+        setPourcentageMag(i);
+        i = intAlea.nextInt(15);
+        setPourcentageAtt(i);
+        i = intAlea.nextInt(8);
+        setDegAtt(i); //le Mage se bat très mal sans sa Magie
+        i = 15+intAlea.nextInt(15);
+        setDegMag(i);
+        i = 10+intAlea.nextInt(10); //s'il réussit sa défense, il use de sa magie et se défend très bien
+        setPtPar(i);
+        i = 45+intAlea.nextInt(20);
+        setPourcentageResisMag(i);
+        i = 1+intAlea.nextInt(5);
+        setDistAttMax(i);
     }
     
     

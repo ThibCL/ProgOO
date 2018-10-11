@@ -49,7 +49,7 @@ public class Joueur {
             case "Mage": this.perso=new Mage();
             case "Paysan": this.perso=new Paysan();
         }
-        System.out.println("Entrez le nom de votre personnage ");
+        System.out.println("Entrez le nom de votre personnage :");
         String nm = saisieUtilisateur.next();
         this.perso.setNom(nm);
         
