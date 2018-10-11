@@ -4,6 +4,7 @@ import java.util.Random;
 
 /**
  * Cette classe représente les personnages de type archer (sous-classe de Personnage)
+ * test pour github
  * @author Mathilde
  * 
  */
