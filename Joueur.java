@@ -1,5 +1,6 @@
 
 package org.centrale.projet.objet;
+import java.util.ArrayList;
 import java.util.Scanner; 
 /**
  *
@@ -55,14 +56,36 @@ public class Joueur {
         
     }
     
+    /** fonction renvoyant la liste des personnages pouvant être attaqués par le joueur selon sa position et sa distance max d'attaque 
+     * 
+     */
+    public ArrayList<Creature> creaAttaquables (World w){
+        ArrayList<Creature> cAtt = new ArrayList<>();
+        for (Creature c : w.getlCrea()){
+            if (this.getPerso().getPos().distance(c.getPos())<=this.getPerso().getDistAttMax()){
+                cAtt.add(c);
+            }
+        }
+        return cAtt;
+    }
     /**
-     * fonction qui permet au joeur de décider d'attaquer une autre creature
+     * méthode qui permet au joeur d'attaquer une autre creature
      * @param w 
      */
     public void combattreperso(World w){
-        
-        
+        ArrayList<Creature> cAtt = creaAttaquables(w);
+        if (cAtt.size()==0){
+            System.out.println("Impossible de te battre, tu n'as pas d'ennemi à portée d'attaque");
+        }
+        else {
+            Scanner scan = new Scanner(System.in);
+            System.out.println("Entrez le personnage que vous voulez combattre parmis les suivants :");
+            for (Creature c : w.getlCrea()){
+                c.affiche();
+                }
+            }
     }
+       
             
     /**
      * méthode qui permet au joueur de décider ou deplacer son perso, la méthode vérifie si il y a une case autour de libre
@@ -72,20 +95,21 @@ public class Joueur {
      */
     public void deplaceperso(World w){
         if(this.perso.deplpossible(w)==false){
-            System.out.println("Impossible de se ddéplacer tu dois te battre");
+            System.out.println("Impossible de te déplacer, tu dois te battre");
             //this.combattreperso();
         }
         
         else{
             Scanner scan = new Scanner(System.in);
-            System.out.println("Entrez un position X");
+            System.out.println("Entrez une position X :");
             int x=scan.nextInt();
-            System.out.println("Entrez un position Y");
+            System.out.println("Entrez une position Y :");
             int y=scan.nextInt();
             while (w.getMatMonde()[this.perso.getPos().getX()+x][this.perso.getPos().getY()+y]==1){
-                System.out.println("Entrez un position X");
+                System.out.println("Position déjà occupée, entrez une autre position!");
+                System.out.println("Entrez une position X :");
                 x=scan.nextInt();
-                System.out.println("Entrez un position Y");
+                System.out.println("Entrez une position Y :");
                 y=scan.nextInt();
 
             }

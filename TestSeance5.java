@@ -1,13 +1,15 @@
 
 package org.centrale.projet.objet;
 
+import java.util.ArrayList;
+
 /**
  *Test de la séance 5
  * @author Thibault
  */
 public class TestSeance5 {
     public static void main(String[] args){
-        World w5= new World();
+        /**World w5= new World();
         w5.creationJoueur();
         w5.creationJoueur();
         w5.creationJoueur();
@@ -25,9 +27,17 @@ public class TestSeance5 {
         w5.getlJoueur().get(0).getPerso().affiche();
         w5.tourDeJeu();
         w5.getlJoueur().get(0).getPerso().affiche();
-        
-        
-        
+        */
+        ArrayList<Creature> cAtt = new ArrayList<>();
+        Personnage p = new Archer();
+        cAtt.add(p);
+        if (cAtt.get(0) instanceof Monstre){
+            System.out.println("Vrai");
+        }
+        else {
+
+            System.out.println("Faux");
     }
     
+}
 }
