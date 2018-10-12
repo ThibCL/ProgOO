@@ -35,7 +35,10 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
  * Coordonnée de la position du personnage
  */
     private Point2D pos;
-    
+/**
+ * permet de savoir si un joueur le controle ou pas. Est égal à 1 si controlé
+ */
+    private int controle;
     
 /**
  * Constucteur de Creature qui prend en paramètre la valeur de tous les attributs de cette classe
@@ -53,6 +56,7 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
         degAtt=dA;
         ptPar=ptP;
         this.pos=pos;
+        this.controle=0;
     }
     
     
@@ -67,6 +71,7 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
         degAtt=c.degAtt;
         ptPar=c.ptPar;
         pos=new Point2D(c.pos);
+        this.controle=c.controle;
     }
     
 /**
@@ -80,6 +85,7 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
         degAtt=20;
         ptPar=10;
         pos=new Point2D(0,0);
+        this.controle=0;
     }
     
     public int getPtVie(){
@@ -88,6 +94,14 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
     
     public void setPtVie(int value){
         ptVie=value;
+    }
+
+    public void setControle(int controle) {
+        this.controle = controle;
+    }
+
+    public int getControle() {
+        return controle;
     }
     
     public int getPourcentageAtt(){
@@ -138,8 +152,10 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
         boolean verif=false;
         for(int i=0;i<3;i++){
             for(int j=0;j<3;j++){
-                if(w.getMatMonde()[this.getPos().getX()+i-1][this.getPos().getY()+j-1]!=1){
-                    verif=true;
+                if(this.getPos().getX()+i-1>-1 && this.getPos().getX()+i-1<w.getTaille()-1 && this.getPos().getY()+j-1>-1 && this.getPos().getY()+j-1<w.getTaille()-1){
+                    if(w.getMatMonde()[this.getPos().getX()+i-1][this.getPos().getY()+j-1]!=1){
+                        verif=true;
+                    }
                 }
             }
         }
@@ -165,7 +181,7 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
         }
         else {
             Random posAlea= new Random();
-            while (w.getMatMonde()[this.pos.getX()+i][this.pos.getY()+j]==1){
+            while (this.getPos().getX()+i<0 || this.getPos().getX()+i>w.getTaille()-1 || this.getPos().getY()+j<0 || this.getPos().getY()+j>w.getTaille()-1 || w.getMatMonde()[this.pos.getX()+i][this.pos.getY()+j]==1){
                 i=posAlea.nextInt(3)-1;
                 j=posAlea.nextInt(3)-1;
             }

@@ -22,7 +22,7 @@ public class World {
     /**
      * Taille du monde
      */
-    private final int taille=20;
+    private final int taille=10;
     /**
      * Matrice des positions des différentes entitées dans le monde
      */
@@ -37,44 +37,44 @@ public class World {
     /**
      * Constructeur qui place un nombre aléatoire de chaque type de personnage
      */
-    public World() {
+    public World(int nbr) {
         Random nbralea = new Random();
-        for(int k=0;k<nbralea.nextInt(10);k++)
+        for(int k=0;k<nbralea.nextInt(nbr);k++)
         {
             Archer arch=new Archer();
             this.ajouterCrea(arch);
         }
-        for(int i=0;i<nbralea.nextInt(10);i++)
+        for(int i=0;i<nbralea.nextInt(nbr);i++)
         {
             Paysan pays=new Paysan();
             this.ajouterCrea(pays);
         }
-        for(int k=0;k<nbralea.nextInt(10);k++)
+        for(int k=0;k<nbralea.nextInt(nbr);k++)
         {
             Guerrier guer=new Guerrier();
             this.ajouterCrea(guer);
         }
-        for(int k=0;k<nbralea.nextInt(10);k++)
+        for(int k=0;k<nbralea.nextInt(nbr);k++)
         {
             Mage mge=new Mage();
             this.ajouterCrea(mge);
         }
-        for(int k=0;k<nbralea.nextInt(10);k++)
+        for(int k=0;k<nbralea.nextInt(nbr);k++)
         {
             Lapin lap=new Lapin();
             this.ajouterCrea(lap);
         }
-        for(int k=0;k<nbralea.nextInt(10);k++)
+        for(int k=0;k<nbralea.nextInt(nbr);k++)
         {
             Loup lp=new Loup();
             this.ajouterCrea(lp);
         }
-        for(int k=0;k<nbralea.nextInt(10);k++)
+        for(int k=0;k<nbralea.nextInt(nbr);k++)
         {
             Soin vdk=new Soin();
             this.ajouterObjet(vdk);
         }
-        for(int k=0;k<nbralea.nextInt(10);k++)
+        for(int k=0;k<nbralea.nextInt(nbr);k++)
         {
             Mana rhm=new Mana();
             this.ajouterObjet(rhm);
@@ -199,6 +199,7 @@ public class World {
             }
             System.out.println();
         }
+        System.out.println();
     }
 /**
  * méthode qui définit le tour de jeu et qui fait jouer les joueurs un par un avant de faire joueur les autres entitées
@@ -216,15 +217,23 @@ public class World {
                 choix=sc.next();
                 switch(choix){
                     case "Combattre": 
-                        //j.combattreperso()
+                        j.combattreperso(this);
                         break;
                     case "Deplacer":
                         j.deplaceperso(this);
                         break;
                 
                 }
+                j.getPerso().affiche();
+                this.affichemat();
             }
             //faire joueur les autres entitees sur le terrain
+            for(Creature c: this.getlCrea() ){
+                if(c.getControle()==0){
+                    c.deplacer(this, 0, 0);
+                }
+            }
+            this.affichemat();
             System.out.println("Si vous voulez arrêter de jouer entrez quit");
             choix=sc.next();
         }

@@ -11,10 +11,17 @@ public class TestSeance5 {
     public static void main(String[] args){
 
         
-        World w5= new World();
-
+        World w5= new World(2);
+        
         w5.creationJoueur();
+        w5.creeMondeAlea();
         w5.getlJoueur().get(0).affiche();
+        w5.tourDeJeu();
+        
+        
+        
+        
+        /*w5.getlJoueur().get(0).affiche();
         
         
         w5.creationJoueur();
@@ -45,7 +52,7 @@ public class TestSeance5 {
 
             System.out.println("Faux");
 
-    }
+    }*/
     
 }
 }
