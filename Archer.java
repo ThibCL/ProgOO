@@ -1,6 +1,7 @@
 package org.centrale.projet.objet;
 
 import java.util.Random;
+import java.util.ArrayList;
 
 /**
  * Cette classe représente les personnages de type archer (sous-classe de Personnage)
@@ -28,11 +29,12 @@ public class Archer extends Personnage implements Combattant {
      * @param dM
      * @param distMax
      * @param ptP
+     * @param s 
      * @param p
      * @param nbF 
      */
-    public Archer (String nom, int pV, int ptM, int pA, int pP, int pM, int rM, int dA, int dM, int distMax, int ptP, Point2D p, int nbF){
-        super(nom, pV, ptM, pA, pP, pM, rM, dA, dM, distMax, ptP, p);
+    public Archer (String nom, int pV, int ptM, int pA, int pP, int pM, int rM, int dA, int dM, int distMax, int ptP, ArrayList<Objet> s, Point2D p, int nbF){
+        super(nom, pV, ptM, pA, pP, pM, rM, dA, dM, distMax, ptP, s, p);
         nbFleches=nbF;
     }
     

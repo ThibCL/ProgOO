@@ -28,16 +28,9 @@ public class TestSeance5 {
         w5.tourDeJeu();
         w5.getlJoueur().get(0).getPerso().affiche();
         */
-        ArrayList<Creature> cAtt = new ArrayList<>();
-        Personnage p = new Archer();
-        cAtt.add(p);
-        if (cAtt.get(0) instanceof Monstre){
-            System.out.println("Vrai");
-        }
-        else {
-
-            System.out.println("Faux");
-    }
-    
+       Archer p = new Archer();
+       Mana ob = new Mana();
+       p.getSac().add(ob);
+       p.afficheSac();
 }
 }
