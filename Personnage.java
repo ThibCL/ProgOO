@@ -32,7 +32,7 @@ public abstract class Personnage extends Creature {
 /**
  * Portée maximale de l'attaque magique pour les personnages Magiques 
  */
-    private int distAttMax;
+    private double distAttMax;
     
 /**
  * Constructeur de Personnage qui prend en parametre toutes les valeurs des attributs a initialiser
@@ -50,7 +50,7 @@ public abstract class Personnage extends Creature {
  * @param p Poisition 2D du personnage créé
  */
     
-    public Personnage(String nom, int ptV, int ptM, int pA, int pP, int pM, int rM, int dA, int dM, int distM, int ptP, Point2D p){
+    public Personnage(String nom, int ptV, int ptM, int pA, int pP, int pM, int rM, int dA, int dM, double distM, int ptP, Point2D p){
         super(ptV, pA, pP, dA, ptP, p);
         this.nom=nom;
         ptMana=ptM;
@@ -85,7 +85,7 @@ public abstract class Personnage extends Creature {
         pourcentageMag=0;
         pourcentageResisMag=40;
         degMag=0;
-        distAttMax=1;
+        distAttMax=1.42;
     }
     
     public String getNom(){
@@ -128,7 +128,7 @@ public abstract class Personnage extends Creature {
         degMag=value;
     }
     
-    public int getDistAttMax(){
+    public double getDistAttMax(){
         return distAttMax;
     }
     
