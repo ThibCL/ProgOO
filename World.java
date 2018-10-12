@@ -201,13 +201,13 @@ public class World {
         for(int i=0; i<taille;i++){
             for(int j=0; j<taille;j++){
                 if(this.matMonde[i][j].getCreature()==null &&this.matMonde[i][j].getObjet()==null){
-                    System.out.print(" ["+0+","+0+"]");
+                    System.out.print(" ["+"."+","+"."+"]");
                 }
                 else if(this.matMonde[i][j].getCreature()==null &&this.matMonde[i][j].getObjet()!=null){
-                    System.out.print(" ["+0+","+2+"]");
+                    System.out.print(" ["+"."+","+2+"]");
                 }
                 else if(this.matMonde[i][j].getCreature()!=null &&this.matMonde[i][j].getObjet()==null){
-                    System.out.print(" ["+1+","+0+"]");
+                    System.out.print(" ["+1+","+"."+"]");
                 }
                 else if(this.matMonde[i][j].getCreature()!=null &&this.matMonde[i][j].getObjet()!=null){
                     System.out.print(" ["+1+","+2+"]");
