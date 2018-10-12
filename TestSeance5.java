@@ -40,7 +40,7 @@ public class TestSeance5 {
         w5.getlJoueur().get(0).getPerso().affiche();
         w5.tourDeJeu();
         w5.getlJoueur().get(0).getPerso().affiche();
-        
+   
        
         ArrayList<Creature> cAtt = new ArrayList<>();
         Personnage p = new Archer();
@@ -52,7 +52,11 @@ public class TestSeance5 {
 
             System.out.println("Faux");
 
+
     }*/
+
+        
+
     
 }
 }

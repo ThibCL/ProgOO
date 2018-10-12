@@ -1,6 +1,7 @@
 package org.centrale.projet.objet;
 
 import java.util.Random;
+import java.util.ArrayList;
 
 /**
  * Cette classe permet de représenter un personnage de type Paysan (sous-classe de Personnage)
@@ -21,10 +22,11 @@ public class Paysan extends Personnage {
  * @param dM
  * @param distMax
  * @param ptP
+ * @param s 
  * @param p 
  */
-    public Paysan(String nom, int pV, int ptM, int pA, int pP, int pM, int rM, int dA, int dM, int distMax, int ptP, Point2D p){
-        super(nom, pV, ptM, pA, pP, pM, rM, dA, dM, distMax, ptP,  p);
+    public Paysan(String nom, int pV, int ptM, int pA, int pP, int pM, int rM, int dA, int dM, int distMax, int ptP, ArrayList<Objet> s, Point2D p){
+        super(nom, pV, ptM, pA, pP, pM, rM, dA, dM, distMax, ptP, s,  p);
     }
     
 /**

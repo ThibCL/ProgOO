@@ -1,4 +1,5 @@
 package org.centrale.projet.objet;
+import java.util.ArrayList;
 
 /**
  * Classe qui est une super classe de tous les personnages possibles tels que les archers, les paysans... 
@@ -35,6 +36,11 @@ public abstract class Personnage extends Creature {
     private double distAttMax;
     
 /**
+ * Tableau contenant les objets détenus par le personnage
+ */
+    private ArrayList<Objet> sac;
+    
+/**
  * Constructeur de Personnage qui prend en parametre toutes les valeurs des attributs a initialiser
  * @param nom Nom du personnage créé
  * @param ptV Points de vie du personnage créé
@@ -47,10 +53,11 @@ public abstract class Personnage extends Creature {
  * @param dM Dégats de magie du personnage créé
  * @param distM Distance maximale d'attaque du personnage créé
  * @param ptP Points de parade du personnage créé
+ * @param s Sac du personnage contenant les objets détenus par le personnage créé
  * @param p Poisition 2D du personnage créé
  */
     
-    public Personnage(String nom, int ptV, int ptM, int pA, int pP, int pM, int rM, int dA, int dM, double distM, int ptP, Point2D p){
+    public Personnage(String nom, int ptV, int ptM, int pA, int pP, int pM, int rM, int dA, int dM, double distM, int ptP, ArrayList<Objet> s, Point2D p){
         super(ptV, pA, pP, dA, ptP, p);
         this.nom=nom;
         ptMana=ptM;
@@ -58,6 +65,7 @@ public abstract class Personnage extends Creature {
         pourcentageResisMag=rM;
         degMag=dM;
         distAttMax=distM;
+        sac=new ArrayList(s);
     }
     
     
@@ -73,6 +81,7 @@ public abstract class Personnage extends Creature {
         pourcentageResisMag=perso.pourcentageResisMag;
         degMag=perso.degMag;
         distAttMax=perso.distAttMax;
+        sac=new ArrayList(perso.getSac());
     }
     
     //A améliorer avec Random
@@ -86,6 +95,7 @@ public abstract class Personnage extends Creature {
         pourcentageResisMag=40;
         degMag=0;
         distAttMax=1.42;
+        sac = new ArrayList<>();
     }
     
     public String getNom(){
@@ -131,16 +141,37 @@ public abstract class Personnage extends Creature {
     public double getDistAttMax(){
         return distAttMax;
     }
-    
-    public void setDistAttMax(int value){
-        distAttMax=value;
+
+
+    public void setDistAttMax(double distAttMax) {
+        this.distAttMax = distAttMax;
     }
+
+
+    public ArrayList<Objet> getSac() {
+        return sac;
+    }
+    
+    public void setSac(ArrayList<Objet> sac) {
+        this.sac = sac;
+    }
+    
     
     public abstract void affiche();
     
-
-    
+    public void afficheSac(){
+        ArrayList<Objet> sac = getSac();
+        if (sac == null ){
+            System.out.println("Ce personnage n'a rien dans son sac.");
+        }
+        else {
+            for (Objet o : sac){
+                o.affiche();
+            }
+                
+                 
+    }
+    }
 }
 
-
-
+    
