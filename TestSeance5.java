@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class TestSeance5 {
     public static void main(String[] args){
-
+       /**
         
         World w5= new World();
 
@@ -46,6 +46,11 @@ public class TestSeance5 {
             System.out.println("Faux");
 
         }
-    
+    */
+       Point2D p = new Point2D(3,4);
+       Case c =new Case(p);
+       Archer a = new Archer();
+       c.setCreature(a);
+       c.getCreature().affiche();
 }
 }

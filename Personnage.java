@@ -156,8 +156,7 @@ public abstract class Personnage extends Creature {
         this.sac = sac;
     }
     
-    
-    public abstract void affiche();
+
     
     public void afficheSac(){
         ArrayList<Objet> sac = getSac();
@@ -167,11 +166,12 @@ public abstract class Personnage extends Creature {
         else {
             for (Objet o : sac){
                 o.affiche();
-            }
-                
-                 
+            }   
+        }
     }
-    }
+    
+    public abstract void affiche();
+    public abstract void ramasser(Objet o, World w);
 }
 
     
