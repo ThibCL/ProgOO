@@ -158,7 +158,7 @@ public abstract class Personnage extends Creature {
     
     
     public abstract void affiche();
-    
+ 
     public void afficheSac(){
         ArrayList<Objet> sac = getSac();
         if (sac == null ){

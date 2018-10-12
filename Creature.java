@@ -197,4 +197,5 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
     
     public abstract void affiche();
 
+
 }

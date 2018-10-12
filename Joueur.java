@@ -71,7 +71,7 @@ public class Joueur {
     public ArrayList<Creature> creaAttaquables (World w){
         ArrayList<Creature> cAtt = new ArrayList<>();
         for (Creature c : w.getlCrea()){
-            if (this.getPerso().getPos().distance(c.getPos())<=this.getPerso().getDistAttMax()){
+            if (this.getPerso().getPos().distance(c.getPos())!=0 && this.getPerso().getPos().distance(c.getPos())<=this.getPerso().getDistAttMax()){
                 cAtt.add(c);
             }
         }
@@ -89,9 +89,16 @@ public class Joueur {
         else {
             Scanner scan = new Scanner(System.in);
             System.out.println("Entrez le personnage que vous voulez combattre parmis les suivants :");
-            for (Creature c : w.getlCrea()){
+            int k=1;
+            for (Creature c : cAtt){
+                
+                System.out.print(k);
                 c.affiche();
+                k=k+1;
                 }
+            System.out.println("Donner le numéro de la créature que vous voulez attaquer");
+            int rep=scan.nextInt();
+            this.perso.combattre(cAtt.get(rep-1));
             }
     }
        
