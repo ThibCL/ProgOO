@@ -218,21 +218,28 @@ public class World {
         while(Objects.equals(choix,"quit")==false){
             System.out.println("Nouveau tour");
             for (Joueur j : this.getlJoueur()){
-                System.out.println("C'est à "+ j.getNomJoueur() + " de jouer Veux tu Combattre ou te Deplacer?");
-                choix=sc.next();
-                switch(choix){
-                    case "Combattre": 
-                        j.combattreperso(this);
-                        break;
-                    case "Deplacer":
-                        j.deplaceperso(this);
-                        break;
-                
+                System.out.println("C'est à "+ j.getNomJoueur() + " de jouer. Veux tu Combattre ou te Deplacer?");
+                boolean choisi=false;
+                while (choisi==false){
+                    choix=sc.next();
+                    switch(choix){
+                        case "Combattre": 
+                            j.combattreperso(this);
+                            choisi=true;
+                            break;
+                        case "Deplacer":
+                            j.deplaceperso(this);
+                            choisi=true;
+                            break;
+                        default :
+                            System.out.println("Ce n'est pas une action possible : Entrer Combattre ou Deplacer :");
+                            break;
+                    }
                 }
                 j.getPerso().affiche();
                 this.affichemat();
             }
-            //faire joueur les autres entitees sur le terrain
+            //faire jouer les autres entitees sur le terrain
             for(Creature c: this.getlCrea() ){
                 if(c.getControle()==0){
                     c.deplacer(this, 0, 0);
@@ -249,7 +256,7 @@ public class World {
  * dans la liste des créatures 
  */
     public void creationJoueur(){
-        System.out.println("Quelle est votre nom?");
+        System.out.println("Quel est votre nom?");
         Scanner saisie = new Scanner(System.in); 
         String nmj = saisie.next();
         Joueur j= new Joueur();
