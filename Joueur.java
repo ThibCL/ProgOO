@@ -92,13 +92,17 @@ public class Joueur {
             int k=1;
             for (Creature c : cAtt){
                 
-                System.out.print(k);
+                System.out.print(k+": ");
                 c.affiche();
+                System.out.println();
                 k=k+1;
                 }
             System.out.println("Donner le numéro de la créature que vous voulez attaquer");
             int rep=scan.nextInt();
-            this.perso.combattre(cAtt.get(rep-1));
+            if(this.getPerso() instanceof Combattant){
+                System.out.println("tu engages le combat");
+                ((Combattant)this.perso).combattre(cAtt.get(rep-1));
+            }
             }
     }
        
@@ -121,7 +125,7 @@ public class Joueur {
             int x=scan.nextInt();
             System.out.println("Entrez une position Y :");
             int y=scan.nextInt();
-            while (this.getPerso().getPos().getX()+x<0 || this.getPerso().getPos().getX()+x>w.getTaille()-1 || this.getPerso().getPos().getY()+y<0 || this.getPerso().getPos().getY()+y>w.getTaille()-1 || w.getMatMonde()[this.perso.getPos().getX()+x][this.perso.getPos().getY()+y]==1){
+            while (this.getPerso().getPos().getX()+x<0 || this.getPerso().getPos().getX()+x>w.getTaille()-1 || this.getPerso().getPos().getY()+y<0 || this.getPerso().getPos().getY()+y>w.getTaille()-1 || w.getMatMonde()[this.perso.getPos().getX()+x][this.perso.getPos().getY()+y].getCreature()!=null){
                 System.out.println("Position déjà occupée, entrez une autre position!");
                 System.out.println("Entrez une position X :");
                 x=scan.nextInt();

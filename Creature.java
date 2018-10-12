@@ -153,7 +153,7 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
         for(int i=0;i<3;i++){
             for(int j=0;j<3;j++){
                 if(this.getPos().getX()+i-1>-1 && this.getPos().getX()+i-1<w.getTaille()-1 && this.getPos().getY()+j-1>-1 && this.getPos().getY()+j-1<w.getTaille()-1){
-                    if(w.getMatMonde()[this.getPos().getX()+i-1][this.getPos().getY()+j-1]!=1){
+                    if(w.getMatMonde()[this.getPos().getX()+i-1][this.getPos().getY()+j-1].getCreature()==null){
                         verif=true;
                     }
                 }
@@ -181,14 +181,14 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
         }
         else {
             Random posAlea= new Random();
-            while (this.getPos().getX()+i<0 || this.getPos().getX()+i>w.getTaille()-1 || this.getPos().getY()+j<0 || this.getPos().getY()+j>w.getTaille()-1 || w.getMatMonde()[this.pos.getX()+i][this.pos.getY()+j]==1){
+            while (this.getPos().getX()+i<0 || this.getPos().getX()+i>w.getTaille()-1 || this.getPos().getY()+j<0 || this.getPos().getY()+j>w.getTaille()-1 || w.getMatMonde()[this.pos.getX()+i][this.pos.getY()+j].getCreature()!=null){
                 i=posAlea.nextInt(3)-1;
                 j=posAlea.nextInt(3)-1;
             }
             //Faire que la créature ramasse un objet s'il y en a un à la place ou il va et détruire l'objet ensuite 
-            w.getMatMonde()[this.pos.getX()][this.pos.getY()]=0;
+            w.getMatMonde()[this.pos.getX()][this.pos.getY()].setCreature(null);
             pos.translate(i, j);
-            w.getMatMonde()[this.pos.getX()][this.pos.getY()]=1;
+            w.getMatMonde()[this.pos.getX()][this.pos.getY()].setCreature(this);
         }
     }
 /**

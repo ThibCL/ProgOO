@@ -200,8 +200,20 @@ public class World {
     public void affichemat(){
         for(int i=0; i<taille;i++){
             for(int j=0; j<taille;j++){
-                System.out.print(this.matMonde[i][j]);
+                if(this.matMonde[i][j].getCreature()==null &&this.matMonde[i][j].getObjet()==null){
+                    System.out.print(" ["+0+","+0+"]");
+                }
+                else if(this.matMonde[i][j].getCreature()==null &&this.matMonde[i][j].getObjet()!=null){
+                    System.out.print(" ["+0+","+2+"]");
+                }
+                else if(this.matMonde[i][j].getCreature()!=null &&this.matMonde[i][j].getObjet()==null){
+                    System.out.print(" ["+1+","+0+"]");
+                }
+                else if(this.matMonde[i][j].getCreature()!=null &&this.matMonde[i][j].getObjet()!=null){
+                    System.out.print(" ["+1+","+2+"]");
+                }
             }
+            System.out.println();
             System.out.println();
         }
         System.out.println();
@@ -229,8 +241,8 @@ public class World {
                         break;
                 
                 }
-                j.getPerso().affiche();
-                this.affichemat();
+                
+                
             }
             //faire joueur les autres entitees sur le terrain
             for(Creature c: this.getlCrea() ){

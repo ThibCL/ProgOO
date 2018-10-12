@@ -18,7 +18,7 @@ public class TestSeance5 {
         
         
         
-        
+        /*
         w5.getlJoueur().get(0).affiche();
         
         
@@ -49,6 +49,6 @@ public class TestSeance5 {
         else {
 
             System.out.println("Faux");}
-
+*/
     }
 }    
