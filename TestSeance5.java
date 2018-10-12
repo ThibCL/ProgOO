@@ -7,9 +7,13 @@ package org.centrale.projet.objet;
  */
 public class TestSeance5 {
     public static void main(String[] args){
+        
         World w5= new World();
         w5.creationJoueur();
-        w5.creationJoueur();
+        w5.getlJoueur().get(0).affiche();
+        
+        
+        /*w5.creationJoueur();
         w5.creationJoueur();
         
         w5.creeMondeAlea();
@@ -24,7 +28,7 @@ public class TestSeance5 {
         
         w5.getlJoueur().get(0).getPerso().affiche();
         w5.tourDeJeu();
-        w5.getlJoueur().get(0).getPerso().affiche();
+        w5.getlJoueur().get(0).getPerso().affiche();*/
         
         
         

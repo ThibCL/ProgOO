@@ -95,6 +95,11 @@ public class Joueur {
         
     }
     
+    public void affiche(){
+        System.out.println("Le nom du joueur est "+ this.getNomJoueur()+ " il controle le personnage:");
+        this.perso.affiche();
+    }
+    
     
     
     
