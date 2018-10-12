@@ -26,7 +26,7 @@ public class World {
     /**
      * Matrice des positions des différentes entitées dans le monde
      */
-    private int[][] matMonde= new int[taille][taille];
+    private Case[][] matMonde= new Case[taille][taille];
     /**
      * Liste des joueurs dans le monde
      */
@@ -79,7 +79,12 @@ public class World {
             Mana rhm=new Mana();
             this.ajouterObjet(rhm);
         }
-        //la matrice sera remplie lors de l'appel de creeMondeAlea()
+        //initialisation de la matrice par l'ajout de cases vides
+        for (int k=0; k<taille;k++){
+            for (int i=0; i<taille;i++){
+                this.matMonde[k][i]=new Case(new Point2D(k,i));
+            }
+        }
         
     }
 
@@ -99,11 +104,11 @@ public class World {
         return taille;
     }
 
-    public int[][] getMatMonde() {
+    public Case[][] getMatMonde() {
         return matMonde;
     }
 
-    public void setMatMonde(int[][] matMonde) {
+    public void setMatMonde(Case[][] matMonde) {
         this.matMonde = matMonde;
     }
 
@@ -164,19 +169,19 @@ public class World {
                 pt= new Point2D(x,y);
             }
             c.setPos(pt);
-            getMatMonde()[x][y]=1;
+            getMatMonde()[x][y].setCreature(c);
             
             }           
         for (Objet o : this.getlObjet()){
             int x = posAlea.nextInt(this.taille);
             int y= posAlea.nextInt(this.taille);
-            if (getMatMonde()[x][y]>0){
+            if (getMatMonde()[x][y].getObjet()!=null){
                 x = posAlea.nextInt(this.taille);
                 y= posAlea.nextInt(this.taille);
             }
             else {
                 o.getPos().setPosition(x,y);
-                getMatMonde()[x][y]=2;
+                getMatMonde()[x][y].setObjet(o);
             }  
     }
 }

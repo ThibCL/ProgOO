@@ -69,4 +69,20 @@ public class Paysan extends Personnage {
         getPos().affiche();
     }
     
+    public void ramasser(Objet o, World w){
+    if (o instanceof Mana){
+        System.out.println("Le Paysan ne peut pas ramasser de Potion Mana");
+    }
+    else if (o instanceof NuageToxique){
+        System.out.println("C'est un nuage Toxique!");
+    }
+    else {
+        getSac().add(o);
+        int x = o.getPos().getX();
+        int y = o.getPos().getY();
+        w.getMatMonde()[x][y].setObjet(null);
+        w.getlObjet().remove(o);
+    }
+}
+    
 }

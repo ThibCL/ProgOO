@@ -9,8 +9,6 @@ import java.util.ArrayList;
  */
 public class TestSeance5 {
     public static void main(String[] args){
-
-        
         World w5= new World(2);
         
         w5.creationJoueur();
@@ -21,7 +19,7 @@ public class TestSeance5 {
         
         
         
-        /*w5.getlJoueur().get(0).affiche();
+        w5.getlJoueur().get(0).affiche();
         
         
         w5.creationJoueur();
@@ -50,13 +48,7 @@ public class TestSeance5 {
         }
         else {
 
-            System.out.println("Faux");
+            System.out.println("Faux");}
 
-
-    }*/
-
-        
-
-    
-}
-}
+    }
+}    

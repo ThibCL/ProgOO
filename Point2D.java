@@ -75,6 +75,19 @@ public class Point2D {
         System.out.println("Position : ["+x+" ; "+y+"]");
     }
     
+    /** 
+     * Méthode permettant de savoir si deux points sont égaux
+     */
+    public boolean egaux(Point2D p){
+        if (this.getX()==p.getX() && this.getY()==p.getY()){
+            return true;
+        }
+        else 
+        {
+            return false;
+        }
+    }
+    
     /**
      * Méthode permettant de calculer la distance entre le Point2D et le Poin2D entré en paramètre 
      * @param p1
