@@ -69,6 +69,7 @@ public class Mage extends Personnage implements Combattant{
     /**
      * Méthode permettant d'afficher le mage
      */
+    @Override
         public void affiche(){
         System.out.println("C'est un personnage de type Mage :"
                 +"\nNom : "+getNom() +

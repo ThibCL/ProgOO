@@ -9,11 +9,16 @@ import java.util.ArrayList;
  */
 public class TestSeance5 {
     public static void main(String[] args){
-       /**
+        World w5= new World(2);
         
-        World w5= new World();
-
         w5.creationJoueur();
+        w5.creeMondeAlea();
+        w5.getlJoueur().get(0).affiche();
+        w5.tourDeJeu();
+        
+        
+        
+        
         w5.getlJoueur().get(0).affiche();
         
         
@@ -43,14 +48,7 @@ public class TestSeance5 {
         }
         else {
 
-            System.out.println("Faux");
+            System.out.println("Faux");}
 
-        }
-    */
-       Point2D p = new Point2D(3,4);
-       Case c =new Case(p);
-       Archer a = new Archer();
-       c.setCreature(a);
-       c.getCreature().affiche();
-}
-}
+    }
+}    

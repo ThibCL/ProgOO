@@ -45,14 +45,23 @@ public class Joueur {
         Scanner saisieUtilisateur = new Scanner(System.in); 
         String str = saisieUtilisateur.next(); 
         switch(str){
-            case "Archer": this.perso= new Archer();
-            case "Guerrier": this.perso=new Guerrier();
-            case "Mage": this.perso=new Mage();
-            case "Paysan": this.perso=new Paysan();
+            case "Archer": 
+                this.perso= new Archer();
+                break;
+            case "Guerrier": 
+                this.perso=new Guerrier();
+                break;
+            case "Mage":
+                this.perso=new Mage();
+                break;
+            case "Paysan": 
+                this.perso=new Paysan();
+                break;
         }
         System.out.println("Entrez le nom de votre personnage :");
         String nm = saisieUtilisateur.next();
         this.perso.setNom(nm);
+        this.perso.setControle(1);
         
     }
     
@@ -105,7 +114,7 @@ public class Joueur {
             int x=scan.nextInt();
             System.out.println("Entrez une position Y :");
             int y=scan.nextInt();
-            while (w.getMatMonde()[this.perso.getPos().getX()+x][this.perso.getPos().getY()+y]==1){
+            while (this.getPerso().getPos().getX()+x<0 || this.getPerso().getPos().getX()+x>w.getTaille()-1 || this.getPerso().getPos().getY()+y<0 || this.getPerso().getPos().getY()+y>w.getTaille()-1 || w.getMatMonde()[this.perso.getPos().getX()+x][this.perso.getPos().getY()+y]==1){
                 System.out.println("Position déjà occupée, entrez une autre position!");
                 System.out.println("Entrez une position X :");
                 x=scan.nextInt();
