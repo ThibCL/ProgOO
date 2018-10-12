@@ -1,5 +1,6 @@
 package org.centrale.projet.objet;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  * Cette classe represente la super classe de toute les creatures qui vont être créées telle que les monstres ou personnages
@@ -36,7 +37,7 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
  */
     private Point2D pos;
 /**
- * permet de savoir si un joueur le controle ou pas. Est égal à 1 si controlé
+ * permet de savoir si un joueur le controle ou pas. Est égal à 1 si un joueur le controle
  */
     private int controle;
     
@@ -173,7 +174,6 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
      * @param i Entier pour se déplacer de -1,0,1 en X
      * @param j Entier pour se déplacer de -1,0,1 en Y
      */
-    @Override
     public void deplacer(World w,int i,int j){
         if(deplpossible(w)==false){
             System.out.println("La creature ne peut pas se déplacer");
@@ -181,15 +181,39 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
         }
         else {
             Random posAlea= new Random();
-            while (this.getPos().getX()+i<0 || this.getPos().getX()+i>w.getTaille()-1 || this.getPos().getY()+j<0 || this.getPos().getY()+j>w.getTaille()-1 || w.getMatMonde()[this.pos.getX()+i][this.pos.getY()+j].getCreature()!=null){
+            while (this.getPos().getX()+i<0 || this.getPos().getX()+i>w.getTaille()-1 || 
+                    this.getPos().getY()+j<0 || this.getPos().getY()+j>w.getTaille()-1 || 
+                    w.getMatMonde()[this.pos.getX()+i][this.pos.getY()+j].getCreature()!=null){
                 i=posAlea.nextInt(3)-1;
                 j=posAlea.nextInt(3)-1;
             }
-            //Faire que la créature ramasse un objet s'il y en a un à la place ou il va et détruire l'objet ensuite 
+
             w.getMatMonde()[this.pos.getX()][this.pos.getY()].setCreature(null);
             pos.translate(i, j);
             w.getMatMonde()[this.pos.getX()][this.pos.getY()].setCreature(this);
+            if (this instanceof Personnage){
+                Objet o = w.getMatMonde()[this.pos.getX()][this.pos.getY()].getObjet();
+                if (o != null){
+                    if (this.controle == 1){
+                        Scanner scan = new Scanner(System.in);
+                        System.out.print("Voulez vous ramasser l'objet ? o/n :");
+                        o.affiche();
+                        String reponse=scan.next();
+                        switch(reponse){
+                            case "o": 
+                                ((Personnage)this).ramasser(o,w);
+                                break;
+                            default :
+                                System.out.println("L'objet n'est pas ramassé");
+                                break;
+                        }
+                    }
+                    else {
+                        ((Personnage)this).ramasser(o,w);
+                    }
+            }
         }
+    }
     }
 /**
  * Méthode qui permet d'afficher tous les atttributs de la créature
