@@ -173,7 +173,6 @@ public abstract class Personnage extends Creature {
         }
     }
     
-   
     public abstract void ramasser(Objet o, World w);
 }
 

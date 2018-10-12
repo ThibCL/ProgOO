@@ -36,6 +36,7 @@ public class World {
     
     /**
      * Constructeur qui place un nombre aléatoire de chaque type de personnage
+     * @param nbr le nombre aléatoire sera choisi entre 0 et nbr 
      */
     public World(int nbr) {
         Random nbralea = new Random();

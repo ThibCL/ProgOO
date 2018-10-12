@@ -2,14 +2,17 @@
 package org.centrale.projet.objet;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *Test de la séance 5
  * @author Thibault
  */
 public class TestSeance5 {
+    
     public static void main(String[] args){
-        World w5= new World(2);
+       
+        /*World w5= new World(2);
         
         w5.creationJoueur();
         w5.creeMondeAlea();
@@ -18,7 +21,7 @@ public class TestSeance5 {
         
         
         
-        /*
+        
         w5.getlJoueur().get(0).affiche();
         
         
@@ -49,6 +52,20 @@ public class TestSeance5 {
         else {
 
             System.out.println("Faux");}
-*/
+           */
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Entrez une position X :");
+        String x=scan.next();
+        int X=1;
+        try { 
+            X=Integer.parseInt(x);
+        }
+        catch (NumberFormatException e){
+            System.out.println("il faut entrer un entier !");
+        }
+        finally {
+            System.out.println(X);
+        }
+
     }
-}    
+}   
