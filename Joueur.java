@@ -118,7 +118,9 @@ public class Joueur {
         }
         
     }
-    
+    /**
+     * Methode qui permet d'afficher le nom du joueur et son personnage
+     */
     public void affiche(){
         System.out.println("Le nom du joueur est "+ this.getNomJoueur()+ " il controle le personnage:");
         this.perso.affiche();
