@@ -9,7 +9,19 @@ import java.util.Random;
  */
 public class Nourriture extends Objet{
     
+    /**
+     * 
+     */
     private int quantite;
+    /**
+     *Atttibut qui précise la caractèristique impacté par le bonus/malus
+     */
+    private String caractéristique;
+    /**
+    * Indique le nombre de tour que l'objet fait effet
+    */
+    private int duree;
+    
     
     public Nourriture(Point2D pos, int q){
         super(pos);
@@ -29,6 +41,22 @@ public class Nourriture extends Objet{
 
     public int getQuantite() {
         return quantite;
+    }
+
+    public String getCaractéristique() {
+        return caractéristique;
+    }
+
+    public int getDuree() {
+        return duree;
+    }
+
+    public void setCaractéristique(String caractéristique) {
+        this.caractéristique = caractéristique;
+    }
+
+    public void setDuree(int duree) {
+        this.duree = duree;
     }
     
     /**

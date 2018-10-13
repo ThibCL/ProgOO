@@ -68,7 +68,7 @@ public class Paysan extends Personnage {
                 ";");
         getPos().affiche();
     }
-    
+    //le paysan peut-il rammasser des objets?
     public void ramasser(Objet o, World w){
     if (o instanceof Mana){
         System.out.println("Le Paysan ne peut pas ramasser de Potion Mana");

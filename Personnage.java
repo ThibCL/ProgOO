@@ -39,7 +39,10 @@ public abstract class Personnage extends Creature {
  * Tableau contenant les objets détenus par le personnage
  */
     private ArrayList<Objet> sac;
-    
+/**
+ * Liste de la nourriture que possède le personnagz
+ */
+    private ArrayList<Objet> bonusmalus;
 /**
  * Constructeur de Personnage qui prend en parametre toutes les valeurs des attributs a initialiser
  * @param nom Nom du personnage créé
@@ -155,6 +158,15 @@ public abstract class Personnage extends Creature {
     public void setSac(ArrayList<Objet> sac) {
         this.sac = sac;
     }
+
+    public ArrayList<Objet> getBonusmalus() {
+        return bonusmalus;
+    }
+
+    public void setBonusmalus(ArrayList<Objet> bonusmalus) {
+        this.bonusmalus = bonusmalus;
+    }
+    
     
 
     
@@ -174,7 +186,6 @@ public abstract class Personnage extends Creature {
         }
     }
     
-   
     public abstract void ramasser(Objet o, World w);
 }
 
