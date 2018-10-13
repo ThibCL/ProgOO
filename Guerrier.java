@@ -114,6 +114,13 @@ public void ramasser(Objet o, World w){
     else if (o instanceof NuageToxique){
         System.out.println("C'est un nuage Toxique!");
     }
+    else if(o instanceof Nourriture){
+        this.getBonusmalus().add(o);
+        int x = o.getPos().getX();
+        int y = o.getPos().getY();
+        w.getMatMonde()[x][y].setObjet(null);
+        w.getlObjet().remove(o);
+    }
     else {
         getSac().add(o);
         int x = o.getPos().getX();

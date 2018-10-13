@@ -168,6 +168,7 @@ public abstract class Personnage extends Creature {
         }
         else {
             for (Objet o : sac){
+                System.out.print("Ce personnage a dans son sac un(e) ");
                 o.affiche();
             }   
         }
