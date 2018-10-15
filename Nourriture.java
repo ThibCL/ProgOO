@@ -23,13 +23,20 @@ public class Nourriture extends Objet{
      * Nombre de point ajouté ou enlevé au personnage
      */
     private int pteffet;
+    /**
+     * Represente l'etat activé ou non de la nourriture
+     */
+    private int etat;
 
-    public Nourriture(int caractéristique, int duree, int pteffet, Point2D pos) {
+    public Nourriture(int caractéristique, int duree, int pteffet, int etat, Point2D pos) {
         super(pos);
         this.caractéristique = caractéristique;
         this.duree = duree;
         this.pteffet = pteffet;
+        this.etat = etat;
     }
+
+    
 
     public Nourriture() {
         super();
@@ -37,11 +44,20 @@ public class Nourriture extends Objet{
         this.caractéristique=nbralea.nextInt(9)+1;
         this.duree=3;//nbralea.nextInt(9)+1;
         this.pteffet=nbralea.nextInt(9)+1;
+        this.etat=0;
+    }
+
+    public int getEtat() {
+        return etat;
+    }
+
+    public void setEtat(int etat) {
+        this.etat = etat;
     }
     
     
     
-
+    
     public int getPteffet() {
         return pteffet;
     }
@@ -71,7 +87,10 @@ public class Nourriture extends Objet{
      * Méthode permettant d'afficher l'objet 
      */
     public void affiche(){
-        System.out.println("Nourriture");
+        System.out.print("Nourriture: ");
+        System.out.print("Augmente la caractéristique "+this.getCaractéristique());
+        System.out.print(" de "+this.getPteffet()+" pt");
+        System.out.println(" D'une duree de "+ this.getDuree()+" tour");
     }
     
     /**

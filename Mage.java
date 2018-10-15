@@ -96,7 +96,7 @@ public class Mage extends Personnage implements Combattant {
      * @param c
      */
     public void combattre(Creature c) {
-        if ((this.getPos().distance(c.getPos()) < this.getDistAttMax()) && ((this.getPtMana() > 0))) {
+        if ((this.getPos().distance(c.getPos()) <= this.getDistAttMax()) && ((this.getPtMana() > 0))) {
             this.setPtMana(this.getPtMana() - 1);
             Random lanceDe = new Random();
             int RandAtt = lanceDe.nextInt(101);
@@ -106,7 +106,6 @@ public class Mage extends Personnage implements Combattant {
             } else {
                 System.out.println("Attaque ratée!");
             }
-            this.setPtMana(this.getPtMana() - 3);//une fois que le mage attaque avec de la magie il perd es point de mana
         }
     }
 
@@ -119,7 +118,7 @@ public class Mage extends Personnage implements Combattant {
             int y = o.getPos().getY();
             w.getMatMonde()[x][y].setObjet(null);
             w.getlObjet().remove(o);
-            this.effetnourriture((Nourriture)o,1);
+            
         } else {
             getSac().add(o);
             int x = o.getPos().getX();

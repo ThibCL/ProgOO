@@ -72,7 +72,7 @@ public class World {
             Mana rhm = new Mana();
             this.ajouterObjet(rhm);
         }
-        for (int k = 0; k < 5/*nbralea.nextInt(nbr)*/; k++) {
+        for (int k = 0; k < 8/*nbralea.nextInt(nbr)*/; k++) {
             Nourriture burger = new Nourriture();
             this.ajouterObjet(burger);
         }
@@ -235,7 +235,7 @@ public class World {
         while (Objects.equals(choix, "quit") == false) {
             System.out.println("Nouveau tour");
             for (Joueur j : this.getlJoueur()) {
-                System.out.println("C'est à " + j.getNomJoueur() + " de jouer. Veux tu Combattre ou te Deplacer?");
+                System.out.println("C'est à " + j.getNomJoueur() + " de jouer. Veux tu Combattre ,te Deplacer ou Manger?");
                 boolean choisi = false;
                 while (choisi == false) {
                     choix = sc.next();
@@ -247,6 +247,10 @@ public class World {
                         case "Deplacer":
                             j.deplaceperso(this);
                             choisi = true;
+                            break;
+                        case "Manger":
+                            j.mangerperso(this);
+                            choisi=true;
                             break;
                         default:
                             System.out.println("Ce n'est pas une action possible : Entrer Combattre ou Deplacer :");
@@ -262,29 +266,20 @@ public class World {
                     c.deplacer(this, 0, 0);
                 }
                 if (c instanceof Personnage) {
-                    int k=0;
+                    int k = 0;
                     Nourriture n;
-                    
-                    /**for (Nourriture n : ((Personnage) c).getBonusmalus()) {
-                        n.setDuree(n.getDuree() - 1);
-                        if (n.getDuree() < 1) {
-                            ((Personnage) c).effetnourriture(n,-1);
-                            ((Personnage) c).getBonusmalus().remove(n);
-                            
-                        }**/
-                    while(k<((Personnage) c).getBonusmalus().size()){
-                        n=((Personnage) c).getBonusmalus().get(k);
-                        n.setDuree(n.getDuree() - 1);
-                        if (n.getDuree() < 1) {
-                            ((Personnage) c).effetnourriture(n,-1);
-                            ((Personnage) c).getBonusmalus().remove(n);
-                            
+                    while (k < ((Personnage) c).getBonusmalus().size()) {
+                        n = ((Personnage) c).getBonusmalus().get(k);
+                        if (n.getEtat() == 1) {
+                            n.setDuree(n.getDuree() - 1);
+                            if (n.getDuree() < 1) {
+                                ((Personnage) c).effetnourriture(n, -1);
+                                ((Personnage) c).getBonusmalus().remove(n);
+                            }
                         }
-                        
+                        k=k+1;
+
                     }
-                    
-                    
-                   
 
                 }
             }

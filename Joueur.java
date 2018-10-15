@@ -138,6 +138,30 @@ public class Joueur {
         }
         
     }
+    
+    public void mangerperso(World w){
+        Scanner scani = new Scanner(System.in);
+        if(this.getPerso().getBonusmalus().size()==0){
+            System.out.println("Pas d'aliment à manger");
+            
+        }
+        else{
+            System.out.println("Voici les aliments que vous possédez: ");      
+            for(int k=0; k<this.getPerso().getBonusmalus().size();k++){
+                if(this.getPerso().getBonusmalus().get(k).getEtat()==0){    
+                    System.out.print(k+": ");
+                    this.getPerso().getBonusmalus().get(k).affiche();
+                }
+                System.out.println("Taper le numéro de l'aliment que vous voulez mangez:");  
+            }
+            int rep=scani.nextInt();
+            this.getPerso().effetnourriture(this.getPerso().getBonusmalus().get(rep),1);
+            this.getPerso().getBonusmalus().get(rep).setEtat(1);
+            System.out.print("vous avez mangé: ");
+            this.getPerso().getBonusmalus().get(rep).affiche();
+        }
+    }
+    
     /**
      * Methode qui permet d'afficher le nom du joueur et son personnage
      */
