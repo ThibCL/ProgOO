@@ -11,6 +11,7 @@ public abstract class Objet extends ElementDeJeu {
      */
     private Point2D pos;
 
+
     public Objet(Point2D pos) {
         this.pos = new Point2D(pos);
     }

@@ -13,7 +13,7 @@ public class TestSeance5 {
     public static void main(String[] args){
 
         World w5= new World(5);       
-        /*World w5= new World(2);
+        
         
 
         w5.creationJoueur();
@@ -23,7 +23,7 @@ public class TestSeance5 {
         w5.tourDeJeu();
         w5.getlJoueur().get(0).getPerso().afficheSac();
         
-        
+        /**To
         
         w5.getlJoueur().get(0).affiche();
         
@@ -56,7 +56,7 @@ public class TestSeance5 {
 
             System.out.println("Faux");}
            */
-        Scanner scan = new Scanner(System.in);
+        /**Scanner scan = new Scanner(System.in);
         System.out.println("Entrez une position X :");
         String x=scan.next();
         int X=1;
@@ -68,7 +68,7 @@ public class TestSeance5 {
         }
         finally {
             System.out.println(X);
-        }
+        }**/
 
     }
 }   

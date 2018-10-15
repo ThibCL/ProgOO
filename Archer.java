@@ -33,16 +33,16 @@ public class Archer extends Personnage implements Combattant {
      * @param p
      * @param nbF 
      */
-    public Archer (String nom, int pV, int ptM, int pA, int pP, int pM, int rM, int dA, int dM, int distMax, int ptP, ArrayList<Objet> s, Point2D p, int nbF){
-        super(nom, pV, ptM, pA, pP, pM, rM, dA, dM, distMax, ptP, s, p);
-        nbFleches=nbF;
+    public Archer(int nbFleches, String nom, int ptMana, int pourcentageMag, int pourcentageResisMag, int degMag, double distAttMax, ArrayList<Objet> sac, ArrayList<Nourriture> bonusmalus, int pV, int pA, int pP, int dA, int ptP, Point2D pos){
+        super(nom, ptMana, pourcentageMag, pourcentageResisMag, degMag, distAttMax, sac, bonusmalus, pV, pA, pP, dA, ptP, pos);
+        this.nbFleches=nbFleches;
     }
-    
+
     /**
      * Constructeur de Archer qui construit un archer en fonction des attributs de l'archer mis en paramètre
      * @param a 
      */
-    public Archer(Archer a){
+    public Archer(Archer a) {
         super(a);
         nbFleches=a.nbFleches;
     }
@@ -146,11 +146,12 @@ public class Archer extends Personnage implements Combattant {
             System.out.println("C'est un nuage Toxique!");
         }
         else if(o instanceof Nourriture){
-        this.getBonusmalus().add(o);
+        this.getBonusmalus().add((Nourriture)o);
         int x = o.getPos().getX();
         int y = o.getPos().getY();
         w.getMatMonde()[x][y].setObjet(null);
         w.getlObjet().remove(o);
+        this.effetnourriture((Nourriture)o,1);
     }
         else {
             getSac().add(o);

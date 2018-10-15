@@ -24,15 +24,15 @@ public class Guerrier extends Personnage implements Combattant {
  * @param s 
  * @param p 
  */
-    public Guerrier(String nom, int pV, int ptM, int pA, int pP, int pM, int rM, int dA, int dM, int distMax, int ptP, ArrayList<Objet> s, Point2D p){
-        super(nom, pV, ptM, pA, pP, pM, rM, dA, dM, distMax, ptP,  s, p);
+    public Guerrier(String nom, int ptMana, int pourcentageMag, int pourcentageResisMag, int degMag, double distAttMax, ArrayList<Objet> sac, ArrayList<Nourriture> bonusmalus, int pV, int pA, int pP, int dA, int ptP, Point2D pos){
+        super(nom, ptMana, pourcentageMag, pourcentageResisMag, degMag, distAttMax, sac, bonusmalus, pV, pA, pP, dA, ptP, pos);
     }
-    
+
 /**
- * Constructeur de Guerrier qui construit un guerrier en fonction des attributs du guerrier mis en paramètre
- * @param g 
- */
-    public Guerrier(Guerrier g){
+     * Constructeur de Guerrier qui construit un guerrier en fonction des attributs du guerrier mis en paramètre
+     * @param g
+     */
+    public Guerrier(Guerrier g) {
         super(g);
     }
 
@@ -115,11 +115,12 @@ public void ramasser(Objet o, World w){
         System.out.println("C'est un nuage Toxique!");
     }
     else if(o instanceof Nourriture){
-        this.getBonusmalus().add(o);
+        this.getBonusmalus().add((Nourriture)o);
         int x = o.getPos().getX();
         int y = o.getPos().getY();
         w.getMatMonde()[x][y].setObjet(null);
         w.getlObjet().remove(o);
+        this.effetnourriture((Nourriture)o,1);
     }
     else {
         getSac().add(o);

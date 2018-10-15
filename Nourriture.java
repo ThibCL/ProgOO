@@ -9,41 +9,49 @@ import java.util.Random;
  */
 public class Nourriture extends Objet{
     
-    /**
-     * 
-     */
-    private int quantite;
+    
     /**
      *Atttibut qui précise la caractèristique impacté par le bonus/malus
      */
-    private String caractéristique;
+    private int caractéristique;
     /**
     * Indique le nombre de tour que l'objet fait effet
     */
     private int duree;
     
-    
-    public Nourriture(Point2D pos, int q){
+    /**
+     * Nombre de point ajouté ou enlevé au personnage
+     */
+    private int pteffet;
+
+    public Nourriture(int caractéristique, int duree, int pteffet, Point2D pos) {
         super(pos);
-        quantite=q;
+        this.caractéristique = caractéristique;
+        this.duree = duree;
+        this.pteffet = pteffet;
+    }
+
+    public Nourriture() {
+        super();
+        Random nbralea=new Random();
+        this.caractéristique=nbralea.nextInt(9)+1;
+        this.duree=3;//nbralea.nextInt(9)+1;
+        this.pteffet=nbralea.nextInt(9)+1;
     }
     
-    public Nourriture(){
-        super();
-        Random intAlea= new Random();
-        int i = 1+intAlea.nextInt(3);
-        quantite=i;
+    
+    
+
+    public int getPteffet() {
+        return pteffet;
     }
 
-    public void setQuantite(int quantite) {
-        this.quantite = quantite;
+    public void setPteffet(int pteffet) {
+        this.pteffet = pteffet;
     }
+    
 
-    public int getQuantite() {
-        return quantite;
-    }
-
-    public String getCaractéristique() {
+    public int getCaractéristique() {
         return caractéristique;
     }
 
@@ -51,7 +59,7 @@ public class Nourriture extends Objet{
         return duree;
     }
 
-    public void setCaractéristique(String caractéristique) {
+    public void setCaractéristique(int caractéristique) {
         this.caractéristique = caractéristique;
     }
 
@@ -72,4 +80,5 @@ public class Nourriture extends Objet{
     public void caracteristiques(){
         
     }
+    
 }
