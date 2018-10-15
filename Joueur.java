@@ -43,20 +43,34 @@ public class Joueur {
                 + "\n -Mage"
                 + "\n -Paysan");
         Scanner saisieUtilisateur = new Scanner(System.in); 
-        String str = saisieUtilisateur.next(); 
-        switch(str){
-            case "Archer": 
-                this.perso= new Archer();
-                break;
-            case "Guerrier": 
-                this.perso=new Guerrier();
-                break;
-            case "Mage":
-                this.perso=new Mage();
-                break;
-            case "Paysan": 
-                this.perso=new Paysan();
-                break;
+        boolean choisi = false;
+        while (choisi == false) {
+            String str = saisieUtilisateur.next(); 
+            choisi = true;
+            switch(str){
+                case "Archer": 
+                    this.perso= new Archer();
+                    break;
+                case "Guerrier": 
+                    this.perso=new Guerrier();
+                    break;
+                case "Mage":
+                    this.perso=new Mage();
+                    break;
+                case "Paysan": 
+                    this.perso=new Paysan();
+                    break;
+                default :
+                    System.out.println("Ce n'est pas un type de personnage valide!");
+                    System.out.println("Veuillez entrer un type de personnage: "
+                + "\n -Archer"
+                + "\n -Guerrier"
+                + "\n -Mage"
+                + "\n -Paysan");
+                    choisi = false;
+                    break;
+            }
+                    
         }
         System.out.println("Entrez le nom de votre personnage :");
         String nm = saisieUtilisateur.next();
@@ -96,9 +110,28 @@ public class Joueur {
                 c.affiche();
                 System.out.println();
                 k=k+1;
+                }            
+            boolean choisi = false;
+            int rep = -1;
+            while (choisi==false){
+                System.out.println("Donner le numéro de la créature que vous voulez attaquer");
+                try {
+                    rep=scan.nextInt();
+                    choisi=true;
                 }
-            System.out.println("Donner le numéro de la créature que vous voulez attaquer");
-            int rep=scan.nextInt();
+                catch (java.util.InputMismatchException e){
+                    System.out.println("Ce n'est pas un numéro valide !");
+                    choisi=false;
+                }
+                finally {
+                    if (choisi==true){
+                        if(rep<0 || rep>cAtt.size()){
+                            System.out.println("Ce n'est pas un numéro valide !");
+                            choisi=false;
+                        }
+                    }
+                }
+            }
             if(this.getPerso() instanceof Combattant){
                 System.out.println("tu engages le combat");
                 ((Combattant)this.perso).combattre(cAtt.get(rep-1));
