@@ -171,7 +171,10 @@ public class Joueur {
         }
         
     }
-    
+    /**
+     * Méthode qui permet au joueur de faire manger un aliment à son personnage 
+     * @param w 
+     */
     public void mangerperso(World w){
         Scanner scani = new Scanner(System.in);
         if(this.getPerso().getBonusmalus().size()==0){
