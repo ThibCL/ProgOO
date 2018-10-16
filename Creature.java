@@ -80,7 +80,7 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
  * des valeurs aléatoires
  */
     public Creature(){
-        ptVie=10;
+        ptVie=100;
         pourcentageAtt=50;
         pourcentagePar=50;
         degAtt=20;

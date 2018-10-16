@@ -112,7 +112,11 @@ public class Mage extends Personnage implements Combattant {
                     System.out.println("Le défenseur est mort");
                 }
     }
-
+    /**
+     * Méthode qui permet de ramasser un objet dans un monde
+     * @param o
+     * @param w 
+     */
     public void ramasser(Objet o, World w) {
         if (o instanceof NuageToxique) {
             System.out.println("C'est un nuage Toxique!");
