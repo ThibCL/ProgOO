@@ -88,6 +88,9 @@ public void combattre(Creature c){
                 System.out.println("Attaque ratée!");
             }
         }
+        if(c.getPtVie()<1){
+                    System.out.println("Le défenseur est mort");
+                }
     }
 
 }

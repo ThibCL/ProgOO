@@ -103,10 +103,14 @@ public class Mage extends Personnage implements Combattant {
             if (RandAtt <= this.getPourcentageMag()) {
                 System.out.println("Attaque réussie! Le défenseur perd " + this.getDegMag() + " points de vie");
                 c.setPtVie(c.getPtVie() - this.getDegMag());
+                
             } else {
                 System.out.println("Attaque ratée!");
             }
         }
+        if(c.getPtVie()<1){
+                    System.out.println("Le défenseur est mort");
+                }
     }
 
     public void ramasser(Objet o, World w) {
@@ -144,5 +148,13 @@ public class Mage extends Personnage implements Combattant {
             }
         
 
+    }
+    
+    public void effetPotion(Objet o){
+        super.effetPotion(o);
+        if(o instanceof Mana){
+            this.setPtMana(this.getPtMana()+((Mana) o).getPtRecup());
+        }
+        
     }
 }

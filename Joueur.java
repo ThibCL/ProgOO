@@ -177,7 +177,7 @@ public class Joueur {
      */
     public void mangerperso(World w){
         Scanner scani = new Scanner(System.in);
-        if(this.getPerso().getBonusmalus().size()==0){
+        if(!this.getPerso().nourritureNonActivee()){
             System.out.println("Pas d'aliment à manger");
             
         }
@@ -197,6 +197,33 @@ public class Joueur {
             this.getPerso().getBonusmalus().get(rep).affiche();
         }
     }
+    /**
+     * Mérhode qui permet au joueur de faire boire une potion à son personnage
+     * @param w 
+     */
+    public void boirePerso(World w){
+        Scanner scani = new Scanner(System.in);
+        if(this.getPerso().getSac().size()==0){
+            System.out.println("Pas de potion à boire");
+            
+        }
+        else{
+            System.out.println("Voici les potions que vous possédez: ");      
+                for(int k=0; k<this.getPerso().getSac().size();k++){
+
+                    System.out.print(k+": ");
+                    this.getPerso().getSac().get(k).affiche();
+                }    
+            System.out.println("Taper le numéro de l'aliment que vous voulez boire:");  
+            
+            int rep=scani.nextInt();
+            this.getPerso().effetPotion(this.getPerso().getSac().get(rep));
+            
+            System.out.print("vous avez bu: ");
+            this.getPerso().getSac().get(rep).affiche();
+        }
+    }
+        
     
     /**
      * Methode qui permet d'afficher le nom du joueur et son personnage

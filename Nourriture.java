@@ -42,8 +42,15 @@ public class Nourriture extends Objet{
         super();
         Random nbralea=new Random();
         this.caractéristique=nbralea.nextInt(9)+1;
-        this.duree=nbralea.nextInt(9)+1;
-        this.pteffet=nbralea.nextInt(9)+1;// faire des cas différent selon la caractéritique
+        this.duree=nbralea.nextInt(7)+3;
+            switch(this.caractéristique){//a voir pour les malus
+                case 1: case 2: case 5: case 6: case 8:
+                    this.pteffet=nbralea.nextInt(11)+5;
+                case 3: case 4: case 9:
+                    this.pteffet=nbralea.nextInt(6)+1;
+                case 7:
+                    this.pteffet=nbralea.nextInt(3)+1;
+            }
         this.etat=0;
     }
 

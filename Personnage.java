@@ -228,5 +228,21 @@ public abstract class Personnage extends Creature {
             }
         
     }
+    
+    public void effetPotion(Objet o){
+        if(o instanceof Soin){
+            this.setPtVie(this.getPtVie()+((Soin) o).getPtRecup());
+        }
+    }
+    
+    public boolean nourritureNonActivee(){
+        boolean verif=false;
+        for(Nourriture n: this.getBonusmalus()){
+            if(n.getEtat()==0){
+                verif=true;
+            }
+        }
+        return verif;
+    }
 }
 

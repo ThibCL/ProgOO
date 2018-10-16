@@ -121,6 +121,7 @@ public class Archer extends Personnage implements Combattant {
             else {
                 System.out.println("Attaque ratée!");
             }
+            
         }
 
         //Combat à distance 
@@ -136,6 +137,9 @@ public class Archer extends Personnage implements Combattant {
                 System.out.println("Attaque ratée!");
             }
         }
+        if(c.getPtVie()<1){
+                    System.out.println("Le défenseur est mort");
+                }
     }
     
     public void ramasser(Objet o, World w){
