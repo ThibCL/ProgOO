@@ -23,11 +23,12 @@ public class World {
     /**
      * Taille du monde
      */
-    private final int taille = 10;
+    private int hauteur;
+    private int largeur;
     /**
      * Matrice des positions des différentes entitées dans le monde
      */
-    private Case[][] matMonde = new Case[taille][taille];
+    private Case[][] matMonde = new Case[hauteur][largeur];
     /**
      * Liste des joueurs dans le monde
      */
@@ -38,8 +39,10 @@ public class World {
      *
      * @param nbr le nombre aléatoire sera choisi entre 0 et nbr
      */
-    public World(int nbr) {
+    public World(int nbr, int h, int l) {
         Random nbralea = new Random();
+        hauteur=h;
+        largeur=l;
         for (int k = 0; k < nbralea.nextInt(nbr); k++) {
             Archer arch = new Archer();
             this.ajouterCrea(arch);
@@ -77,8 +80,8 @@ public class World {
             this.ajouterObjet(burger);
         }
         //initialisation de la matrice par l'ajout de cases vides
-        for (int k = 0; k < taille; k++) {
-            for (int i = 0; i < taille; i++) {
+        for (int k = 0; k < hauteur; k++) {
+            for (int i = 0; i < largeur; i++) {
                 this.matMonde[k][i] = new Case(new Point2D(k, i));
             }
         }
@@ -97,9 +100,23 @@ public class World {
         return lObjet;
     }
 
-    public int getTaille() {
-        return taille;
+    public int getHauteur() {
+        return hauteur;
     }
+
+    public int getLargeur() {
+        return largeur;
+    }
+
+    public void setHauteur(int hauteur) {
+        this.hauteur = hauteur;
+    }
+
+    public void setLargeur(int largeur) {
+        this.largeur = largeur;
+    }
+
+
 
     public Case[][] getMatMonde() {
         return matMonde;
@@ -166,12 +183,12 @@ public class World {
     public void creeMondeAlea() {
         Random posAlea = new Random();
         for (Creature c : this.getlCrea()) {
-            int x = posAlea.nextInt(this.taille);
-            int y = posAlea.nextInt(this.taille);
+            int x = posAlea.nextInt(this.hauteur);
+            int y = posAlea.nextInt(this.largeur);
             Point2D pt = new Point2D(x, y);
             while (!(distanceMonde(2, pt))) {
-                x = posAlea.nextInt(this.taille);
-                y = posAlea.nextInt(this.taille);
+                x = posAlea.nextInt(this.hauteur);
+                y = posAlea.nextInt(this.largeur);
                 pt = new Point2D(x, y);
             }
             c.setPos(pt);
@@ -179,11 +196,11 @@ public class World {
 
         }
         for (Objet o : this.getlObjet()) {
-            int x = posAlea.nextInt(this.taille);
-            int y = posAlea.nextInt(this.taille);
+            int x = posAlea.nextInt(this.hauteur);
+            int y = posAlea.nextInt(this.largeur);
             if (getMatMonde()[x][y].getObjet() != null) {
-                x = posAlea.nextInt(this.taille);
-                y = posAlea.nextInt(this.taille);
+                x = posAlea.nextInt(this.hauteur);
+                y = posAlea.nextInt(this.largeur);
             } else {
                 o.getPos().setPosition(x, y);
                 getMatMonde()[x][y].setObjet(o);
@@ -204,8 +221,8 @@ public class World {
     }
 
     public void affichemat() {
-        for (int i = 0; i < taille; i++) {
-            for (int j = 0; j < taille; j++) {
+        for (int i = 0; i < hauteur; i++) {
+            for (int j = 0; j < largeur; j++) {
                 if (this.matMonde[i][j].getCreature() == null && this.matMonde[i][j].getObjet() == null) {
                     System.out.print(" [" + "." + "," + "." + "]");
                 } else if (this.matMonde[i][j].getCreature() == null && this.matMonde[i][j].getObjet() != null) {

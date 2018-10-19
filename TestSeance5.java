@@ -11,7 +11,7 @@ public class TestSeance5 {
     
     public static void main(String[] args){
 
-        World w5= new World(5);       
+        World w5= new World(5, 10, 10);       
         
         
 
