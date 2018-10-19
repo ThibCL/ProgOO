@@ -96,20 +96,28 @@ public class Mage extends Personnage implements Combattant {
      * @param c
      */
     public void combattre(Creature c) {
-        if ((this.getPos().distance(c.getPos()) < this.getDistAttMax()) && ((this.getPtMana() > 0))) {
+        if ((this.getPos().distance(c.getPos()) <= this.getDistAttMax()) && ((this.getPtMana() > 0))) {
             this.setPtMana(this.getPtMana() - 1);
             Random lanceDe = new Random();
             int RandAtt = lanceDe.nextInt(101);
             if (RandAtt <= this.getPourcentageMag()) {
                 System.out.println("Attaque réussie! Le défenseur perd " + this.getDegMag() + " points de vie");
                 c.setPtVie(c.getPtVie() - this.getDegMag());
+                
             } else {
                 System.out.println("Attaque ratée!");
             }
-            this.setPtMana(this.getPtMana() - 3);//une fois que le mage attaque avec de la magie il perd es point de mana
         }
+        if(c.getPtVie()<1){
+                    System.out.println("Le défenseur est mort");
+                }
     }
-
+    /**
+     * Méthode qui permet de ramasser un objet dans un mondequit
+     * 
+     * @param o
+     * @param w 
+     */
     public void ramasser(Objet o, World w) {
         if (o instanceof NuageToxique) {
             System.out.println("C'est un nuage Toxique!");
@@ -119,7 +127,7 @@ public class Mage extends Personnage implements Combattant {
             int y = o.getPos().getY();
             w.getMatMonde()[x][y].setObjet(null);
             w.getlObjet().remove(o);
-            this.effetnourriture((Nourriture)o,1);
+            
         } else {
             getSac().add(o);
             int x = o.getPos().getX();
@@ -145,5 +153,13 @@ public class Mage extends Personnage implements Combattant {
             }
         
 
+    }
+    
+    public void effetPotion(Objet o){
+        super.effetPotion(o);
+        if(o instanceof Mana){
+            this.setPtMana(this.getPtMana()+((Mana) o).getPtRecup());
+        }
+        
     }
 }

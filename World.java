@@ -71,11 +71,11 @@ public class World {
             Soin vdk = new Soin();
             this.ajouterObjet(vdk);
         }
-        for (int k = 0; k < nbralea.nextInt(nbr); k++) {
+        for (int k = 0; k<7/* nbralea.nextInt(nbr)*/; k++) {
             Mana rhm = new Mana();
             this.ajouterObjet(rhm);
         }
-        for (int k = 0; k < 5/*nbralea.nextInt(nbr)*/; k++) {
+        for (int k = 0; k < 8/*nbralea.nextInt(nbr)*/; k++) {
             Nourriture burger = new Nourriture();
             this.ajouterObjet(burger);
         }
@@ -252,21 +252,29 @@ public class World {
         while (Objects.equals(choix, "quit") == false) {
             System.out.println("Nouveau tour");
             for (Joueur j : this.getlJoueur()) {
-                System.out.println("C'est à " + j.getNomJoueur() + " de jouer. Veux tu Combattre ou te Deplacer?");
+                System.out.println("C'est à " + j.getNomJoueur() + " de jouer. Veux tu Combattre ,te Deplacer,Manger ou Boire?");
                 boolean choisi = false;
                 while (choisi == false) {
                     choix = sc.next();
                     switch (choix) {
-                        case "Combattre":
+                        case "Combattre": case "c":
                             j.combattreperso(this);
                             choisi = true;
                             break;
-                        case "Deplacer":
+                        case "Deplacer": case "d":
                             j.deplaceperso(this);
                             choisi = true;
                             break;
+                        case "Manger": case "m":
+                            j.mangerperso(this);
+                            choisi=true;
+                            break;
+                        case "Boire": case "b":
+                            j.boirePerso(this);
+                            choisi=true;
+                            break;
                         default:
-                            System.out.println("Ce n'est pas une action possible : Entrer Combattre ou Deplacer :");
+                            System.out.println("Ce n'est pas une action possible : Entrer Combattre,Deplacer,Manger ou Boire :");
                             break;
                     }
                 }
@@ -274,36 +282,40 @@ public class World {
 
             }
             //faire jouer les autres entitees sur le terrain
-            for (Creature c : this.getlCrea()) {
-                if (c.getControle() == 0) {
+            int i=0;
+            while(i<this.getlCrea().size()){
+                Creature c=this.getlCrea().get(i);
+            //for (Creature c : this.getlCrea()) {
+                if (c.getControle() == 0 && c.getPtVie()>0) {
                     c.deplacer(this, 0, 0);
                 }
+                
                 if (c instanceof Personnage) {
-                    int k=0;
+                    int k = 0;
                     Nourriture n;
-                    
-                    /**for (Nourriture n : ((Personnage) c).getBonusmalus()) {
-                        n.setDuree(n.getDuree() - 1);
-                        if (n.getDuree() < 1) {
-                            ((Personnage) c).effetnourriture(n,-1);
-                            ((Personnage) c).getBonusmalus().remove(n);
-                            
-                        }**/
-                    while(k<((Personnage) c).getBonusmalus().size()){
-                        n=((Personnage) c).getBonusmalus().get(k);
-                        n.setDuree(n.getDuree() - 1);
-                        if (n.getDuree() < 1) {
-                            ((Personnage) c).effetnourriture(n,-1);
-                            ((Personnage) c).getBonusmalus().remove(n);
-                            
+                    while (k < ((Personnage) c).getBonusmalus().size()) {
+                        n = ((Personnage) c).getBonusmalus().get(k);
+                        if (n.getEtat() == 1) {
+                            n.setDuree(n.getDuree() - 1);
+                            if (n.getDuree() < 1) {
+                                ((Personnage) c).effetnourriture(n, -1);
+                                System.out.print("L'aliment suivant ne fait plus effet: ");
+                                n.affiche();
+                                ((Personnage) c).getBonusmalus().remove(n);
+                              
+                            }
                         }
-                        
+                        k=k+1;
+
                     }
-                    
-                    
-                   
 
                 }
+                if(c.getPtVie()<1){
+                    this.getMatMonde()[c.getPos().getX()][c.getPos().getY()].setCreature(null);
+                    this.getlCrea().remove(c);
+                    
+                }
+                i=i+1;
             }
             this.affichemat();
             System.out.println("Si vous voulez arrêter de jouer entrez quit");

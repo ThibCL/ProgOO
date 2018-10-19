@@ -172,6 +172,60 @@ public class Joueur {
         
     }
     /**
+     * Méthode qui permet au joueur de faire manger un aliment à son personnage 
+     * @param w 
+     */
+    public void mangerperso(World w){
+        Scanner scani = new Scanner(System.in);
+        if(!this.getPerso().nourritureNonActivee()){
+            System.out.println("Pas d'aliment à manger");
+            
+        }
+        else{
+            System.out.println("Voici les aliments que vous possédez: ");      
+            for(int k=0; k<this.getPerso().getBonusmalus().size();k++){
+                if(this.getPerso().getBonusmalus().get(k).getEtat()==0){    
+                    System.out.print(k+": ");
+                    this.getPerso().getBonusmalus().get(k).affiche();
+                }
+                System.out.println("Taper le numéro de l'aliment que vous voulez mangez:");  
+            }
+            int rep=scani.nextInt();
+            this.getPerso().effetnourriture(this.getPerso().getBonusmalus().get(rep),1);
+            this.getPerso().getBonusmalus().get(rep).setEtat(1);
+            System.out.print("vous avez mangé: ");
+            this.getPerso().getBonusmalus().get(rep).affiche();
+        }
+    }
+    /**
+     * Mérhode qui permet au joueur de faire boire une potion à son personnage
+     * @param w 
+     */
+    public void boirePerso(World w){
+        Scanner scani = new Scanner(System.in);
+        if(this.getPerso().getSac().size()==0){
+            System.out.println("Pas de potion à boire");
+            
+        }
+        else{
+            System.out.println("Voici les potions que vous possédez: ");      
+                for(int k=0; k<this.getPerso().getSac().size();k++){
+
+                    System.out.print(k+": ");
+                    this.getPerso().getSac().get(k).affiche();
+                }    
+            System.out.println("Taper le numéro de l'aliment que vous voulez boire:");  
+            
+            int rep=scani.nextInt();
+            this.getPerso().effetPotion(this.getPerso().getSac().get(rep));
+            
+            System.out.print("vous avez bu: ");
+            this.getPerso().getSac().get(rep).affiche();
+        }
+    }
+        
+    
+    /**
      * Methode qui permet d'afficher le nom du joueur et son personnage
      */
     public void affiche(){
