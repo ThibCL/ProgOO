@@ -113,7 +113,8 @@ public class Mage extends Personnage implements Combattant {
                 }
     }
     /**
-     * Méthode qui permet de ramasser un objet dans un monde
+     * Méthode qui permet de ramasser un objet dans un mondequit
+     * 
      * @param o
      * @param w 
      */
