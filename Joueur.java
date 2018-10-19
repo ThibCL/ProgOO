@@ -1,5 +1,7 @@
 
 package org.centrale.projet.objet;
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner; 
 /**
@@ -233,7 +235,11 @@ public class Joueur {
         this.perso.affiche();
     }
     
-    
+    public void getTexteSauvegarde(BufferedWriter writer) throws IOException{
+        writer.write(this.nomJoueur+" ");
+        this.getPerso().getTexteSauvegarde(writer);
+        
+    }
     
     
 }

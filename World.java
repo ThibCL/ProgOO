@@ -1,5 +1,6 @@
 package org.centrale.projet.objet;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -20,6 +21,9 @@ public class World {
      * Liste des objets dans le monde
      */
     private ArrayList<Objet> lObjet = new ArrayList<>();
+    
+    
+    private ArrayList<ElementDeJeu> lelem =new ArrayList<>();
     /**
      * Taille du monde
      */
@@ -28,7 +32,7 @@ public class World {
     /**
      * Matrice des positions des différentes entitées dans le monde
      */
-    private Case[][] matMonde = new Case[hauteur][largeur];
+    private Case[][] matMonde; //= new Case[hauteur][largeur];
     /**
      * Liste des joueurs dans le monde
      */
@@ -41,8 +45,9 @@ public class World {
      */
     public World(int nbr, int h, int l) {
         Random nbralea = new Random();
-        hauteur=h;
-        largeur=l;
+        this.hauteur=h;
+        this.largeur=l;
+        this.matMonde= new Case[hauteur][largeur];
         for (int k = 0; k < nbralea.nextInt(nbr); k++) {
             Archer arch = new Archer();
             this.ajouterCrea(arch);
@@ -80,9 +85,9 @@ public class World {
             this.ajouterObjet(burger);
         }
         //initialisation de la matrice par l'ajout de cases vides
-        for (int k = 0; k < hauteur; k++) {
-            for (int i = 0; i < largeur; i++) {
-                this.matMonde[k][i] = new Case(new Point2D(k, i));
+        for (int li = 0; li < hauteur; li++) {
+            for (int ti = 0; ti < largeur; ti++) {
+                this.matMonde[li][ti] = new Case(new Point2D(li, ti));
             }
         }
 
@@ -145,6 +150,7 @@ public class World {
      * personnages
      */
     public void ajouterCrea(Creature crea) {
+        this.lCrea.add(crea);
         this.lCrea.add(crea);
     }
 
@@ -245,7 +251,8 @@ public class World {
      * déplacer ou de combattre Si on veut arrêter de jouer il faut rentrer quit
      * entre deux tour de jeu
      */
-    public void tourDeJeu() {
+    public void tourDeJeu() throws IOException {
+        SauvegardePartie testi=new SauvegardePartie("trere");
         Scanner sc = new Scanner(System.in);
         System.out.println("si vous ne voulez pas jouer tapez quit");
         String choix = sc.next();
@@ -318,8 +325,13 @@ public class World {
                 i=i+1;
             }
             this.affichemat();
-            System.out.println("Si vous voulez arrêter de jouer entrez quit");
+            System.out.println("Si vous voulez arrêter de jouer entrez quit si vous voulez sauvegarder taper save");
             choix = sc.next();
+            switch(choix){
+                case "save":
+                    testi.sauvegarderPartie(this);
+                    break;
+            }
         }
 
     }
@@ -338,6 +350,27 @@ public class World {
         this.lJoueur.add(j);
         this.ajouterCrea(j.getPerso());
 
+    }
+    public int nombrePerso(){
+        int compt=0;
+        for(Creature c: this.getlCrea()){
+            if(c instanceof Personnage){
+                compt+=1;
+            }
+            
+        }
+        return compt;
+    }
+    
+    public int nombreMonstre(){
+        int compt=0;
+        for(Creature c: this.getlCrea()){
+            if(c instanceof Monstre){
+                compt+=1;
+            }
+            
+        }
+        return compt;
     }
 
 }

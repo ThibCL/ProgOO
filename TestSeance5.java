@@ -1,5 +1,6 @@
 package org.centrale.projet.objet;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,12 +10,10 @@ import java.util.Scanner;
  */
 public class TestSeance5 {
     
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException{
 
         World w5= new World(5, 10, 10);       
-        
-        
-
+      
         w5.creationJoueur();
         w5.creeMondeAlea();
         w5.getlJoueur().get(0).affiche();

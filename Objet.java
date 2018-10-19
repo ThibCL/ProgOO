@@ -1,5 +1,8 @@
 package org.centrale.projet.objet;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 /**
  * Représente un objet dans le monde : c'est une super classe de tous les objets du monde
  * @author Thibault
@@ -41,7 +44,13 @@ public abstract class Objet extends ElementDeJeu {
     public abstract void caracteristiques();
     
     
-    
+    public void getTexteSauvegarde(BufferedWriter writer) throws IOException{
+        writer.write(this.getClass().getSimpleName()+" ");
+        writer.write(Integer.toString(this.getPos().getX())+" ");
+       
+        writer.write(Integer.toString(this.getPos().getY())+ " ");
+
+    }
 
     
     

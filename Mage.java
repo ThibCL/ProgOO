@@ -142,7 +142,7 @@ public class Mage extends Personnage implements Combattant {
 
         
 
-            switch (n.getCaractéristique()) {
+            switch (n.getCaracteristique()) {
                 case 8:
                     this.setPourcentageMag(this.getPourcentageMag() + n.getPteffet() * i);
                     break;
