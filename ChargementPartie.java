@@ -48,28 +48,36 @@ public class ChargementPartie {
     }
     
     public ElementDeJeu creerElementJeu(String element, String type){
-        
         ElementDeJeu e;
         
         switch (type){
             case "Archer":
                 e = new Archer(element);
+                break;
             case "Guerrier":
                 e = new Guerrier(element);
+                break;
             case "Paysan":
                 e = new Paysan(element);
+                break;
             case "Mage":
                 e = new Mage(element);
+                break;
             case "Lapin":
                 e = new Lapin(element);
+                break;
             case "Loup":
                 e = new Loup(element);
+                break;
             case "Mana":
                 e= new Mana(element);
+                break;
             case "Soin":
                 e= new Soin(element);
+                break;
             default : //si la sauvegarde a été bien faite, le seul type restant possible est nuage toxique
                 e=new NuageToxique(element);
+                break;
             
         }
         return(e);
@@ -101,11 +109,11 @@ public class ChargementPartie {
             //on créé les personnages et les monstres
             for (int i=0; i<parametres[2]; i++){
                 ligne = fichier.readLine();
-                System.out.println(ligne);
                 tokenizer = new StringTokenizer(ligne, delimiteurs);
                 String type = tokenizer.nextToken();
-                Personnage p =(Personnage)(creerElementJeu(ligne, type));
-                p.affiche();//pour les tests
+                ElementDeJeu e =creerElementJeu(ligne, type);
+                Personnage p =(Personnage)(e);
+                p.affiche();//pour les tests*/
                 //AJOUTER LES PERSONNAGES ET LES MONSTRES AU MONDE ==> faire une fonction dans la classe World 
             }
             /*

@@ -170,12 +170,12 @@ public abstract class Personnage extends Creature {
         }
          
         //on récupère le nombre d'objets de type Nourriture 
-        /*
+        
         int nbreNourriture = Integer.parseInt(tokenizer.nextToken());
         bonusmalus = new ArrayList<>();
         /*on récupère chaque nourriture en utilisant le même délimiteur que pour les objets puisque les nourritures du 
         personnage sont délimités par des crochets "[" et "]" et séparés par un ";" dans le fichier*/
-        /*tokenizer2.nextToken(); //on décale le curseur pour sauter le numéro correspondant au nombre de nourriture situé entre les objets du sac et les objets nourriture
+        tokenizer2.nextToken(); //on décale le curseur pour sauter le numéro correspondant au nombre de nourriture situé entre les objets du sac et les objets nourriture
         for (int i=0; i<nbreNourriture;i++){
             String nourriture = tokenizer2.nextToken();
             Nourriture n = new Nourriture(nourriture);
