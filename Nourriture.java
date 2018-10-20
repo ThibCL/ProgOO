@@ -1,6 +1,8 @@
 
 package org.centrale.projet.objet;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.Random;
 import java.util.StringTokenizer;
 
@@ -93,7 +95,8 @@ public class Nourriture extends Objet{
     }
     
 
-    public int getCaractéristique() {
+
+    public int getCaracteristique() {
         return caracteristique;
     }
 
@@ -101,7 +104,7 @@ public class Nourriture extends Objet{
         return duree;
     }
 
-    public void setCaractéristique(int caracteristique) {
+    public void setCaracteristique(int caracteristique) {
         this.caracteristique = caracteristique;
     }
 
@@ -114,7 +117,7 @@ public class Nourriture extends Objet{
      */
     public void affiche(){
         System.out.print("Nourriture: ");
-        System.out.print("Augmente la caracteristique "+this.getCaractéristique());
+        System.out.print("Augmente la caracteristique "+this.getCaracteristique());
         System.out.print(" de "+this.getPteffet()+" pt");
         System.out.println(" D'une duree de "+ this.getDuree()+" tour");
     }
@@ -126,4 +129,13 @@ public class Nourriture extends Objet{
         
     }
     
+    public void getTexteSauvegarde(BufferedWriter writer) throws IOException{
+        super.getTexteSauvegarde(writer);
+        writer.write(Integer.toString(this.caracteristique)+ " ");
+        writer.write(Integer.toString(this.duree)+ " ");
+         writer.write(Integer.toString(this.ptEffet)+ " ");
+        writer.write(Integer.toString(this.etat)+ " ");
+       
+        writer.newLine();
+    }
 }

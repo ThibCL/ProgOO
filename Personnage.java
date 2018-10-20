@@ -2,6 +2,7 @@ package org.centrale.projet.objet;
 
 import java.util.ArrayList;
 import java.util.StringTokenizer;
+import java.io.*;
 
 /**
  * Classe qui est une super classe de tous les personnages possibles tels que
@@ -281,7 +282,7 @@ public abstract class Personnage extends Creature {
     public void effetnourriture(Nourriture n, int i) {
         
 
-            switch (n.getCaractéristique()) {
+            switch (n.getCaracteristique()) {
                 case 1:
                     this.setPourcentageAtt(this.getPourcentageAtt() + n.getPteffet() * i);
                     break;
@@ -327,6 +328,32 @@ public abstract class Personnage extends Creature {
             }
         }
         return verif;
+    }
+    
+    
+    public void getTexteSauvegarde(BufferedWriter writer) throws IOException{
+        writer.write(this.getClass().getSimpleName()+" ");
+                if(this.getNom()!=null){
+                    writer.write(this.getNom()+" ");
+                }
+                else{
+                    writer.write("bob ");
+                }
+                writer.write(Integer.toString(this.getPtMana())+" ");
+                writer.write(Integer.toString(this.getPourcentageMag())+" ");
+                writer.write(Integer.toString(this.getPourcentageResisMag())+" ");
+                writer.write(Integer.toString(this.getDegMag())+" ");
+                writer.write(Double.toString(this.getDistAttMax())+" ");
+                //writer.write(Integer.toString(this)+" ");
+                //writer.write(Integer.toString(this)+" ");
+                writer.write(Integer.toString(this.getPtVie())+" ");
+                writer.write(Integer.toString(this.getPourcentageAtt())+" ");
+                writer.write(Integer.toString(this.getPourcentagePar())+" ");
+                writer.write(Integer.toString(this.getDegAtt())+" ");
+                writer.write(Integer.toString(this.getPtPar())+" ");
+                writer.write(Integer.toString(this.getPos().getX())+" ");
+                writer.write(Integer.toString(this.getPos().getY())+" ");
+                writer.newLine();
     }
 }
 
