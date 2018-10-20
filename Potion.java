@@ -1,6 +1,7 @@
 package org.centrale.projet.objet;
 
 import java.util.Random;
+import java.util.StringTokenizer;
 
 /**
  * Représente un objet de type Potion (sous-classe de potion)
@@ -23,7 +24,18 @@ public abstract class Potion extends Objet {
         Random intAlea= new Random();
         ptRecup = 5+intAlea.nextInt(15);
     }
-
+    
+    public Potion(String element){
+        String delimiteurs = " ";
+        StringTokenizer tokenizer;
+        tokenizer = new StringTokenizer(element, delimiteurs);
+        tokenizer.nextToken(); //on passe le nom
+        int x = Integer.parseInt(tokenizer.nextToken());
+        int y = Integer.parseInt(tokenizer.nextToken());
+        setPos(new Point2D(x,y));
+        ptRecup = Integer.parseInt(tokenizer.nextToken());
+    }
+    
     public int getPtRecup() {
         return ptRecup;
     }

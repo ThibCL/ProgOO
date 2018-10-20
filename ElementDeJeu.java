@@ -6,4 +6,5 @@ package org.centrale.projet.objet;
  */
 public abstract class ElementDeJeu {
     
+    
 }

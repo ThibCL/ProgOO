@@ -1,5 +1,7 @@
 package org.centrale.projet.objet;
 
+import java.util.StringTokenizer;
+
 /**
  * Représente un objet dans le monde : c'est une super classe de tous les objets du monde
  * @author Thibault
@@ -19,6 +21,20 @@ public abstract class Objet extends ElementDeJeu {
     
     public Objet() {
         this.pos = new Point2D();
+    }
+    
+    /**
+     * Constructeur de Objet à partir d'une ligne de la sauvegarde
+     * @param element ligne de la sauvegarde comportant les caractéristiques de l'objet à créer
+     */
+    public Objet(String element){
+        String delimiteurs = " ";
+        StringTokenizer tokenizer;
+        tokenizer = new StringTokenizer(element, delimiteurs);
+        tokenizer.nextToken();//on passe le type de l'objet
+        int x = Integer.parseInt(tokenizer.nextToken());
+        int y = Integer.parseInt(tokenizer.nextToken());
+        pos = new Point2D(x,y);
     }
 
     public Point2D getPos() {

@@ -39,6 +39,13 @@ public class Loup extends Monstre implements Combattant {
         setDegAtt(i);
     }
     
+    /**
+     * Constructeur prenant en argument la ligne correspondant à la sauvegarde du loup dans un fichier et recréant le personnage correspondant
+     * @param element ligne correspondant à la sauvegarde du loup dans un fichier
+     */
+    public Loup(String element){
+        super(element);
+    }
 /**
  * Méthode permettant d'afficher un Loup
  */

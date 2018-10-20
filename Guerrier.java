@@ -58,6 +58,14 @@ public class Guerrier extends Personnage implements Combattant {
         i = 25 + intAlea.nextInt(15);
         setPourcentageResisMag(35);
     }
+    
+    /**
+     * Constructeur de Guerrier à partir d'une ligne de la sauvegarde
+     * @param element ligne de la sauvegarde comportant les caractéristiques du guerrier à créer
+     */
+    public Guerrier(String element){
+        super(element);
+    }
 
     /**
      * Méthode permettant d'afficher un Guerrier

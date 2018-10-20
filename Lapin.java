@@ -42,6 +42,14 @@ public class Lapin extends Monstre{
         setPourcentagePar(i); //mais il peut éviter facilement le combat grace à sa rapidité
         setDegAtt(0);
     }
+    
+    /**
+     * Constructeur prenant en argument la ligne correspondant à la sauvegarde du lapin dans un fichier et recréant le personnage correspondant
+     * @param element ligne correspondant à la sauvegarde du lapin dans un fichier
+     */
+    public Lapin(String element){
+        super(element);
+    }
 
 /**
  * Méthode permettant d'afficher un Lapin

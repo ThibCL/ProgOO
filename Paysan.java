@@ -53,6 +53,14 @@ public class Paysan extends Personnage {
     }
     
     /**
+     * Constructeur de Paysan à partir d'une ligne de la sauvegarde
+     * @param element ligne de la sauvegarde comportant les caractéristiques du paysan à créer
+     */
+    public Paysan(String element){
+        super(element);
+    }
+    
+    /**
      * Méthode permettant d'afficher un Paysan
      */
     public void affiche(){
