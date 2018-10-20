@@ -32,7 +32,7 @@ public class World {
     /**
      * Matrice des positions des différentes entitées dans le monde
      */
-    private Case[][] matMonde; //= new Case[hauteur][largeur];
+    private Case[][] matMonde;
     /**
      * Liste des joueurs dans le monde
      */
@@ -47,6 +47,7 @@ public class World {
     public World (int h, int l){
         hauteur=h;
         largeur=l;
+        matMonde= new Case[hauteur][largeur];
         for (int k = 0; k < hauteur; k++) {
             for (int i = 0; i < largeur; i++) {
                 this.matMonde[k][i] = new Case(new Point2D(k, i));

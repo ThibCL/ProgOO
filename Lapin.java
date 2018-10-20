@@ -56,7 +56,7 @@ public class Lapin extends Monstre{
  */
     public void affiche(){
         System.out.println("C'est un monstre de type Lapin :"+
-                "; \nPoints de vie: "+getPtVie()+
+                "\nPoints de vie: "+getPtVie()+
                 "; \nPourcentage d'attaque : "+getPourcentageAtt()+
                 "; \nPourcentage parade : "+getPourcentagePar()+
                 "; \nDegats d'attaque : "+getDegAtt()+

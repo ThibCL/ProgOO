@@ -53,6 +53,7 @@ public abstract class Monstre extends Creature {
         String delimiteurs = " ";
         StringTokenizer tokenizer;
         tokenizer = new StringTokenizer(element, delimiteurs);
+        tokenizer.nextToken();//on passe le type de monstre
         setPtVie(Integer.parseInt(tokenizer.nextToken()));
         setPourcentageAtt(Integer.parseInt(tokenizer.nextToken()));
         setPourcentagePar(Integer.parseInt(tokenizer.nextToken()));
@@ -60,7 +61,7 @@ public abstract class Monstre extends Creature {
         setPtPar(Integer.parseInt(tokenizer.nextToken()));
         int x=Integer.parseInt(tokenizer.nextToken());
         int y= Integer.parseInt(tokenizer.nextToken());
-        Point2D pos = new Point2D(x,y);   
+        setPos(new Point2D(x,y));   
         setControle(0);
     }
 

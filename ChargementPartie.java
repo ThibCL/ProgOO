@@ -77,19 +77,18 @@ public class ChargementPartie {
     
     public World chargerPartie(){
         String ligne;
-        World w =new World(50,50);
         try {
             BufferedReader fichier =getLecteur();
             String delimiteurs = " ";
             StringTokenizer tokenizer;
             String mot;
             int[] parametres = new int[5];
-
-            /*
+            
             //On récupère les parametres du jeu que l'on place dans le tableau parametre
-            //d'abord la hauteur du monde, puis la largeur, puis le nombre de créatures, puis le nombre d'objet et pour finir le nombre de joueurs
+            //d'abord la largeur du monde, puis la hauteur, puis le nombre de créatures, puis le nombre d'objet et pour finir le nombre de joueurs
             for (int i=0; i<5; i++){                
                 ligne = fichier.readLine();
+                System.out.println(ligne);
                 tokenizer = new StringTokenizer(ligne, delimiteurs);
                 mot = tokenizer.nextToken();
                 int k =  Integer.parseInt(tokenizer.nextToken());
@@ -97,18 +96,19 @@ public class ChargementPartie {
             }
 
             //on créé le monde vide 
-            World w = new World(parametres[0], parametres[1]);
+            World w = new World(parametres[1], parametres[0]);
             
             //on créé les personnages et les monstres
             for (int i=0; i<parametres[2]; i++){
                 ligne = fichier.readLine();
+                System.out.println(ligne);
                 tokenizer = new StringTokenizer(ligne, delimiteurs);
                 String type = tokenizer.nextToken();
                 Personnage p =(Personnage)(creerElementJeu(ligne, type));
                 p.affiche();//pour les tests
                 //AJOUTER LES PERSONNAGES ET LES MONSTRES AU MONDE ==> faire une fonction dans la classe World 
             }
-            
+            /*
             //On créé les objets du monde 
             for (int i=0; i<parametres[3];i++){
                 ligne = fichier.readLine();
@@ -134,10 +134,10 @@ public class ChargementPartie {
             */
             return w;
             }
-        catch (Exception e) {
+        catch (IOException e) {
             System.out.println("Le fichier ne peut pas être lu.");
-             //World w = new World(50,50);//on créé un monde par default si il n'y a pas de partie chargée
-             return w;
+            World w = new World(50,50);//on créé un monde par default si il n'y a pas de partie chargée
+            return w;
         }
     }
     

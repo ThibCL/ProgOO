@@ -51,7 +51,7 @@ public class Loup extends Monstre implements Combattant {
  */
     public void affiche(){
         System.out.println("C'est un monstre de type Loup :"+
-                "; \nPoints de vie: "+getPtVie()+
+                "\nPoints de vie: "+getPtVie()+
                 "; \nPourcentage d'attaque : "+getPourcentageAtt()+
                 "; \nPourcentage parade : "+getPourcentagePar()+
                 "; \nDegats d'attaque : "+getDegAtt()+

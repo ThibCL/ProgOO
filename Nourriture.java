@@ -28,7 +28,7 @@ public class Nourriture extends Objet{
      */
     private int ptEffet;
     /**
-     * Represente l'etat activé ou non de la nourriture
+     * Represente l'etat activé (1) ou non (0)de la nourriture
      */
     private int etat;
 
@@ -119,7 +119,7 @@ public class Nourriture extends Objet{
         System.out.print("Nourriture: ");
         System.out.print("Augmente la caracteristique "+this.getCaracteristique());
         System.out.print(" de "+this.getPteffet()+" pt");
-        System.out.println(" D'une duree de "+ this.getDuree()+" tour");
+        System.out.println(" pour une duree de "+ this.getDuree()+" tour");
     }
     
     /**

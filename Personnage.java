@@ -77,8 +77,8 @@ public abstract class Personnage extends Creature {
         this.pourcentageResisMag = pourcentageResisMag;
         this.degMag = degMag;
         this.distAttMax = distAttMax;
-        this.sac = sac;
-        this.bonusmalus = bonusmalus;
+        this.sac = new ArrayList<Objet> (sac);
+        this.bonusmalus = new ArrayList<Nourriture>(bonusmalus);
     }
 
     /**
@@ -125,7 +125,7 @@ public abstract class Personnage extends Creature {
         tokenizer = new StringTokenizer(element, delimiteurs);
 
         String typePerso = tokenizer.nextToken();
-        String nom = tokenizer.nextToken();
+        nom = tokenizer.nextToken();
         ptMana = Integer.parseInt(tokenizer.nextToken());
         pourcentageMag= Integer.parseInt(tokenizer.nextToken());
         pourcentageResisMag= Integer.parseInt(tokenizer.nextToken());
@@ -134,15 +134,14 @@ public abstract class Personnage extends Creature {
 
         //on récupère le nombre d'objets dans le sac
         int objSac = Integer.parseInt(tokenizer.nextToken());
-        ArrayList<Objet> sac = new ArrayList<>();
         //on récupère chaque objet en créant un nouveau curseur avec un délimiteur différent puisque les objets sont délimités par des crochets "[" et "]" et séparés par un ";" dans le fichier
         String delimiteurs2 = "[;]";
         StringTokenizer tokenizer2 = new StringTokenizer(element, delimiteurs2);
         tokenizer2.nextToken(); //on ne récupère pas ce qu'il y a avant la liste des objets
         //puis on construit chaque objet
+        sac = new ArrayList<>();
         for (int i=0; i<objSac;i++){
             String objet = tokenizer2.nextToken();
-
             //on créé un troisième curseur pour récupérer le type de l'objet
             StringTokenizer tokenizer3 = new StringTokenizer(objet, delimiteurs);
             String typeObj = tokenizer3.nextToken();
@@ -150,28 +149,33 @@ public abstract class Personnage extends Creature {
             switch(typeObj){
                 case "Nourriture":
                     o = new Nourriture(objet);
+                    break;
                 case "Mana":
                     o = new Mana(objet);
+                    break;
                 case "Soin":
                     o = new Soin(objet);
+                    break;
                 default:
                     o=new NuageToxique(objet); //si la sauvegarde est bien faite l'objet ne peut qu'être un Nuage Toxique si ce n'est pas les autres cas
+                    break;
                             
             }
             sac.add(o);
-            }
 
             //on fait avancer le premier curseur de 4 pour qu'il passe les objets 
             for (int k=0;k<4;k++){
                 tokenizer.nextToken();
             }
-
+        }
+         
         //on récupère le nombre d'objets de type Nourriture 
+        /*
         int nbreNourriture = Integer.parseInt(tokenizer.nextToken());
-        ArrayList<Nourriture> bonusmalus = new ArrayList<>();
+        bonusmalus = new ArrayList<>();
         /*on récupère chaque nourriture en utilisant le même délimiteur que pour les objets puisque les nourritures du 
         personnage sont délimités par des crochets "[" et "]" et séparés par un ";" dans le fichier*/
-        tokenizer2.nextToken(); //on décale le curseur pour sauter le numéro correspondant au nombre de nourriture situé entre les objets du sac et les objets nourriture
+        /*tokenizer2.nextToken(); //on décale le curseur pour sauter le numéro correspondant au nombre de nourriture situé entre les objets du sac et les objets nourriture
         for (int i=0; i<nbreNourriture;i++){
             String nourriture = tokenizer2.nextToken();
             Nourriture n = new Nourriture(nourriture);
@@ -188,8 +192,8 @@ public abstract class Personnage extends Creature {
         setPtPar(Integer.parseInt(tokenizer.nextToken()));
         int x=Integer.parseInt(tokenizer.nextToken());
         int y= Integer.parseInt(tokenizer.nextToken());
-        Point2D pos = new Point2D(x,y);     
-        setControle(0); //ces personnages ne sont pas contrôlés        
+        setPos(new Point2D(x,y));  
+        setControle(0); //ces personnages ne sont pas contrôlés     */  
 }
 
     public String getNom() {
@@ -258,22 +262,42 @@ public abstract class Personnage extends Creature {
 
     public abstract void affiche();
 
+    /**
+     * Méthode permettant d'afficher le contenu du sac du personnage
+     */
     public void afficheSac() {
         ArrayList<Objet> sac = getSac();
         if (sac == null) {
             System.out.println("Ce personnage n'a rien dans son sac.");
         } else {
+            System.out.println("Ce personnage a dans son sac : ");
             for (Objet o : sac) {
-                System.out.print("Ce personnage a dans son sac un(e) ");
                 o.affiche();
             }
         }
     }
+    
+    /**
+     * Méthode permettant d'afficher la nourriture portée par le personnage
+     */
+    public void afficheNourriture(){
+        ArrayList<Nourriture> nourriture = getBonusmalus();
+        if (nourriture == null) {
+            System.out.println("Ce personnage n'a pas de nourriture sur lui");
+        } else {
+            System.out.println("Ce personnage a sur lui: ");
+            for (Nourriture n : nourriture) {
+                n.affiche();
+            }
+        }
+        
+    }
 
     public abstract void ramasser(Objet o, World w);
 
+    
     /**
-     * méthode qui permet de modifier les caractéristique du personnage en
+     * méthode qui permet de modifier les caractéristiques du personnage en
      * fonction de la nourriture qu'il ramasse
      *
      * @param i vaut 1 ou -1 si le personnage ramasse ou si la duree s'est
