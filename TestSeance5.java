@@ -16,10 +16,10 @@ public class TestSeance5 {
       
         w5.creationJoueur();
         w5.creeMondeAlea();
-        w5.tourDeJeu();
+        /*w5.tourDeJeu();
        
         
-        /**To
+        /*To
         
         w5.getlJoueur().get(0).affiche();
         

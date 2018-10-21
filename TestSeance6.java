@@ -1,6 +1,7 @@
 package org.centrale.projet.objet;
 
-import java.io.IOException;
+import java.io.*;
+import java.util.Scanner;
 
 /**
  * Classe pour les tests effectués lors de la séance dédiée au TP6
@@ -8,13 +9,10 @@ import java.io.IOException;
  */
 public class TestSeance6 {
     public static void main(String[] args) throws IOException{
-        World w = new World(2,10,10);
-        w.creeMondeAlea();
-        w.affiche();
-        SauvegardePartie s= new SauvegardePartie("Sauvegarde");
-        s.sauvegarderPartie(w);
-        ChargementPartie partie = new ChargementPartie("Sauvegarde.txt");
-        World w2 = partie.chargerPartie();
-        w2.affiche();
+        
+        Partie p = new Partie();
+        SauvegardePartie testi =p.lancerPartie();
+        p.getW().tourDeJeu(testi);
+                        
     }   
 }

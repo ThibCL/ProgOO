@@ -21,13 +21,14 @@ public class ChargementPartie {
      * construit le chargement à partir de
      * @param nomFichier nom du fichier à charger 
      */
-    public ChargementPartie(String nomFichier){
+    public ChargementPartie(String nomFichier) throws FileNotFoundException{
         nomSauvegarde = nomFichier;
         try {
             lecteur = new BufferedReader(new FileReader(nomSauvegarde));
         }
         catch (FileNotFoundException e){
             System.out.println("Sauvegarde introuvable !");
+            throw new FileNotFoundException();
         }
     }
 
@@ -137,6 +138,7 @@ public class ChargementPartie {
                 String typePerso = tokenizer.nextToken();
                 j.setPerso((Personnage)(creerElementJeu(ligne, typePerso)));
                 j.getPerso().setControle(1);
+                w.ajouterCrea(j.getPerso());
                 w.ajouterJoueur(j);
             }
             

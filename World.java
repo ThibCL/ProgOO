@@ -1,5 +1,6 @@
 package org.centrale.projet.objet;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -197,8 +198,7 @@ public class World {
     
     /**
      * Méthode vérifiant si une Creature est bien a une distance inférieure à la
-     * distance minimale à laquelle doivent être placés les différentes
-     * Créatures
+     * distance minimale à laquelle doivent être placés les différentes Créatures
      *
      * @param distMin distance minimale entre deux créatures à la création du
      * monde
@@ -284,13 +284,15 @@ public class World {
     }
 
     /**
+     * Lancement
+     */
+    /**
      * méthode qui définit le tour de jeu et qui fait jouer les joueurs un par
      * un avant de faire joueur les autres entitées Le joueur à le choix de se
      * déplacer ou de combattre Si on veut arrêter de jouer il faut rentrer quit
      * entre deux tour de jeu
      */
-    public void tourDeJeu() throws IOException {
-        SauvegardePartie testi=new SauvegardePartie("trere");
+    public void tourDeJeu(SauvegardePartie testi) throws IOException {
         Scanner sc = new Scanner(System.in);
         System.out.println("si vous ne voulez pas jouer tapez quit");
         String choix = sc.next();
@@ -319,7 +321,7 @@ public class World {
                             choisi=true;
                             break;
                         default:
-                            System.out.println("Ce n'est pas une action possible : Entrer Combattre,Deplacer,Manger ou Boire :");
+                            System.out.println("Ce n'est pas une action possible : Entrer Combattre, Deplacer, Manger ou Boire :");
                             break;
                     }
                 }
@@ -375,7 +377,7 @@ public class World {
     }
 
     /**
-     * Méthoe qui rajoute un joueur à la liste de joueur du monde et qui ajoute
+     * Méthode qui rajoute un joueur à la liste de joueur du monde et qui ajoute
      * le personnage que précise le joueur dans la liste des créatures
      */
     public void creationJoueur() {
