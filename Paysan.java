@@ -83,6 +83,7 @@ public class Paysan extends Personnage {
     }
     else if (o instanceof NuageToxique){
         System.out.println("C'est un nuage Toxique!");
+        ((NuageToxique) o).combattre(this);
     }
     else {
         getSac().add(o);

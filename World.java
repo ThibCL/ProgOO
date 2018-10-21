@@ -101,6 +101,10 @@ public class World {
             Nourriture burger = new Nourriture();
             this.ajouterObjet(burger);
         }
+        for(int k=0; k<7;k++){
+            NuageToxique cumulus=new NuageToxique();
+            this.ajouterObjet(cumulus);
+        }
         //initialisation de la matrice par l'ajout de cases vides
         for (int li = 0; li < hauteur; li++) {
             for (int ti = 0; ti < largeur; ti++) {
@@ -249,11 +253,21 @@ public class World {
                 if (this.matMonde[i][j].getCreature() == null && this.matMonde[i][j].getObjet() == null) {
                     System.out.print(" [" + "." + "," + "." + "]");
                 } else if (this.matMonde[i][j].getCreature() == null && this.matMonde[i][j].getObjet() != null) {
-                    System.out.print(" [" + "." + "," + 2 + "]");
+                    if(this.matMonde[i][j].getObjet() instanceof NuageToxique){
+                        System.out.print(" [" + "." + "," + 3 + "]");
+                    }
+                    else{
+                        System.out.print(" [" + "." + "," + 2 + "]");
+                    }
                 } else if (this.matMonde[i][j].getCreature() != null && this.matMonde[i][j].getObjet() == null) {
                     System.out.print(" [" + 1 + "," + "." + "]");
                 } else if (this.matMonde[i][j].getCreature() != null && this.matMonde[i][j].getObjet() != null) {
-                    System.out.print(" [" + 1 + "," + 2 + "]");
+                    if(this.matMonde[i][j].getObjet() instanceof NuageToxique){
+                        System.out.print(" [" + 1 + "," + 3 + "]");
+                    }
+                    else{
+                        System.out.print(" [" + 1 + "," + 2 + "]");
+                    }
                 }
             }
             System.out.println();
@@ -305,6 +319,7 @@ public class World {
                 j.getPerso().affiche();
 
             }
+            
             //faire jouer les autres entitees sur le terrain
             int i=0;
             while(i<this.getlCrea().size()){
@@ -340,6 +355,12 @@ public class World {
                     
                 }
                 i=i+1;
+            }
+            //on fait bouger les nuages
+            for(Objet o: this.getlObjet()){
+                if(o instanceof NuageToxique){
+                    ((NuageToxique) o).deplacer(this, 0, 0);
+                }
             }
             this.affichemat();
             System.out.println("Si vous voulez arrêter de jouer entrez quit si vous voulez sauvegarder taper save");

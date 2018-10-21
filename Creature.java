@@ -191,8 +191,16 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
             w.getMatMonde()[this.pos.getX()][this.pos.getY()].setCreature(null);
             pos.translate(i, j);
             w.getMatMonde()[this.pos.getX()][this.pos.getY()].setCreature(this);
-            if (this instanceof Personnage){
-                Objet o = w.getMatMonde()[this.pos.getX()][this.pos.getY()].getObjet();
+            Objet o = w.getMatMonde()[this.pos.getX()][this.pos.getY()].getObjet();
+            if (o instanceof NuageToxique){
+                ((NuageToxique) o).combattre(this);
+                if(this.getPtVie()<0){
+                    System.out.println("La créature meurt");
+                    w.getlCrea().remove(this);
+                }
+            }
+            else if (this instanceof Personnage){
+                
                 if (o != null){
                     if (this.controle == 1){
                         Scanner scan = new Scanner(System.in);
