@@ -22,8 +22,6 @@ public class World {
      */
     private ArrayList<Objet> lObjet = new ArrayList<>();
     
-    
-    private ArrayList<ElementDeJeu> lelem =new ArrayList<>();
     /**
      * Taille du monde
      */
@@ -53,6 +51,7 @@ public class World {
                 this.matMonde[k][i] = new Case(new Point2D(k, i));
             }
         }
+        
     }
 
     /**
@@ -139,7 +138,6 @@ public class World {
     }
 
 
-
     public Case[][] getMatMonde() {
         return matMonde;
     }
@@ -160,26 +158,44 @@ public class World {
         this.lJoueur = lJoueur;
     }
 
+
     /**
-     * Méthode pour ajouter des personnages au tableau des personnages
-     *
-     * @param crea personnage à ajouter au monde et donc au tableau des
-     * personnages
+     * Méthode pour ajouter des personnages au tableau des personnages et compléter la matrice du monde par leur ajout à leur position
+     * @param crea personnage à ajouter au monde et donc au tableau des personnages
      */
     public void ajouterCrea(Creature crea) {
         this.lCrea.add(crea);
-        this.lCrea.add(crea);
+        Point2D pos = crea.getPos();
+        int x = pos.getX();
+        int y = pos.getY();
+        matMonde[x][y].setCreature(crea);
     }
 
     /**
-     * Méthode pour ajouter des objets au tableau des objets
-     *
+     * Méthode pour ajouter des objets au tableau des objets et compléter la matrice du monde par leur ajout à leur position
      * @param o objet à ajouter au tableau des objets
      */
     public void ajouterObjet(Objet o) {
         this.lObjet.add(o);
+        Point2D pos = o.getPos();
+        int x = pos.getX();
+        int y = pos.getY();
+        matMonde[x][y].setObjet(o);
     }
-
+    
+    /**
+     * Méthode pour ajouter des joueurs au tableau des joueurs et compléter la matrice du monde par l'ajout de son personnage à sa position
+     * @param j joueur à ajouter au tableau des joueurs
+     */
+    public void ajouterJoueur(Joueur j) {
+        this.lJoueur.add(j);
+        Personnage p = j.getPerso();
+        Point2D pos = p.getPos();
+        int x = pos.getX();
+        int y = pos.getY();
+        matMonde[x][y].setCreature(p);
+    }
+    
     /**
      * Méthode vérifiant si une Creature est bien a une distance inférieure à la
      * distance minimale à laquelle doivent être placés les différentes
@@ -235,15 +251,21 @@ public class World {
      * méthode qui affiche tous les creatures et objets qu'il y a dans un monde
      */
     public void affiche() {
-        for (int j = 0; j < this.lCrea.size(); j++) {
-            this.lCrea.get(j).affiche();
+        for (Creature c : this.getlCrea()) {
+            c.affiche();
+            System.out.println();
         }
-        for (int j = 0; j < this.lObjet.size(); j++) {
-            this.lObjet.get(j).affiche();
+        for (Objet o : this.getlObjet()) {
+            o.affiche();
+            System.out.println();
+        }
+        for (Joueur j : this.getlJoueur()){
+            j.affiche();
+            System.out.println();
         }
     }
 
-    public void affichemat() {
+    public void afficheMat() {
         for (int i = 0; i < hauteur; i++) {
             for (int j = 0; j < largeur; j++) {
                 if (this.matMonde[i][j].getCreature() == null && this.matMonde[i][j].getObjet() == null) {
@@ -341,7 +363,7 @@ public class World {
                 }
                 i=i+1;
             }
-            this.affichemat();
+            this.afficheMat();
             System.out.println("Si vous voulez arrêter de jouer entrez quit si vous voulez sauvegarder taper save");
             choix = sc.next();
             switch(choix){
