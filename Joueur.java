@@ -63,9 +63,6 @@ public class Joueur {
             }
                     
         }
-        System.out.println("Entrez le nom de votre personnage :");
-        String nm = saisieUtilisateur.next();
-        this.perso.setNom(nm);
         this.perso.setControle(1);
         
     }

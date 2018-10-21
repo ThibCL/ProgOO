@@ -21,13 +21,14 @@ public class ChargementPartie {
      * construit le chargement à partir de
      * @param nomFichier nom du fichier à charger 
      */
-    public ChargementPartie(String nomFichier){
+    public ChargementPartie(String nomFichier) throws FileNotFoundException{
         nomSauvegarde = nomFichier;
         try {
             lecteur = new BufferedReader(new FileReader(nomSauvegarde));
         }
         catch (FileNotFoundException e){
             System.out.println("Sauvegarde introuvable !");
+            throw new FileNotFoundException();
         }
     }
 
@@ -96,11 +97,10 @@ public class ChargementPartie {
             //d'abord la largeur du monde, puis la hauteur, puis le nombre de créatures, puis le nombre d'objet et pour finir le nombre de joueurs
             for (int i=0; i<5; i++){                
                 ligne = fichier.readLine();
-                System.out.println(ligne);
                 tokenizer = new StringTokenizer(ligne, delimiteurs);
                 mot = tokenizer.nextToken();
                 int k =  Integer.parseInt(tokenizer.nextToken());
-                parametres[i]=k;
+                parametres[i]=k;                
             }
 
             //on créé le monde vide 
@@ -112,18 +112,17 @@ public class ChargementPartie {
                 tokenizer = new StringTokenizer(ligne, delimiteurs);
                 String type = tokenizer.nextToken();
                 ElementDeJeu e =creerElementJeu(ligne, type);
-                Personnage p =(Personnage)(e);
-                p.affiche();//pour les tests*/
-                //AJOUTER LES PERSONNAGES ET LES MONSTRES AU MONDE ==> faire une fonction dans la classe World 
+                Creature c =(Creature)(e);
+                w.ajouterCrea(c);
             }
-            /*
+            
             //On créé les objets du monde 
             for (int i=0; i<parametres[3];i++){
                 ligne = fichier.readLine();
                 tokenizer = new StringTokenizer(ligne, delimiteurs);
                 String type = tokenizer.nextToken();
-                creerElementJeu(ligne, type);
-                //AJOUTER LES OBJETS AU MONDE ==> faire une fonction dans la classe World
+                Objet o = (Objet)(creerElementJeu(ligne, type));
+                w.ajouterObjet(o);
             }
             
             //On créé les joueurs 
@@ -135,11 +134,14 @@ public class ChargementPartie {
                 tokenizer2.nextToken(); //on passe le mot "Joueur"
                 String persoJoueur = tokenizer2.nextToken();
                 //on récupère le type du personnage du joueur 
-                tokenizer = new StringTokenizer(ligne, delimiteurs);
+                tokenizer = new StringTokenizer(persoJoueur, delimiteurs);
                 String typePerso = tokenizer.nextToken();
-                j.setPerso((Personnage)(creerElementJeu(ligne, typePerso)));            
+                j.setPerso((Personnage)(creerElementJeu(ligne, typePerso)));
+                j.getPerso().setControle(1);
+                w.ajouterCrea(j.getPerso());
+                w.ajouterJoueur(j);
             }
-            */
+            
             return w;
             }
         catch (IOException e) {

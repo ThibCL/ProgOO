@@ -1,5 +1,6 @@
 package org.centrale.projet.objet;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -22,8 +23,6 @@ public class World {
      */
     private ArrayList<Objet> lObjet = new ArrayList<>();
     
-    
-    private ArrayList<ElementDeJeu> lelem =new ArrayList<>();
     /**
      * Taille du monde
      */
@@ -53,6 +52,7 @@ public class World {
                 this.matMonde[k][i] = new Case(new Point2D(k, i));
             }
         }
+        
     }
 
     /**
@@ -65,7 +65,13 @@ public class World {
         this.hauteur=h;
         this.largeur=l;
         this.matMonde= new Case[hauteur][largeur];
-        for (int k = 0; k <2 /*nbralea.nextInt(nbr)*/; k++) {
+        //initialisation de la matrice par l'ajout de cases vides
+        for (int li = 0; li < hauteur; li++) {
+            for (int ti = 0; ti < largeur; ti++) {
+                this.matMonde[li][ti] = new Case(new Point2D(li, ti));
+            }
+        }
+        for (int k = 0; k <nbralea.nextInt(nbr); k++) {
             Archer arch = new Archer();
             this.ajouterCrea(arch);
         }
@@ -93,14 +99,15 @@ public class World {
             Soin vdk = new Soin();
             this.ajouterObjet(vdk);
         }
-        for (int k = 0; k<7/* nbralea.nextInt(nbr)*/; k++) {
+        for (int k = 0; k< nbralea.nextInt(nbr); k++) {
             Mana rhm = new Mana();
             this.ajouterObjet(rhm);
         }
-        for (int k = 0; k < 8/*nbralea.nextInt(nbr)*/; k++) {
+        for (int k = 0; k < nbralea.nextInt(nbr); k++) {
             Nourriture burger = new Nourriture();
             this.ajouterObjet(burger);
         }
+
         for(int k=0; k<7;k++){
             NuageToxique cumulus=new NuageToxique();
             this.ajouterObjet(cumulus);
@@ -111,6 +118,7 @@ public class World {
                 this.matMonde[li][ti] = new Case(new Point2D(li, ti));
             }
         }
+
 
     }
 
@@ -143,7 +151,6 @@ public class World {
     }
 
 
-
     public Case[][] getMatMonde() {
         return matMonde;
     }
@@ -164,30 +171,47 @@ public class World {
         this.lJoueur = lJoueur;
     }
 
+
     /**
-     * Méthode pour ajouter des personnages au tableau des personnages
-     *
-     * @param crea personnage à ajouter au monde et donc au tableau des
-     * personnages
+     * Méthode pour ajouter des personnages au tableau des personnages et compléter la matrice du monde par leur ajout à leur position
+     * @param crea personnage à ajouter au monde et donc au tableau des personnages
      */
     public void ajouterCrea(Creature crea) {
         this.lCrea.add(crea);
-       
+        Point2D pos = crea.getPos();
+        int x = pos.getX();
+        int y = pos.getY();
+        matMonde[x][y].setCreature(crea);
     }
 
     /**
-     * Méthode pour ajouter des objets au tableau des objets
-     *
+     * Méthode pour ajouter des objets au tableau des objets et compléter la matrice du monde par leur ajout à leur position
      * @param o objet à ajouter au tableau des objets
      */
     public void ajouterObjet(Objet o) {
         this.lObjet.add(o);
+        Point2D pos = o.getPos();
+        int x = pos.getX();
+        int y = pos.getY();
+        matMonde[x][y].setObjet(o);
     }
-
+    
+    /**
+     * Méthode pour ajouter des joueurs au tableau des joueurs et compléter la matrice du monde par l'ajout de son personnage à sa position
+     * @param j joueur à ajouter au tableau des joueurs
+     */
+    public void ajouterJoueur(Joueur j) {
+        this.lJoueur.add(j);
+        Personnage p = j.getPerso();
+        Point2D pos = p.getPos();
+        int x = pos.getX();
+        int y = pos.getY();
+        matMonde[x][y].setCreature(p);
+    }
+    
     /**
      * Méthode vérifiant si une Creature est bien a une distance inférieure à la
-     * distance minimale à laquelle doivent être placés les différentes
-     * Créatures
+     * distance minimale à laquelle doivent être placés les différentes Créatures
      *
      * @param distMin distance minimale entre deux créatures à la création du
      * monde
@@ -239,15 +263,21 @@ public class World {
      * méthode qui affiche tous les creatures et objets qu'il y a dans un monde
      */
     public void affiche() {
-        for (int j = 0; j < this.lCrea.size(); j++) {
-            this.lCrea.get(j).affiche();
+        for (Creature c : this.getlCrea()) {
+            c.affiche();
+            System.out.println();
         }
-        for (int j = 0; j < this.lObjet.size(); j++) {
-            this.lObjet.get(j).affiche();
+        for (Objet o : this.getlObjet()) {
+            o.affiche();
+            System.out.println();
+        }
+        for (Joueur j : this.getlJoueur()){
+            j.affiche();
+            System.out.println();
         }
     }
 
-    public void affichemat() {
+    public void afficheMat() {
         for (int i = 0; i < hauteur; i++) {
             for (int j = 0; j < largeur; j++) {
                 if (this.matMonde[i][j].getCreature() == null && this.matMonde[i][j].getObjet() == null) {
@@ -277,13 +307,15 @@ public class World {
     }
 
     /**
+     * Lancement
+     */
+    /**
      * méthode qui définit le tour de jeu et qui fait jouer les joueurs un par
      * un avant de faire joueur les autres entitées Le joueur à le choix de se
      * déplacer ou de combattre Si on veut arrêter de jouer il faut rentrer quit
      * entre deux tour de jeu
      */
-    public void tourDeJeu() throws IOException {
-        SauvegardePartie testi=new SauvegardePartie("trere");
+    public void tourDeJeu(SauvegardePartie testi) throws IOException {
         Scanner sc = new Scanner(System.in);
         System.out.println("si vous ne voulez pas jouer tapez quit");
         String choix = sc.next();
@@ -312,7 +344,7 @@ public class World {
                             choisi=true;
                             break;
                         default:
-                            System.out.println("Ce n'est pas une action possible : Entrer Combattre,Deplacer,Manger ou Boire :");
+                            System.out.println("Ce n'est pas une action possible : Entrer Combattre, Deplacer, Manger ou Boire :");
                             break;
                     }
                 }
@@ -356,13 +388,15 @@ public class World {
                 }
                 i=i+1;
             }
+
             //on fait bouger les nuages
             for(Objet o: this.getlObjet()){
                 if(o instanceof NuageToxique){
                     ((NuageToxique) o).deplacer(this, 0, 0);
                 }
             }
-            this.affichemat();
+            this.afficheMat();
+
             System.out.println("Si vous voulez arrêter de jouer entrez quit si vous voulez sauvegarder taper save");
             choix = sc.next();
             switch(choix){
@@ -375,7 +409,7 @@ public class World {
     }
 
     /**
-     * Méthoe qui rajoute un joueur à la liste de joueur du monde et qui ajoute
+     * Méthode qui rajoute un joueur à la liste de joueur du monde et qui ajoute
      * le personnage que précise le joueur dans la liste des créatures
      */
     public void creationJoueur() {
