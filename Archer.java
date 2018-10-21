@@ -1,5 +1,6 @@
 package org.centrale.projet.objet;
 
+import java.io.*;
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
@@ -181,5 +182,11 @@ public class Archer extends Personnage implements Combattant {
             w.getMatMonde()[x][y].setObjet(null);
             w.getlObjet().remove(o);
         }
+    }
+    public void getTexteSauvegarde(BufferedWriter writer) throws IOException{
+        super.getTexteSauvegarde(writer);
+        writer.write("*");
+        writer.write(Integer.toString(nbFleches));
+        
     }
 }

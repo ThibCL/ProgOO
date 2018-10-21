@@ -83,6 +83,6 @@ public abstract class Monstre extends Creature {
         writer.write(Integer.toString(this.getPtPar()) + " ");
         writer.write(Integer.toString(this.getPos().getX()) + " ");
         writer.write(Integer.toString(this.getPos().getY()) + " ");
-        writer.newLine();
+       
     }
 }

@@ -16,10 +16,8 @@ public class TestSeance5 {
       
         w5.creationJoueur();
         w5.creeMondeAlea();
-        w5.getlJoueur().get(0).affiche();
-        w5.affichemat();
         w5.tourDeJeu();
-        w5.getlJoueur().get(0).getPerso().afficheSac();
+       
         
         /**To
         

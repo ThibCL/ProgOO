@@ -134,8 +134,8 @@ public class Nourriture extends Objet{
         writer.write(Integer.toString(this.caracteristique)+ " ");
         writer.write(Integer.toString(this.duree)+ " ");
          writer.write(Integer.toString(this.ptEffet)+ " ");
-        writer.write(Integer.toString(this.etat)+ " ");
+        writer.write(Integer.toString(this.etat)+ "");
        
-        writer.newLine();
+        
     }
 }

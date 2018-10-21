@@ -63,7 +63,7 @@ public abstract class Objet extends ElementDeJeu {
         writer.write(this.getClass().getSimpleName()+" ");
         writer.write(Integer.toString(this.getPos().getX())+" ");
        
-        writer.write(Integer.toString(this.getPos().getY())+ " ");
+        writer.write(Integer.toString(this.getPos().getY())+" ");
 
     }
 
