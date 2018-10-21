@@ -48,10 +48,7 @@ public class SauvegardePartie {
         writer.write("Hauteur " + Integer.toString(w.getHauteur()));
 
         writer.newLine();
-        writer.write("NombrePerso " + Integer.toString(w.nombrePerso()));
-
-        writer.newLine();
-        writer.write("NombreMonstre " + Integer.toString(w.nombreMonstre()));
+        writer.write("NombreCrea " + Integer.toString(w.getlCrea().size()));
         writer.newLine();
         writer.write("NombreObjet " + Integer.toString(w.getlObjet().size()));
         writer.newLine();

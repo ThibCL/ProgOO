@@ -106,6 +106,7 @@ public abstract class Personnage extends Creature {
      */
     public Personnage() {
         super();
+        nom="Bob";
         ptMana = 0;
         pourcentageMag = 0;
         pourcentageResisMag = 40;
@@ -141,7 +142,7 @@ public abstract class Personnage extends Creature {
         //on récupère chaque objet en créant un nouveau curseur avec un délimiteur différent puisque les objets sont délimités par des crochets "[" et "]" et séparés par un ";" dans le fichier
         String delimiteurs2 = "[;]";
         StringTokenizer tokenizer2 = new StringTokenizer(element, delimiteurs2);
-<<<<<<< HEAD
+
         if (objSac==0){
             //si le sac est vide on passe juste le [;] avec le premier cusreur et le deuxième pour pouvoir l'utiliser pour la nourriture portée par le personnage
             tokenizer.nextToken();
@@ -181,41 +182,9 @@ public abstract class Personnage extends Creature {
                 for (int k=0;k<4;k++){
                     tokenizer.nextToken();
                 }
-=======
-        tokenizer2.nextToken(); //on ne récupère pas ce qu'il y a avant la liste des objets
-        //puis on construit chaque objet
-        sac = new ArrayList<>();
-        for (int i = 0; i < objSac; i++) {
-            String objet = tokenizer2.nextToken();
-            //on créé un troisième curseur pour récupérer le type de l'objet
-            StringTokenizer tokenizer3 = new StringTokenizer(objet, delimiteurs);
-            String typeObj = tokenizer3.nextToken();
-            Objet o;
-            switch (typeObj) {
-                case "Nourriture":
-                    o = new Nourriture(objet);
-                    break;
-                case "Mana":
-                    o = new Mana(objet);
-                    break;
-                case "Soin":
-                    o = new Soin(objet);
-                    break;
-                default:
-                    o = new NuageToxique(objet); //si la sauvegarde est bien faite l'objet ne peut qu'être un Nuage Toxique si ce n'est pas les autres cas
-                    break;
-
-            }
-            sac.add(o);
-
-            //on fait avancer le premier curseur de 4 pour qu'il passe les objets 
-            for (int k = 0; k < 4; k++) {
-                tokenizer.nextToken();
->>>>>>> ae5eced0fb5077126fc1d74eebe04ad546abeb11
             }
             tokenizer.nextToken(); //on passe le dernier ;] avec le premier curseur
         }
-<<<<<<< HEAD
         
         //on récupère le nombre d'objets de type Nourriture 
         int nbreNourriture = Integer.parseInt(tokenizer.nextToken());
@@ -236,22 +205,6 @@ public abstract class Personnage extends Creature {
                 for (int k=1;k<8;k++){
                     tokenizer.nextToken();
                 }
-=======
-
-        //on récupère le nombre d'objets de type Nourriture 
-        int nbreNourriture = Integer.parseInt(tokenizer.nextToken());
-        bonusmalus = new ArrayList<>();
-        /*on récupère chaque nourriture en utilisant le même délimiteur que pour les objets puisque les nourritures du 
-        personnage sont délimités par des crochets "[" et "]" et séparés par un ";" dans le fichier*/
-        tokenizer2.nextToken(); //on décale le curseur pour sauter le numéro correspondant au nombre de nourriture situé entre les objets du sac et les objets nourriture
-        for (int i = 0; i < nbreNourriture; i++) {
-            String nourriture = tokenizer2.nextToken();
-            Nourriture n = new Nourriture(nourriture);
-            bonusmalus.add(n);
-            //on fait avancer l'autre curseur de 7 pour qu'il passe les nourritures
-            for (int k = 1; k < 8; k++) {
-                tokenizer.nextToken();
->>>>>>> ae5eced0fb5077126fc1d74eebe04ad546abeb11
             }
             tokenizer.nextToken(); //on passe le dernier ;] avec le premier curseur
         }
@@ -260,19 +213,12 @@ public abstract class Personnage extends Creature {
         setPourcentagePar(Integer.parseInt(tokenizer.nextToken()));
         setDegAtt(Integer.parseInt(tokenizer.nextToken()));
         setPtPar(Integer.parseInt(tokenizer.nextToken()));
-<<<<<<< HEAD
         int x=Integer.parseInt(tokenizer.nextToken());
         int y= Integer.parseInt(tokenizer.nextToken());
         setPos(new Point2D(x,y));  
         setControle(0); //ces personnages ne sont pas contrôlés     */ 
 }
-=======
-        int x = Integer.parseInt(tokenizer.nextToken());
-        int y = Integer.parseInt(tokenizer.nextToken());
-        setPos(new Point2D(x, y));
-        setControle(0); //ces personnages ne sont pas contrôlés     */  
-    }
->>>>>>> ae5eced0fb5077126fc1d74eebe04ad546abeb11
+
 
     public String getNom() {
         return nom;
@@ -433,33 +379,7 @@ public abstract class Personnage extends Creature {
         }
         return verif;
     }
-<<<<<<< HEAD
-    
-    
-    public void getTexteSauvegarde(BufferedWriter writer) throws IOException{
-        writer.write(this.getClass().getSimpleName()+" ");
-        if(this.getNom()!=null){
-            writer.write(this.getNom()+" ");
-        }
-        else{
-            writer.write("bob ");
-        }
-        writer.write(Integer.toString(this.getPtMana())+" ");
-        writer.write(Integer.toString(this.getPourcentageMag())+" ");
-        writer.write(Integer.toString(this.getPourcentageResisMag())+" ");
-        writer.write(Integer.toString(this.getDegMag())+" ");
-        writer.write(Double.toString(this.getDistAttMax())+" ");
-        //writer.write(Integer.toString(this)+" ");
-        //writer.write(Integer.toString(this)+" ");
-        writer.write(Integer.toString(this.getPtVie())+" ");
-        writer.write(Integer.toString(this.getPourcentageAtt())+" ");
-        writer.write(Integer.toString(this.getPourcentagePar())+" ");
-        writer.write(Integer.toString(this.getDegAtt())+" ");
-        writer.write(Integer.toString(this.getPtPar())+" ");
-        writer.write(Integer.toString(this.getPos().getX())+" ");
-        writer.write(Integer.toString(this.getPos().getY())+" ");
-        writer.newLine();
-=======
+
 
     public void getTexteSauvegarde(BufferedWriter writer) throws IOException {
         writer.write(this.getClass().getSimpleName() + " ");
@@ -494,7 +414,6 @@ public abstract class Personnage extends Creature {
         writer.write(Integer.toString(this.getPtPar()) + " ");
         writer.write(Integer.toString(this.getPos().getX()) + " ");
         writer.write(Integer.toString(this.getPos().getY()) + " ");
-        
->>>>>>> ae5eced0fb5077126fc1d74eebe04ad546abeb11
+
     }
 }
