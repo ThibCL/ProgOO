@@ -19,6 +19,14 @@ public class Soin extends Potion{
     }
     
     /**
+     * Constructeur de potion Mana à partir d'une ligne de la sauvegarde
+     * @param element ligne de la sauvegarde comportant les caractéristiques de la potion Mana à créer
+     */
+    public Soin(String element){
+        super(element);
+    }
+    
+    /**
      * Méthode permettant d'afficher l'objet 
      */
     public void affiche(){

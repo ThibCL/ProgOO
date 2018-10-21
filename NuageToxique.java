@@ -11,6 +11,10 @@ public class NuageToxique extends Objet implements Deplacable,Combattant {
         super();
     }
     
+    public NuageToxique(String element){
+        super(element);
+    }
+    
 /**
      * Méthode permettant d'afficher l'objet 
      */

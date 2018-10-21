@@ -1,35 +1,24 @@
-
 package org.centrale.projet.objet;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner; 
+import java.util.StringTokenizer;
 /**
- *
+ * Cette classe représente un joueur dans le monde
  * @author Thibault
  */
+
 public class Joueur {
-    /**
-     * Nom du joueur 
-     */
-    private String nomJoueur;
     /**
      * Personnage associé au joueur
      */
     private Personnage perso;
-
-
-    public String getNomJoueur() {
-        return nomJoueur;
-    }
+    
     
    
     public Personnage getPerso() {
         return perso;
-    }
-
-    public void setNomJoueur(String nomJoueur) {
-        this.nomJoueur = nomJoueur;
     }
 
     public void setPerso(Personnage perso) {
@@ -231,12 +220,13 @@ public class Joueur {
      * Methode qui permet d'afficher le nom du joueur et son personnage
      */
     public void affiche(){
-        System.out.println("Le nom du joueur est "+ this.getNomJoueur()+ " il controle le personnage:");
+        System.out.println("Le nom du joueur est "+ this.getPerso().getNom()+ " il controle le personnage:");
         this.perso.affiche();
     }
     
     public void getTexteSauvegarde(BufferedWriter writer) throws IOException{
-        writer.write(this.nomJoueur+"/");
+
+        writer.write(this.getPerso().getNom()+"/");
         this.getPerso().getTexteSauvegarde(writer);
         
     }

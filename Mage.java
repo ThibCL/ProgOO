@@ -67,6 +67,14 @@ public class Mage extends Personnage implements Combattant {
         i = 1 + intAlea.nextInt(5);
         setDistAttMax(i);
     }
+    
+    /**
+     * Constructeur de Mage à partir d'une ligne de la sauvegarde
+     * @param element ligne de la sauvegarde comportant les caractéristiques du mage à créer
+     */
+    public Mage(String element){
+        super(element);
+    }
 
     /**
      * Méthode permettant d'afficher le mage

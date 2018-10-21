@@ -2,6 +2,7 @@ package org.centrale.projet.objet;
 
 import java.util.Random;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 /**
  * Cette classe représente les personnages de type archer (sous-classe de Personnage)
@@ -33,7 +34,7 @@ public class Archer extends Personnage implements Combattant {
      * @param p
      * @param nbF 
      */
-    public Archer(int nbFleches, String nom, int ptMana, int pourcentageMag, int pourcentageResisMag, int degMag, double distAttMax, ArrayList<Objet> sac, ArrayList<Nourriture> bonusmalus, int pV, int pA, int pP, int dA, int ptP, Point2D pos){
+    public Archer(String nom, int ptMana, int pourcentageMag, int pourcentageResisMag, int degMag, double distAttMax, ArrayList<Objet> sac, ArrayList<Nourriture> bonusmalus, int pV, int pA, int pP, int dA, int ptP, Point2D pos, int nbFleches){
         super(nom, ptMana, pourcentageMag, pourcentageResisMag, degMag, distAttMax, sac, bonusmalus, pV, pA, pP, dA, ptP, pos);
         this.nbFleches=nbFleches;
     }
@@ -61,6 +62,22 @@ public class Archer extends Personnage implements Combattant {
         i = 1+intAlea.nextInt(5);
         setDistAttMax(i);
         nbFleches=10;
+    }
+    
+    
+    /**
+     * Construit un Archer à partir d'une ligne prise dans la sauvegarde
+     * @param element ligne correspondant à l'archer dans la sauvegarde
+     */
+    public Archer(String element){
+        super(element);
+        //pour récupérer le nombre de flèches on créé un délimiteur 
+        String delimiteurs = "*";
+        StringTokenizer tokenizer;
+        tokenizer = new StringTokenizer(element, delimiteurs);
+        tokenizer.nextToken();
+        int nbreFleches = Integer.parseInt(tokenizer.nextToken());
+        nbFleches=nbreFleches;
     }
     
     public int getNbFleches(){

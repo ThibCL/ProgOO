@@ -32,11 +32,28 @@ public class World {
     /**
      * Matrice des positions des différentes entitées dans le monde
      */
-    private Case[][] matMonde; //= new Case[hauteur][largeur];
+    private Case[][] matMonde;
     /**
      * Liste des joueurs dans le monde
      */
     private ArrayList<Joueur> lJoueur = new ArrayList<>();
+    
+    
+    /**
+     * Constructeur du monde de hauteur h et de largeur l
+     * @param h hauteur du monde
+     * @param l largeur du monde
+     */
+    public World (int h, int l){
+        hauteur=h;
+        largeur=l;
+        matMonde= new Case[hauteur][largeur];
+        for (int k = 0; k < hauteur; k++) {
+            for (int i = 0; i < largeur; i++) {
+                this.matMonde[k][i] = new Case(new Point2D(k, i));
+            }
+        }
+    }
 
     /**
      * Constructeur qui place un nombre aléatoire de chaque type de personnage
@@ -259,7 +276,7 @@ public class World {
         while (Objects.equals(choix, "quit") == false) {
             System.out.println("Nouveau tour");
             for (Joueur j : this.getlJoueur()) {
-                System.out.println("C'est à " + j.getNomJoueur() + " de jouer. Veux tu Combattre ,te Deplacer,Manger ou Boire?");
+                System.out.println("C'est à " + j.getPerso().getNom()+ " de jouer. Veux tu Combattre ,te Deplacer,Manger ou Boire?");
                 boolean choisi = false;
                 while (choisi == false) {
                     choix = sc.next();
@@ -346,7 +363,7 @@ public class World {
         String nmj = saisie.next();
         Joueur j = new Joueur();
         j.choisirperso();
-        j.setNomJoueur(nmj);
+        j.getPerso().setNom(nmj);
         this.lJoueur.add(j);
         this.ajouterCrea(j.getPerso());
 

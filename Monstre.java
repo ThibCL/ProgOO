@@ -1,7 +1,9 @@
 package org.centrale.projet.objet;
 
+import java.util.StringTokenizer;
 import java.io.BufferedWriter;
 import java.io.IOException;
+
 
 /**
  * Classe qui est la super classe de tous les montres qui vont être créés tels
@@ -35,15 +37,34 @@ public abstract class Monstre extends Creature {
     public Monstre(Monstre m) {
         super(m);
     }
-
-    //A modifier pour ajouter le coté aléatoire !!
-    /**
-     * Constructeur de Monstre par default qui initialise les attributs a des
-     * valeurs choisies par default
-     */
-    public Monstre() {
+    
+/**
+ * Constructeur de Monstre par default qui initialise les attributs a des valeurs choisies par default
+ */
+    public Monstre(){
         super();
     }
+    
+    /**
+     * Constructeur prenant en argument la ligne correspondant à la sauvegarde du monstre dans un fichier et recréant le personnage correspondant
+     * @param element ligne correspondant à la sauvegarde du monstre dans un fichier
+     */
+    public Monstre(String element){
+        String delimiteurs = " ";
+        StringTokenizer tokenizer;
+        tokenizer = new StringTokenizer(element, delimiteurs);
+        tokenizer.nextToken();//on passe le type de monstre
+        setPtVie(Integer.parseInt(tokenizer.nextToken()));
+        setPourcentageAtt(Integer.parseInt(tokenizer.nextToken()));
+        setPourcentagePar(Integer.parseInt(tokenizer.nextToken()));
+        setDegAtt(Integer.parseInt(tokenizer.nextToken()));
+        setPtPar(Integer.parseInt(tokenizer.nextToken()));
+        int x=Integer.parseInt(tokenizer.nextToken());
+        int y= Integer.parseInt(tokenizer.nextToken());
+        setPos(new Point2D(x,y));   
+        setControle(0);
+    }
+
 
     /**
      * Méthode qui permet d'afficher tous les atttributs du monstre

@@ -6,4 +6,5 @@ import java.util.StringTokenizer;
  */
 public abstract class ElementDeJeu {
     
+    
 }
