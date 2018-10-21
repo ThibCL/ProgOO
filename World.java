@@ -64,7 +64,7 @@ public class World {
         this.hauteur=h;
         this.largeur=l;
         this.matMonde= new Case[hauteur][largeur];
-        for (int k = 0; k < nbralea.nextInt(nbr); k++) {
+        for (int k = 0; k <2 /*nbralea.nextInt(nbr)*/; k++) {
             Archer arch = new Archer();
             this.ajouterCrea(arch);
         }
@@ -165,10 +165,14 @@ public class World {
      */
     public void ajouterCrea(Creature crea) {
         this.lCrea.add(crea);
+<<<<<<< HEAD
         Point2D pos = crea.getPos();
         int x = pos.getX();
         int y = pos.getY();
         matMonde[x][y].setCreature(crea);
+=======
+       
+>>>>>>> ae5eced0fb5077126fc1d74eebe04ad546abeb11
     }
 
     /**

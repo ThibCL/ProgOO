@@ -77,7 +77,7 @@ public abstract class Personnage extends Creature {
         this.pourcentageResisMag = pourcentageResisMag;
         this.degMag = degMag;
         this.distAttMax = distAttMax;
-        this.sac = new ArrayList<Objet> (sac);
+        this.sac = new ArrayList<Objet>(sac);
         this.bonusmalus = new ArrayList<Nourriture>(bonusmalus);
     }
 
@@ -114,12 +114,15 @@ public abstract class Personnage extends Creature {
         sac = new ArrayList<>();
         bonusmalus = new ArrayList<>();
     }
-    
+
     /**
-     * Constructeur prenant en argument la ligne correspondant à la sauvegarde du personnage dans un fichier et recréant le personnage correspondant
-     * @param element ligne correspondant à la sauvegarde du personnage dans un fichier
+     * Constructeur prenant en argument la ligne correspondant à la sauvegarde
+     * du personnage dans un fichier et recréant le personnage correspondant
+     *
+     * @param element ligne correspondant à la sauvegarde du personnage dans un
+     * fichier
      */
-    public Personnage(String element){
+    public Personnage(String element) {
         String delimiteurs = " ";
         StringTokenizer tokenizer;
         tokenizer = new StringTokenizer(element, delimiteurs);
@@ -127,8 +130,8 @@ public abstract class Personnage extends Creature {
         String typePerso = tokenizer.nextToken();
         nom = tokenizer.nextToken();
         ptMana = Integer.parseInt(tokenizer.nextToken());
-        pourcentageMag= Integer.parseInt(tokenizer.nextToken());
-        pourcentageResisMag= Integer.parseInt(tokenizer.nextToken());
+        pourcentageMag = Integer.parseInt(tokenizer.nextToken());
+        pourcentageResisMag = Integer.parseInt(tokenizer.nextToken());
         degMag = Integer.parseInt(tokenizer.nextToken());
         distAttMax = Float.parseFloat(tokenizer.nextToken());
 
@@ -138,6 +141,7 @@ public abstract class Personnage extends Creature {
         //on récupère chaque objet en créant un nouveau curseur avec un délimiteur différent puisque les objets sont délimités par des crochets "[" et "]" et séparés par un ";" dans le fichier
         String delimiteurs2 = "[;]";
         StringTokenizer tokenizer2 = new StringTokenizer(element, delimiteurs2);
+<<<<<<< HEAD
         if (objSac==0){
             //si le sac est vide on passe juste le [;] avec le premier cusreur et le deuxième pour pouvoir l'utiliser pour la nourriture portée par le personnage
             tokenizer.nextToken();
@@ -177,9 +181,41 @@ public abstract class Personnage extends Creature {
                 for (int k=0;k<4;k++){
                     tokenizer.nextToken();
                 }
+=======
+        tokenizer2.nextToken(); //on ne récupère pas ce qu'il y a avant la liste des objets
+        //puis on construit chaque objet
+        sac = new ArrayList<>();
+        for (int i = 0; i < objSac; i++) {
+            String objet = tokenizer2.nextToken();
+            //on créé un troisième curseur pour récupérer le type de l'objet
+            StringTokenizer tokenizer3 = new StringTokenizer(objet, delimiteurs);
+            String typeObj = tokenizer3.nextToken();
+            Objet o;
+            switch (typeObj) {
+                case "Nourriture":
+                    o = new Nourriture(objet);
+                    break;
+                case "Mana":
+                    o = new Mana(objet);
+                    break;
+                case "Soin":
+                    o = new Soin(objet);
+                    break;
+                default:
+                    o = new NuageToxique(objet); //si la sauvegarde est bien faite l'objet ne peut qu'être un Nuage Toxique si ce n'est pas les autres cas
+                    break;
+
+            }
+            sac.add(o);
+
+            //on fait avancer le premier curseur de 4 pour qu'il passe les objets 
+            for (int k = 0; k < 4; k++) {
+                tokenizer.nextToken();
+>>>>>>> ae5eced0fb5077126fc1d74eebe04ad546abeb11
             }
             tokenizer.nextToken(); //on passe le dernier ;] avec le premier curseur
         }
+<<<<<<< HEAD
         
         //on récupère le nombre d'objets de type Nourriture 
         int nbreNourriture = Integer.parseInt(tokenizer.nextToken());
@@ -200,6 +236,22 @@ public abstract class Personnage extends Creature {
                 for (int k=1;k<8;k++){
                     tokenizer.nextToken();
                 }
+=======
+
+        //on récupère le nombre d'objets de type Nourriture 
+        int nbreNourriture = Integer.parseInt(tokenizer.nextToken());
+        bonusmalus = new ArrayList<>();
+        /*on récupère chaque nourriture en utilisant le même délimiteur que pour les objets puisque les nourritures du 
+        personnage sont délimités par des crochets "[" et "]" et séparés par un ";" dans le fichier*/
+        tokenizer2.nextToken(); //on décale le curseur pour sauter le numéro correspondant au nombre de nourriture situé entre les objets du sac et les objets nourriture
+        for (int i = 0; i < nbreNourriture; i++) {
+            String nourriture = tokenizer2.nextToken();
+            Nourriture n = new Nourriture(nourriture);
+            bonusmalus.add(n);
+            //on fait avancer l'autre curseur de 7 pour qu'il passe les nourritures
+            for (int k = 1; k < 8; k++) {
+                tokenizer.nextToken();
+>>>>>>> ae5eced0fb5077126fc1d74eebe04ad546abeb11
             }
             tokenizer.nextToken(); //on passe le dernier ;] avec le premier curseur
         }
@@ -208,11 +260,19 @@ public abstract class Personnage extends Creature {
         setPourcentagePar(Integer.parseInt(tokenizer.nextToken()));
         setDegAtt(Integer.parseInt(tokenizer.nextToken()));
         setPtPar(Integer.parseInt(tokenizer.nextToken()));
+<<<<<<< HEAD
         int x=Integer.parseInt(tokenizer.nextToken());
         int y= Integer.parseInt(tokenizer.nextToken());
         setPos(new Point2D(x,y));  
         setControle(0); //ces personnages ne sont pas contrôlés     */ 
 }
+=======
+        int x = Integer.parseInt(tokenizer.nextToken());
+        int y = Integer.parseInt(tokenizer.nextToken());
+        setPos(new Point2D(x, y));
+        setControle(0); //ces personnages ne sont pas contrôlés     */  
+    }
+>>>>>>> ae5eced0fb5077126fc1d74eebe04ad546abeb11
 
     public String getNom() {
         return nom;
@@ -294,11 +354,11 @@ public abstract class Personnage extends Creature {
             }
         }
     }
-    
+
     /**
      * Méthode permettant d'afficher la nourriture portée par le personnage
      */
-    public void afficheNourriture(){
+    public void afficheNourriture() {
         ArrayList<Nourriture> nourriture = getBonusmalus();
         if (nourriture == null) {
             System.out.println("Ce personnage n'a pas de nourriture sur lui");
@@ -308,12 +368,11 @@ public abstract class Personnage extends Creature {
                 n.affiche();
             }
         }
-        
+
     }
 
     public abstract void ramasser(Objet o, World w);
 
-    
     /**
      * méthode qui permet de modifier les caractéristiques du personnage en
      * fonction de la nourriture qu'il ramasse
@@ -322,55 +381,59 @@ public abstract class Personnage extends Creature {
      * écoulé
      */
     public void effetnourriture(Nourriture n, int i) {
-        
 
-            switch (n.getCaracteristique()) {
-                case 1:
-                    this.setPourcentageAtt(this.getPourcentageAtt() + n.getPteffet() * i);
-                    break;
-                case 2:
-                    this.setPourcentagePar(this.getPourcentagePar() + n.getPteffet() * i);
-                    break;
-                case 3:
-                    this.setDegAtt(this.getDegAtt() + n.getPteffet() * i);
-                    break;
-                case 4:
-                    this.setPtPar(this.getPtPar() + n.getPteffet() * i);
-                    break;
-                case 5:
-                    this.setPourcentageAtt(this.getPourcentageAtt() + n.getPteffet() * i);
-                    break;
-                case 6:
-                    this.setPourcentageResisMag(this.getPourcentageResisMag() + n.getPteffet() * i);
-                    break;
-                case 7:
-                    this.setDistAttMax(this.getDistAttMax() + n.getPteffet() * i);
-                    break;
-            }
-        
+        switch (n.getCaracteristique()) {
+            case 1:
+                this.setPourcentageAtt(this.getPourcentageAtt() + n.getPteffet() * i);
+                break;
+            case 2:
+                this.setPourcentagePar(this.getPourcentagePar() + n.getPteffet() * i);
+                break;
+            case 3:
+                this.setDegAtt(this.getDegAtt() + n.getPteffet() * i);
+                break;
+            case 4:
+                this.setPtPar(this.getPtPar() + n.getPteffet() * i);
+                break;
+            case 5:
+                this.setPourcentageAtt(this.getPourcentageAtt() + n.getPteffet() * i);
+                break;
+            case 6:
+                this.setPourcentageResisMag(this.getPourcentageResisMag() + n.getPteffet() * i);
+                break;
+            case 7:
+                this.setDistAttMax(this.getDistAttMax() + n.getPteffet() * i);
+                break;
+        }
+
     }
+
     /**
      * méthode qui applique les effet des potions aux personnages
-     * @param o 
+     *
+     * @param o
      */
-    public void effetPotion(Objet o){
-        if(o instanceof Soin){
-            this.setPtVie(this.getPtVie()+((Soin) o).getPtRecup());
+    public void effetPotion(Objet o) {
+        if (o instanceof Soin) {
+            this.setPtVie(this.getPtVie() + ((Soin) o).getPtRecup());
         }
     }
+
     /**
      * Verifie si il y a un aliment non active dans le sac
+     *
      * @return true d'il y en a un, false s'ils sont tous actives
      */
-    public boolean nourritureNonActivee(){
-        boolean verif=false;
-        for(Nourriture n: this.getBonusmalus()){
-            if(n.getEtat()==0){
-                verif=true;
+    public boolean nourritureNonActivee() {
+        boolean verif = false;
+        for (Nourriture n : this.getBonusmalus()) {
+            if (n.getEtat() == 0) {
+                verif = true;
             }
         }
         return verif;
     }
+<<<<<<< HEAD
     
     
     public void getTexteSauvegarde(BufferedWriter writer) throws IOException{
@@ -396,6 +459,42 @@ public abstract class Personnage extends Creature {
         writer.write(Integer.toString(this.getPos().getX())+" ");
         writer.write(Integer.toString(this.getPos().getY())+" ");
         writer.newLine();
+=======
+
+    public void getTexteSauvegarde(BufferedWriter writer) throws IOException {
+        writer.write(this.getClass().getSimpleName() + " ");
+        if (this.getNom() != null) {
+            writer.write(this.getNom() + " ");
+        } else {
+            writer.write("bob ");
+        }
+        writer.write(Integer.toString(this.getPtMana()) + " ");
+        writer.write(Integer.toString(this.getPourcentageMag()) + " ");
+        writer.write(Integer.toString(this.getPourcentageResisMag()) + " ");
+        writer.write(Integer.toString(this.getDegMag()) + " ");
+        writer.write(Double.toString(this.getDistAttMax()) + " ");
+        writer.write(Integer.toString(this.getSac().size())+" ");
+        writer.write("[");
+        for(int i=0;i<this.getSac().size();i++){
+            this.getSac().get(i).getTexteSauvegarde(writer);
+            writer.write(" ;");
+        }
+        writer.write("] ");
+        writer.write(Integer.toString(this.getBonusmalus().size())+" ");
+        writer.write("[");
+        for(int i=0;i<this.getBonusmalus().size();i++){
+            this.getBonusmalus().get(i).getTexteSauvegarde(writer);
+            writer.write(" ;");
+        }
+        writer.write("] ");
+        writer.write(Integer.toString(this.getPtVie()) + " ");
+        writer.write(Integer.toString(this.getPourcentageAtt()) + " ");
+        writer.write(Integer.toString(this.getPourcentagePar()) + " ");
+        writer.write(Integer.toString(this.getDegAtt()) + " ");
+        writer.write(Integer.toString(this.getPtPar()) + " ");
+        writer.write(Integer.toString(this.getPos().getX()) + " ");
+        writer.write(Integer.toString(this.getPos().getY()) + " ");
+        
+>>>>>>> ae5eced0fb5077126fc1d74eebe04ad546abeb11
     }
 }
-

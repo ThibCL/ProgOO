@@ -16,10 +16,13 @@ public class TestSeance5 {
       
         w5.creationJoueur();
         w5.creeMondeAlea();
+<<<<<<< HEAD
         w5.getlJoueur().get(0).affiche();
         w5.afficheMat();
+=======
+>>>>>>> ae5eced0fb5077126fc1d74eebe04ad546abeb11
         w5.tourDeJeu();
-        w5.getlJoueur().get(0).getPerso().afficheSac();
+       
         
         /**To
         

@@ -225,7 +225,8 @@ public class Joueur {
     }
     
     public void getTexteSauvegarde(BufferedWriter writer) throws IOException{
-        writer.write(this.getPerso().getNom()+" ");
+
+        writer.write(this.getPerso().getNom()+"/");
         this.getPerso().getTexteSauvegarde(writer);
         
     }
