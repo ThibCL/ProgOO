@@ -145,4 +145,8 @@ public class Guerrier extends Personnage implements Combattant {
             w.getlObjet().remove(o);
         }
     }
+    
+    public String getAffichage(){        
+        return "G";               
+    }
 }

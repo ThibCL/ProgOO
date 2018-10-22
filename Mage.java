@@ -171,4 +171,16 @@ public class Mage extends Personnage implements Combattant {
         }
         
     }
+    
+
+    
+    public String getAffichage(){
+        if(this.getControle()==0){
+            return "M";          
+        }
+        else{
+            String s=Integer.toString(0);
+            return s;
+        }
+    }
 }

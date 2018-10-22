@@ -1,5 +1,6 @@
 
 package org.centrale.projet.objet;
+import java.io.*;
 import java.util.Random;
 /**
  *
@@ -108,5 +109,18 @@ public class NuageToxique extends Objet implements Deplacable,Combattant {
             System.out.println("Le nuage ne fait aucun dégats au "+c.getClass().getSimpleName());
         }
         
+    }
+    
+    public void getTexteSauvegarde(BufferedWriter writer) throws IOException{
+        super.getTexteSauvegarde(writer);
+        writer.write(Integer.toString(degAtt)+" ");
+        writer.write(Integer.toString(this.pourcentageAtt));
+        
+        
+    }
+    
+    
+    public String getAffichage(){        
+        return "N";               
     }
 }

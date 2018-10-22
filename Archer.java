@@ -190,4 +190,8 @@ public class Archer extends Personnage implements Combattant {
         writer.write(Integer.toString(nbFleches));
         
     }
+    
+    public String getAffichage(){        
+        return "A";               
+    }
 }
