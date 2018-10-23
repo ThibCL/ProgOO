@@ -66,7 +66,7 @@ public class Lapin extends Monstre{
     }
     
         public String getAffichage(){        
-        return "l";               
+        return "Lapin ";               
     }
     
 }

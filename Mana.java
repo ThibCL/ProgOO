@@ -40,6 +40,6 @@ public class Mana extends Potion{
     
     
     public String getAffichage(){        
-        return "m";               
+        return " Mage ";               
     }
 }
