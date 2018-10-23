@@ -300,9 +300,7 @@ public class World {
     }
 
     /**
-     * Lancement
-     */
-    /**
+     * Lancement : 
      * méthode qui définit le tour de jeu et qui fait jouer les joueurs un par
      * un avant de faire joueur les autres entitées Le joueur à le choix de se
      * déplacer ou de combattre Si on veut arrêter de jouer il faut rentrer quit
@@ -310,30 +308,25 @@ public class World {
      */
     public void tourDeJeu(SauvegardePartie testi) throws IOException {
         Scanner sc = new Scanner(System.in);
+        System.out.println();
+        System.out.println("Voici la carte du monde :");
         this.afficheMat();
-        System.out.println("Si vous voulez sauvegarder taper save");
+        String choix = "rien";
+        SauvegardePartie testo = new SauvegardePartie(testi.getFilename());
+        testo.sauvegarderPartie(this);
 
-        String choix = sc.next();
-        switch (choix) {
-            case "save":
-                SauvegardePartie testo = new SauvegardePartie(testi.getFilename());
-                testo.sauvegarderPartie(this);
-                break;
-        }
-
-        System.out.println("si vous ne voulez pas jouer tapez quit");
-
-        while (Objects.equals(choix, "quit") == false) {
-            System.out.println("Nouveau tour");
+        while (Objects.equals(choix, "n") == false) {
+            System.out.println("Nouveau tour !");
+            System.out.println();
             for (Joueur j : this.getlJoueur()) {
-                System.out.println("C'est au joueur "+j.getNumero()+":" + j.getPerso().getNom()+ " de jouer. ");
+                System.out.println("C'est au joueur "+j.getNumero()+" : " + j.getPerso().getNom()+ " de jouer. ");
                 j.getPerso().affiche();
+                System.out.println();
                 System.out.println("Voulez vous  : "
                         + "\n - Combattre : tapez 'c' ;" 
-                        + "\n - te Deplacer : tapez 'd' ;" 
+                        + "\n - vous Deplacer : tapez 'd' ;" 
                         + "\n - Manger : tapez 'm' ;"
                         + "\n - Boire : tapez 'b' ;");
-
 
                 boolean choisi = false;
                 while (choisi == false) {
@@ -341,17 +334,17 @@ public class World {
                     switch (choix) {
                         case "Combattre":
                         case "c":
-                            j.combattreperso(this);
+                            j.combattrePerso(this);
                             choisi = true;
                             break;
                         case "Deplacer":
                         case "d":
-                            j.deplaceperso(this);
+                            j.deplacePerso(this);
                             choisi = true;
                             break;
                         case "Manger":
                         case "m":
-                            j.mangerperso(this);
+                            j.mangerPerso(this);
                             choisi = true;
                             break;
                         case "Boire":
@@ -384,15 +377,15 @@ public class World {
                 if (c instanceof Personnage) {
                     int k = 0;
                     Nourriture n;
-                    while (k < ((Personnage) c).getBonusmalus().size()) {
-                        n = ((Personnage) c).getBonusmalus().get(k);
+                    while (k < ((Personnage) c).getBonusMalus().size()) {
+                        n = ((Personnage) c).getBonusMalus().get(k);
                         if (n.getEtat() == 1) {
                             n.setDuree(n.getDuree() - 1);
                             if (n.getDuree() < 1) {
-                                ((Personnage) c).effetnourriture(n, -1);
+                                ((Personnage) c).effetNourriture(n, -1);
                                 System.out.print("L'aliment suivant ne fait plus effet: ");
                                 n.affiche();
-                                ((Personnage) c).getBonusmalus().remove(n);
+                                ((Personnage) c).getBonusMalus().remove(n);
 
                             }
                         }
@@ -415,20 +408,31 @@ public class World {
                     ((NuageToxique) this.getlObjet().get(j)).deplacer(this, 0, 0);
                 }
             }
+            
+            //on affiche la matrice à chaque tour de jeu
             this.afficheMat();
-
-            System.out.println("Si vous voulez sauvegarder taper save");
-            choix = sc.next();
-            switch (choix) {
-                case "save":
-                    SauvegardePartie testo = new SauvegardePartie(testi.getFilename());
-                    testo.sauvegarderPartie(this);
-                    break;
-            }
-            System.out.println("Si vous voulez arrêter de jouer entrez quit");
+            
+            System.out.println("Souhaitez-vous continuer à jouer ? o/n");
             choix = sc.next();
         }
-
+        System.out.println("Voulez-vous sauvegarder avant de quitter? o/n");
+            choix = sc.next();
+            boolean choisi =false;
+            while (choisi==false){
+                switch(choix){
+                    case "o":
+                        testo = new SauvegardePartie(testi.getFilename());
+                        testo.sauvegarderPartie(this);
+                        choisi=true;
+                        break;
+                    case "n":
+                        System.out.println("Partie non sauvegardée !");
+                        choisi=true;
+                        break;
+                    default :
+                        System.out.println("Entrée non valide ! Voulez-vous sauvegarder avant de quitter? o/n");
+                }
+            }
     }
 
     /**
@@ -440,7 +444,7 @@ public class World {
         Scanner saisie = new Scanner(System.in);
         String nmj = saisie.next();
         Joueur j = new Joueur();
-        j.choisirperso();
+        j.choisirPerso();
         j.getPerso().setNom(nmj);
         this.lJoueur.add(j);
         this.ajouterCrea(j.getPerso());

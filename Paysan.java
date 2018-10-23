@@ -114,7 +114,7 @@ public class Paysan extends Personnage {
             return "Pay";          
         }
         else{
-            return this.getNomjcontrole();
+            return this.getNomjControle();
         }               
     }
 

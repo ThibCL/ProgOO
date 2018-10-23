@@ -12,10 +12,10 @@ public class TestSeance6 {
         
         Partie p = new Partie();
         SauvegardePartie testi =p.lancerPartie();
-        p.getW().tourDeJeu(testi);
-        /*World w=new World(5,10,10);
+        p.getW().tourDeJeu(testi);/*
+        World w=new World(5,10,10);
         w.creeMondeAlea();
         w.afficheMat();*/
-                        
+              
     }   
 }

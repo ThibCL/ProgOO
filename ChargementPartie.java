@@ -24,7 +24,7 @@ public class ChargementPartie {
     public ChargementPartie(String nomFichier) throws FileNotFoundException{
         nomSauvegarde = nomFichier;
         try {
-            lecteur = new BufferedReader(new FileReader(nomSauvegarde));
+            lecteur = new BufferedReader(new FileReader(nomSauvegarde + ".txt"));
         }
         catch (FileNotFoundException e){
             System.out.println("Sauvegarde introuvable !");
@@ -107,7 +107,7 @@ public class ChargementPartie {
             World w = new World(parametres[1], parametres[0]);
             
             //on créé les personnages et les monstres
-            for (int i=0; i<parametres[2]; i++){
+            for (int i=0; i<parametres[2]-parametres[4]; i++){
                 ligne = fichier.readLine();
                 tokenizer = new StringTokenizer(ligne, delimiteurs);
                 String type = tokenizer.nextToken();

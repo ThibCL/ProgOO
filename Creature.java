@@ -45,7 +45,7 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
  * Nom du joueur qui le controle
  */
     
-    private String nomjcontrole;
+    private String nomjControle;
     
     
 /**
@@ -151,23 +151,23 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
     public void setPos(Point2D p){
         pos=p;
     }
+
+    
+    public void setNomjControle(String nomjcontrole){
+        this.nomjControle = nomjcontrole;
+        
+    }
+
+    public String getNomjControle() {
+        return nomjControle;
+    }
+
     /**
      * Méthode qui permet de vérifier s'il y a une place libre autour de la créature 
      * @param w monde dans lequel se trouve la creature
      * @return verif qui retourne faux s'il n'y apas de place autour pour se deplacer et vrai s'il y a de la place autour pour se deplacer
      */
-    
-    
-    public void setNomjcontrole(String nomjcontrole){
-        this.nomjcontrole = nomjcontrole;
-        
-    }
-
-    public String getNomjcontrole() {
-        return nomjcontrole;
-    }
-
-    public boolean deplpossible(World w) {
+    public boolean deplPossible(World w){
         boolean verif=false;
         for(int i=0;i<3;i++){
             for(int j=0;j<3;j++){
@@ -192,7 +192,7 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
      * @param j Entier pour se déplacer de -1,0,1 en Y
      */
     public void deplacer(World w,int i,int j){
-        if(deplpossible(w)==false){
+        if(deplPossible(w)==false){
             System.out.println("La creature ne peut pas se déplacer");
             
         }

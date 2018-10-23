@@ -48,7 +48,7 @@ public abstract class Personnage extends Creature {
     /**
      * Liste de la nourriture que possède le personnagz
      */
-    private ArrayList<Nourriture> bonusmalus;
+    private ArrayList<Nourriture> bonusMalus;
 
     /**
      * Constructeur de Personnage qui prend en parametre toutes les valeurs des
@@ -78,7 +78,7 @@ public abstract class Personnage extends Creature {
         this.degMag = degMag;
         this.distAttMax = distAttMax;
         this.sac = new ArrayList<Objet>(sac);
-        this.bonusmalus = new ArrayList<Nourriture>(bonusmalus);
+        this.bonusMalus = new ArrayList<Nourriture>(bonusmalus);
     }
 
     /**
@@ -96,7 +96,7 @@ public abstract class Personnage extends Creature {
         degMag = perso.degMag;
         distAttMax = perso.distAttMax;
         sac = new ArrayList(perso.getSac());
-        bonusmalus = new ArrayList(perso.getBonusmalus());
+        bonusMalus = new ArrayList(perso.getBonusMalus());
     }
 
     //A améliorer avec Random
@@ -113,7 +113,7 @@ public abstract class Personnage extends Creature {
         degMag = 0;
         distAttMax = 1.42;
         sac = new ArrayList<>();
-        bonusmalus = new ArrayList<>();
+        bonusMalus = new ArrayList<>();
     }
 
     /**
@@ -146,7 +146,6 @@ public abstract class Personnage extends Creature {
         if (objSac==0){
             //si le sac est vide on passe juste le [;] avec le premier cusreur et le deuxième pour pouvoir l'utiliser pour la nourriture portée par le personnage
             tokenizer.nextToken();
-            tokenizer2.nextToken();
             tokenizer2.nextToken();
             tokenizer2.nextToken();
         }
@@ -188,7 +187,7 @@ public abstract class Personnage extends Creature {
         
         //on récupère le nombre d'objets de type Nourriture 
         int nbreNourriture = Integer.parseInt(tokenizer.nextToken());
-        bonusmalus = new ArrayList<>();
+        bonusMalus = new ArrayList<>();
         if (nbreNourriture==0){
             //si lpersonnage n'a pas de nourriture on passe juste le [;] avec les premier curseur
             tokenizer.nextToken();
@@ -200,7 +199,7 @@ public abstract class Personnage extends Creature {
             for (int i=0; i<nbreNourriture;i++){
                 String nourriture = tokenizer2.nextToken();
                 Nourriture n = new Nourriture(nourriture);
-                bonusmalus.add(n);
+                bonusMalus.add(n);
                 //on fait avancer l'autre curseur de 7 pour qu'il passe les nourritures
                 for (int k=1;k<8;k++){
                     tokenizer.nextToken();
@@ -276,12 +275,12 @@ public abstract class Personnage extends Creature {
         this.sac = sac;
     }
 
-    public ArrayList<Nourriture> getBonusmalus() {
-        return bonusmalus;
+    public ArrayList<Nourriture> getBonusMalus() {
+        return bonusMalus;
     }
 
-    public void setBonusmalus(ArrayList<Nourriture> bonusmalus) {
-        this.bonusmalus = bonusmalus;
+    public void setBonusMalus(ArrayList<Nourriture> bonusmalus) {
+        this.bonusMalus = bonusmalus;
     }
 
     public abstract void affiche();
@@ -305,7 +304,7 @@ public abstract class Personnage extends Creature {
      * Méthode permettant d'afficher la nourriture portée par le personnage
      */
     public void afficheNourriture() {
-        ArrayList<Nourriture> nourriture = getBonusmalus();
+        ArrayList<Nourriture> nourriture = getBonusMalus();
         if (nourriture == null) {
             System.out.println("Ce personnage n'a pas de nourriture sur lui");
         } else {
@@ -326,7 +325,7 @@ public abstract class Personnage extends Creature {
      * @param i vaut 1 ou -1 si le personnage ramasse ou si la duree s'est
      * écoulé
      */
-    public void effetnourriture(Nourriture n, int i) {
+    public void effetNourriture(Nourriture n, int i) {
 
         switch (n.getCaracteristique()) {
             case 1:
@@ -372,7 +371,7 @@ public abstract class Personnage extends Creature {
      */
     public boolean nourritureNonActivee() {
         boolean verif = false;
-        for (Nourriture n : this.getBonusmalus()) {
+        for (Nourriture n : this.getBonusMalus()) {
             if (n.getEtat() == 0) {
                 verif = true;
             }
@@ -400,10 +399,10 @@ public abstract class Personnage extends Creature {
             writer.write(" ;");
         }
         writer.write("] ");
-        writer.write(Integer.toString(this.getBonusmalus().size())+" ");
+        writer.write(Integer.toString(this.getBonusMalus().size())+" ");
         writer.write("[");
-        for(int i=0;i<this.getBonusmalus().size();i++){
-            this.getBonusmalus().get(i).getTexteSauvegarde(writer);
+        for(int i=0;i<this.getBonusMalus().size();i++){
+            this.getBonusMalus().get(i).getTexteSauvegarde(writer);
             writer.write(" ;");
         }
         writer.write("] ");

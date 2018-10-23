@@ -40,7 +40,7 @@ public class Joueur {
     /**
      * Méthode qui permet au joueur de choisir son personnage et le nom de celui ci
      */
-    public void choisirperso(){
+    public void choisirPerso(){
         System.out.println("Veuillez entrer un type de personnage: "
                 + "\n -Archer"
                 + "\n -Guerrier"
@@ -96,7 +96,7 @@ public class Joueur {
      * méthode qui permet au joeur d'attaquer une autre creature
      * @param w 
      */
-    public void combattreperso(World w){
+    public void combattrePerso(World w){
         ArrayList<Creature> cAtt = creaAttaquables(w);
         if (cAtt.size()==0){
             System.out.println("Impossible de te battre, tu n'as pas d'ennemi à portée d'attaque");
@@ -197,8 +197,8 @@ public class Joueur {
      * deplacement est possible la méthode appelle la méthode déplacer de creature
      * @param w 
      */
-    public void deplaceperso(World w){
-        if(this.perso.deplpossible(w)==false){
+    public void deplacePerso(World w){
+        if(this.perso.deplPossible(w)==false){
             System.out.println("Impossible de te déplacer, tu dois te battre");
             //this.combattreperso();
         }
@@ -224,7 +224,7 @@ public class Joueur {
      * Méthode qui permet au joueur de faire manger un aliment à son personnage 
      * @param w 
      */
-    public void mangerperso(World w){
+    public void mangerPerso(World w){
         Scanner scani = new Scanner(System.in);
         if(!this.getPerso().nourritureNonActivee()){
             System.out.println("Pas d'aliment à manger");
@@ -232,18 +232,18 @@ public class Joueur {
         }
         else{
             System.out.println("Voici les aliments que vous possédez: ");      
-            for(int k=0; k<this.getPerso().getBonusmalus().size();k++){
-                if(this.getPerso().getBonusmalus().get(k).getEtat()==0){    
+            for(int k=0; k<this.getPerso().getBonusMalus().size();k++){
+                if(this.getPerso().getBonusMalus().get(k).getEtat()==0){    
                     System.out.print(k+": ");
-                    this.getPerso().getBonusmalus().get(k).affiche();
+                    this.getPerso().getBonusMalus().get(k).affiche();
                 }
                 System.out.println("Taper le numéro de l'aliment que vous voulez mangez:");  
             }
             int rep=scani.nextInt();
-            this.getPerso().effetnourriture(this.getPerso().getBonusmalus().get(rep),1);
-            this.getPerso().getBonusmalus().get(rep).setEtat(1);
+            this.getPerso().effetNourriture(this.getPerso().getBonusMalus().get(rep),1);
+            this.getPerso().getBonusMalus().get(rep).setEtat(1);
             System.out.print("vous avez mangé: ");
-            this.getPerso().getBonusmalus().get(rep).affiche();
+            this.getPerso().getBonusMalus().get(rep).affiche();
         }
     }
     /**
