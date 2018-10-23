@@ -225,6 +225,7 @@ public class Joueur {
 
         writer.write(this.getPerso().getNom()+"/");
         this.getPerso().getTexteSauvegarde(writer);
+        writer.newLine();
         
     }
     
