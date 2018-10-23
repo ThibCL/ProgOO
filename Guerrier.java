@@ -147,6 +147,6 @@ public class Guerrier extends Personnage implements Combattant {
     }
     
     public String getAffichage(){        
-        return "G";               
+        return "Guerri";               
     }
 }

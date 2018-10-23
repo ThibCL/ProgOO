@@ -103,7 +103,7 @@ public class Paysan extends Personnage {
     }
     
     public String getAffichage(){        
-        return "P";               
+        return "Paysan";               
     }
 
 }

@@ -284,15 +284,17 @@ public class World {
                 Creature c = this.matMonde[i][j].getCreature();
                 Objet o = this.matMonde[i][j].getObjet();
                 if (this.matMonde[i][j].getCreature() == null && this.matMonde[i][j].getObjet() == null) {
-                    System.out.print(" [" + "." + "," + "." + "]");
-                } else if (this.matMonde[i][j].getCreature() == null && this.matMonde[i][j].getObjet() != null) {
-                    System.out.print(" [" + "." + "," + o.getAffichage() + "]");
+                    System.out.print(" [" + "      " + "," + "      " + "]");
+                } else if (this.matMonde[i][j].getCreature() == null && this.matMonde[i][j].getObjet() != null) {                    
+                        System.out.print(" [" + "      " + "," + o.getAffichage() + "]");
                 } else if (this.matMonde[i][j].getCreature() != null && this.matMonde[i][j].getObjet() == null) {
-                    System.out.print(" [" + c.getAffichage() + "," + "." + "]");
-                } else if (this.matMonde[i][j].getCreature() != null && this.matMonde[i][j].getObjet() != null) {
-                    System.out.print(" [" + c.getAffichage() + "," + o.getAffichage() + "]");
-                }
+                    System.out.print(" [" + c.getAffichage() + "," + "      " + "]");
+                } else if (this.matMonde[i][j].getCreature() != null && this.matMonde[i][j].getObjet() != null) {                    
+                        System.out.print(" [" + c.getAffichage() + "," + o.getAffichage() + "]");                    }
+
             }
+            System.out.println();
+            System.out.println();
             System.out.println();
             System.out.println();
         }
@@ -326,21 +328,15 @@ public class World {
         while (Objects.equals(choix, "quit") == false) {
             System.out.println("Nouveau tour");
             for (Joueur j : this.getlJoueur()) {
-<<<<<<< HEAD
-                System.out.println("C'est à " + j.getPerso().getNom()+ " de jouer. "
-                        + "Voulez vous  : "
+                System.out.println("C'est au joueur "+j.getNumero()+":" + j.getPerso().getNom()+ " de jouer. ");
+                j.getPerso().affiche();
+                System.out.println("Voulez vous  : "
                         + "\n - Combattre : tapez 'c' ;" 
                         + "\n - te Deplacer : tapez 'd' ;" 
                         + "\n - Manger : tapez 'm' ;"
                         + "\n - Boire : tapez 'b' ;");
-=======
-                j.getPerso().affiche();
-<<<<<<< HEAD
-                System.out.println("C'est au joueur " + j.getNumero() + ":" + j.getPerso().getNom() + " de jouer. Veux tu Combattre ,te Deplacer,Manger ou Boire?");
-=======
-                System.out.println("C'est au joueur "+j.getNumero()+":" + j.getPerso().getNom()+ " de jouer. Veux tu Combattre ,te Deplacer,Manger ou Boire?");
->>>>>>> dd7c53068bc2fcea7aacb80021a9b66e10db3b51
->>>>>>> b4197afd4d7feb68bfdbce7e8ab6ec485ac2c4f3
+
+
                 boolean choisi = false;
                 while (choisi == false) {
                     choix = sc.next();

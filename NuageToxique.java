@@ -2,6 +2,7 @@
 package org.centrale.projet.objet;
 import java.io.*;
 import java.util.Random;
+import java.util.StringTokenizer;
 /**
  *
  * @author Thibault
@@ -9,7 +10,7 @@ import java.util.Random;
 public class NuageToxique extends Objet implements Deplacable,Combattant {
     
     /**
-     * Dégats que fait le nuage quand un personnage rentre dedans
+     * Dégats que fait le nuage à la créature rentre dedans
      */
     private int degAtt;
     
@@ -27,8 +28,15 @@ public class NuageToxique extends Objet implements Deplacable,Combattant {
     }
     
     public NuageToxique(String element){
-        super(element);
-        
+        String delimiteurs = " ";
+        StringTokenizer tokenizer;
+        tokenizer = new StringTokenizer(element, delimiteurs);
+        tokenizer.nextToken(); //on passe le nom
+        int x = Integer.parseInt(tokenizer.nextToken());
+        int y = Integer.parseInt(tokenizer.nextToken());
+        setPos(new Point2D(x,y));
+        degAtt = Integer.parseInt(tokenizer.nextToken());
+        pourcentageAtt = Integer.parseInt(tokenizer.nextToken());
     }
 
     public int getDegAtt() {
@@ -121,6 +129,6 @@ public class NuageToxique extends Objet implements Deplacable,Combattant {
     
     
     public String getAffichage(){        
-        return "N";               
+        return "NuaTox";               
     }
 }

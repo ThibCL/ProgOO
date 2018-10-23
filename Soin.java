@@ -45,6 +45,6 @@ public class Soin extends Potion{
     }
     
     public String getAffichage(){        
-        return "s";               
+        return " Soin ";               
     }
 }
