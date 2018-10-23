@@ -18,13 +18,19 @@ public class NuageToxique extends Objet implements Deplacable,Combattant {
      * Pourcentage de chance que le nuage blesse un joueur
      */
     private int pourcentageAtt;
+    
+    /**
+     * cet attribut contient l'objet sur lequel est placé le nuage si il y en a un 
+     * cela permet à un nuage et un objet d'être au même endroit sur la map
+     */
+    private Objet objet;
  
+    
     public NuageToxique(){
         super();
         Random rand=new Random();
         this.degAtt=rand.nextInt(11)+5;
         this.pourcentageAtt=50+rand.nextInt(26);
-        
     }
     
     /**
@@ -41,6 +47,30 @@ public class NuageToxique extends Objet implements Deplacable,Combattant {
         setPos(new Point2D(x,y));
         degAtt = Integer.parseInt(tokenizer.nextToken());
         pourcentageAtt = Integer.parseInt(tokenizer.nextToken());
+        //On récupère l'objet si le nuage était sur un objet lors de la sauvegarde
+        int aObjet=Integer.parseInt(tokenizer.nextToken());
+        if (aObjet==1){
+            String delimiteurs2 = "[;]";
+            StringTokenizer tokenizer2 = new StringTokenizer(element, delimiteurs2);
+            tokenizer2.nextToken();
+            String obj = tokenizer2.nextToken();
+            //on créé un troisième curseur pour récupérer le type de l'objet
+            StringTokenizer tokenizer3 = new StringTokenizer(obj, delimiteurs);
+            String typeObj = tokenizer3.nextToken();
+            Objet o ;
+            switch(typeObj){
+                case "Nourriture":
+                    o = new Nourriture(obj);
+                    break;
+                case "Mana":
+                    o = new Mana(obj);
+                    break;
+                default:
+                    o = new Soin(obj);
+                    break; //si la sauvegarde est bien faite l'objet ne peut qu'être un soin si ce n'est pas les autres cas
+            }
+            objet=o;
+        }
     }
 
     public int getDegAtt() {
@@ -58,14 +88,26 @@ public class NuageToxique extends Objet implements Deplacable,Combattant {
     public void setPourcentageAtt(int pourcentageAtt) {
         this.pourcentageAtt = pourcentageAtt;
     }
-    
-    
+
+    public void setObjet(Objet objet) {
+        this.objet = objet;
+    }
+
+    public Objet getObjet() {
+        return objet;
+    }
     
     /**
      * Méthode permettant d'afficher l'objet 
      */
     public void affiche(){
-        System.out.println("Nuage Toxique");
+        System.out.println("Nuage Toxique ! Il a :"
+                + "\n - "  + degAtt + " points de dégats d'attaque ;"
+                + "\n - " + pourcentageAtt + "% de poucentage d'attaque ;");
+        if (getObjet()!=null){
+            System.out.println("Il est placé sur cet objet : "
+                    + "\n - "  + getObjet() );
+        }
     }
     
     /**
@@ -89,12 +131,19 @@ public class NuageToxique extends Objet implements Deplacable,Combattant {
             i=posAlea.nextInt(3)-1;
             j=posAlea.nextInt(3)-1;
         }
-        Objet o =w.getMatMonde()[this.getPos().getX()+i][this.getPos().getY()+j].getObjet();
-        if (o!=null){
-            w.getlObjet().remove(o);
+        Objet o1 = getObjet();
+        if (o1!= null){
+            w.getMatMonde()[this.getPos().getX()][this.getPos().getY()].setObjet(o1);
+            setObjet(null);
         }
-        w.getMatMonde()[this.getPos().getX()][this.getPos().getY()].setObjet(null);
+        else {
+            w.getMatMonde()[this.getPos().getX()][this.getPos().getY()].setObjet(null);
+        }
+        Objet o2 = w.getMatMonde()[this.getPos().getX()+i][this.getPos().getY()+j].getObjet();
         this.getPos().translate(i, j);
+        if (o2!=null){
+            setObjet(o2);
+        }
         w.getMatMonde()[this.getPos().getX()][this.getPos().getY()].setObjet(this);
         if(w.getMatMonde()[this.getPos().getX()][this.getPos().getY()].getCreature()!=null){
             this.combattre(w.getMatMonde()[this.getPos().getX()][this.getPos().getY()].getCreature());
@@ -126,8 +175,15 @@ public class NuageToxique extends Objet implements Deplacable,Combattant {
         super.getTexteSauvegarde(writer);
         writer.write(Integer.toString(degAtt)+" ");
         writer.write(Integer.toString(this.pourcentageAtt));
-        
-        
+        if (getObjet()==null){
+            writer.write(" 0");
+        }
+        else {
+            writer.write(" 1");
+            writer.write(" [");
+            this.getObjet().getTexteSauvegarde(writer);
+            writer.write("] ");
+        }
     }
     
     

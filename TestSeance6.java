@@ -15,7 +15,8 @@ public class TestSeance6 {
         p.getW().tourDeJeu(testi);/*
         World w=new World(5,10,10);
         w.creeMondeAlea();
-        w.afficheMat();*/
-              
+        w.afficheMat();
+        NuageToxique n = new NuageToxique();
+        n.affiche();*/
     }   
 }

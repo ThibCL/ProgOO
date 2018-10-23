@@ -319,7 +319,7 @@ public class World {
             System.out.println("Nouveau tour !");
             System.out.println();
             for (Joueur j : this.getlJoueur()) {
-                System.out.println("C'est au joueur "+j.getNumero()+" : " + j.getPerso().getNom()+ " de jouer. ");
+                System.out.println("C'est au joueur "+j.getNumero()+" (" + j.getPerso().getNom()+ ") de jouer. ");
                 j.getPerso().affiche();
                 System.out.println();
                 System.out.println("Voulez vous  : "
@@ -364,8 +364,10 @@ public class World {
                 }
 
             }
-
+            
             //faire jouer les autres entitees sur le terrain
+            System.out.println();
+            System.out.println("C'est au tour du monde de jouer");
             int i = 0;
             while (i < this.getlCrea().size()) {
                 Creature c = this.getlCrea().get(i);
@@ -395,11 +397,12 @@ public class World {
                     }
 
                 }
+                
+                //On supprime les créatures mortes 
                 if (c.getPtVie() < 1) {
                     this.getMatMonde()[c.getPos().getX()][c.getPos().getY()].setCreature(null);
                     this.getlCrea().remove(c);
                     i=i-1;
-
                 }
                 i = i + 1;
             }

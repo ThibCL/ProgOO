@@ -115,7 +115,7 @@ public class Joueur {
             boolean choisi = false;
             int rep = -1;
             while (choisi==false){
-                System.out.println("Donner le numéro de la créature que vous voulez attaquer");
+                System.out.println("Donner le numéro de la créature que vous voulez attaquer :");
                 try {
                     rep=scan.nextInt();
                     choisi=true;
@@ -134,7 +134,8 @@ public class Joueur {
                 }
             }
             if(this.getPerso() instanceof Combattant){
-                System.out.println("tu engages le combat");
+                System.out.println();
+                System.out.println("Tu engages le combat");
                 ((Combattant)this.perso).combattre(cAtt.get(rep-1));
             }
             }
