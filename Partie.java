@@ -56,6 +56,7 @@ public class Partie {
                     for (int i=0; i<rep;i++){
                         w.creationJoueur();
                         w.getlJoueur().get(i).setNumero(i);
+                        w.getlJoueur().get(i).getPerso().setNomjcontrole("j"+i+" ");
                     }
                     w.creeMondeAlea();
                     break;

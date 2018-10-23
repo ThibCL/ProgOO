@@ -174,13 +174,13 @@ public class Mage extends Personnage implements Combattant {
     
 
     
+    
     public String getAffichage(){
         if(this.getControle()==0){
             return " Mage ";          
         }
         else{
-            String s=Integer.toString(0);
-            return s;
+            return this.getNomjcontrole();
         }
     }
 }

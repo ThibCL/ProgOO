@@ -42,6 +42,13 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
     private int controle;
     
 /**
+ * Nom du joueur qui le controle
+ */
+    
+    private String nomjcontrole;
+    
+    
+/**
  * Constucteur de Creature qui prend en paramètre la valeur de tous les attributs de cette classe
  * @param pV
  * @param pA
@@ -149,7 +156,18 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
      * @param w monde dans lequel se trouve la creature
      * @return verif qui retourne faux s'il n'y apas de place autour pour se deplacer et vrai s'il y a de la place autour pour se deplacer
      */
-    public boolean deplpossible(World w){
+    
+    
+    public void setNomjcontrole(String nomjcontrole){
+        this.nomjcontrole = nomjcontrole;
+        
+    }
+
+    public String getNomjcontrole() {
+        return nomjcontrole;
+    }
+
+    public boolean deplpossible(World w) {
         boolean verif=false;
         for(int i=0;i<3;i++){
             for(int j=0;j<3;j++){
@@ -161,7 +179,6 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
             }
         }
         return verif;
-        
     }
     
     

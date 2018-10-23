@@ -446,6 +446,7 @@ public class World {
         j.getPerso().setNom(nmj);
         this.lJoueur.add(j);
         this.ajouterCrea(j.getPerso());
+        
 
     }
 
