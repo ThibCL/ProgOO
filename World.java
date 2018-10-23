@@ -283,16 +283,14 @@ public class World {
                 Creature c=this.matMonde[i][j].getCreature();
                 Objet o=this.matMonde[i][j].getObjet();
                 if (this.matMonde[i][j].getCreature() == null && this.matMonde[i][j].getObjet() == null) {
-                    System.out.print(" [" + "      " + "," + "      " + "]");
+                    System.out.print(" [" + "   " + "," + "   " + "]");
                 } else if (this.matMonde[i][j].getCreature() == null && this.matMonde[i][j].getObjet() != null) {                    
-                        System.out.print(" [" + "      " + "," + o.getAffichage() + "]");
+                        System.out.print(" [" + "   " + "," + o.getAffichage() + "]");
                 } else if (this.matMonde[i][j].getCreature() != null && this.matMonde[i][j].getObjet() == null) {
-                    System.out.print(" [" + c.getAffichage() + "," + "      " + "]");
+                    System.out.print(" [" + c.getAffichage() + "," + "   " + "]");
                 } else if (this.matMonde[i][j].getCreature() != null && this.matMonde[i][j].getObjet() != null) {                    
                         System.out.print(" [" + c.getAffichage() + "," + o.getAffichage() + "]");                    }
             }
-            System.out.println();
-            System.out.println();
             System.out.println();
             System.out.println();
         }
