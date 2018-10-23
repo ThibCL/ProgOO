@@ -53,10 +53,10 @@ public class Partie {
                             entier=false;
                         }
                     }
-                    for (int i=0; i<rep;i++){
+                    for (int i=1; i<rep+1;i++){
                         w.creationJoueur();
-                        w.getlJoueur().get(i).setNumero(i);
-                        w.getlJoueur().get(i).getPerso().setNomjcontrole("j"+i+" ");
+                        w.getlJoueur().get(i-1).setNumero(i);
+                        w.getlJoueur().get(i-1).getPerso().setNomjcontrole("J"+i+" ");
                     }
                     w.creeMondeAlea();
                     break;

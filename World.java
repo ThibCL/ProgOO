@@ -410,9 +410,9 @@ public class World {
             }
 
             //on fait bouger les nuages
-            for (Objet o : this.getlObjet()) {
-                if (o instanceof NuageToxique) {
-                    ((NuageToxique) o).deplacer(this, 0, 0);
+            for (int j=0;j<this.getlObjet().size();j++) {
+                if (this.getlObjet().get(j) instanceof NuageToxique) {
+                    ((NuageToxique) this.getlObjet().get(j)).deplacer(this, 0, 0);
                 }
             }
             this.afficheMat();

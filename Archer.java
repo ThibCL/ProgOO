@@ -192,6 +192,11 @@ public class Archer extends Personnage implements Combattant {
     }
     
     public String getAffichage(){        
-        return "Arc";               
+        if(this.getControle()==0){
+            return "Arc";          
+        }
+        else{
+            return this.getNomjcontrole();
+        }               
     }
 }

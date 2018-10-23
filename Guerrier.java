@@ -147,6 +147,11 @@ public class Guerrier extends Personnage implements Combattant {
     }
     
     public String getAffichage(){        
-        return "Gue";               
+        if(this.getControle()==0){
+            return "Gue";          
+        }
+        else{
+            return this.getNomjcontrole();
+        }               
     }
 }
