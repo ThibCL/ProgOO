@@ -37,7 +37,20 @@ public class Partie {
                 case "n":
                     choisi=true;
                     System.out.println("Nouvelle partie ! Entrez un nom de sauvegarde :");
-                    choix=sc.next();
+                    
+                    //On teste si la sauvegarde n'existe pas déjà afin de s'assurer que la nouvelle partie n'écrase pas une autre !
+                    boolean fichierExistant=true;
+                    while (fichierExistant == true){
+                        choix=sc.next();
+                        try{
+                            ChargementPartie partieExistante = new ChargementPartie(choix);
+                            System.out.println("Ce nom de sauvegarde existe déjà, choisissez en un autre.");
+                            fichierExistant=true;
+                        }
+                        catch (FileNotFoundException e){
+                            fichierExistant=false;
+                        }
+                    }
                     testi=new SauvegardePartie(choix);
                     w= new World(5,10,10);
                     System.out.println("Combien de joueurs êtes vous ?");
@@ -55,6 +68,7 @@ public class Partie {
                         }
                     }
                     for (int i=1; i<rep+1;i++){
+                        System.out.println("\nJoueur "+ i +":");
                         w.creationJoueur();
                         w.getlJoueur().get(i-1).setNumero(i);
                         w.getlJoueur().get(i-1).getPerso().setNomjControle("J"+i+" ");
@@ -64,7 +78,7 @@ public class Partie {
                 case "c":
                     choisi=true;
                     System.out.println("Chargement d'une partie : Entrez le nom de la sauvegarde :");
-                    boolean fichierExistant=false;
+                    fichierExistant=false;
                     while (fichierExistant == false){
                         choix=sc.next();
                         try{
@@ -73,13 +87,14 @@ public class Partie {
                             fichierExistant=true;
                         }
                         catch (FileNotFoundException e){
+                            System.out.println("Sauvegarde introuvable !");
                             System.out.println("Entrez le nom de la sauvegarde :");
                             fichierExistant=false;
                             
                         }
                     }
                     testi=new SauvegardePartie(choix);
-                    break;
+                break;
                 default :
                     System.out.println("Ce n'est pas une action possible!");
                     System.out.println("Voulez vous :" +

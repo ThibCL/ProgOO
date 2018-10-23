@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class TestSeance6 {
     public static void main(String[] args) throws IOException{
         
-        Partie p = new Partie();
+        /*Partie p = new Partie();
         SauvegardePartie testi =p.lancerPartie();
         p.getW().tourDeJeu(testi);/*
         World w=new World(5,10,10);
@@ -18,5 +18,6 @@ public class TestSeance6 {
         w.afficheMat();
         NuageToxique n = new NuageToxique();
         n.affiche();*/
+        
     }   
 }

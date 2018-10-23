@@ -317,8 +317,8 @@ public class World {
 
         while (Objects.equals(choix, "n") == false) {
             System.out.println("Nouveau tour !");
-            System.out.println();
             for (Joueur j : this.getlJoueur()) {
+                System.out.println();
                 System.out.println("C'est au joueur "+j.getNumero()+" (" + j.getPerso().getNom()+ ") de jouer. ");
                 j.getPerso().affiche();
                 System.out.println();
@@ -327,7 +327,7 @@ public class World {
                         + "\n - vous Deplacer : tapez 'd' ;" 
                         + "\n - Manger : tapez 'm' ;"
                         + "\n - Boire : tapez 'b' ;");
-
+                System.out.println();
                 boolean choisi = false;
                 while (choisi == false) {
                     choix = sc.next();
