@@ -131,7 +131,7 @@ public class Mage extends Personnage implements Combattant {
             System.out.println("C'est un nuage Toxique!");
             ((NuageToxique) o).combattre(this);
         } else if (o instanceof Nourriture) {
-            this.getBonusmalus().add((Nourriture) o);
+            this.getBonusMalus().add((Nourriture) o);
             int x = o.getPos().getX();
             int y = o.getPos().getY();
             w.getMatMonde()[x][y].setObjet(null);
@@ -147,7 +147,7 @@ public class Mage extends Personnage implements Combattant {
     }
 
     public void effetnourriture(Nourriture n, int i) {
-        super.effetnourriture(n,i);
+        super.effetNourriture(n,i);
 
         
 
@@ -174,13 +174,13 @@ public class Mage extends Personnage implements Combattant {
     
 
     
+    
     public String getAffichage(){
         if(this.getControle()==0){
             return "Mag";          
         }
         else{
-            String s=Integer.toString(0);
-            return s;
+            return this.getNomjControle();
         }
     }
 }

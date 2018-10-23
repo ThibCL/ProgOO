@@ -184,18 +184,18 @@ public class Joueur {
         }
         else{
             System.out.println("Voici les aliments que vous possédez: ");      
-            for(int k=0; k<this.getPerso().getBonusmalus().size();k++){
-                if(this.getPerso().getBonusmalus().get(k).getEtat()==0){    
+            for(int k=0; k<this.getPerso().getBonusMalus().size();k++){
+                if(this.getPerso().getBonusMalus().get(k).getEtat()==0){    
                     System.out.print(k+": ");
-                    this.getPerso().getBonusmalus().get(k).affiche();
+                    this.getPerso().getBonusMalus().get(k).affiche();
                 }
                 System.out.println("Taper le numéro de l'aliment que vous voulez mangez:");  
             }
             int rep=scani.nextInt();
-            this.getPerso().effetNourriture(this.getPerso().getBonusmalus().get(rep),1);
-            this.getPerso().getBonusmalus().get(rep).setEtat(1);
+            this.getPerso().effetNourriture(this.getPerso().getBonusMalus().get(rep),1);
+            this.getPerso().getBonusMalus().get(rep).setEtat(1);
             System.out.print("vous avez mangé: ");
-            this.getPerso().getBonusmalus().get(rep).affiche();
+            this.getPerso().getBonusMalus().get(rep).affiche();
         }
     }
     /**

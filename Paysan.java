@@ -103,7 +103,12 @@ public class Paysan extends Personnage {
     }
     
     public String getAffichage(){        
-        return "Pay";               
+        if(this.getControle()==0){
+            return "Pay";          
+        }
+        else{
+            return this.getNomjControle();
+        }               
     }
 
 }

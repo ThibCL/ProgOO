@@ -169,7 +169,7 @@ public class Archer extends Personnage implements Combattant {
             ((NuageToxique) o).combattre(this);
         }
         else if(o instanceof Nourriture){
-        this.getBonusmalus().add((Nourriture)o);
+        this.getBonusMalus().add((Nourriture)o);
         int x = o.getPos().getX();
         int y = o.getPos().getY();
         w.getMatMonde()[x][y].setObjet(null);
@@ -192,6 +192,11 @@ public class Archer extends Personnage implements Combattant {
     }
     
     public String getAffichage(){        
-        return "Arc";               
+        if(this.getControle()==0){
+            return "Arc";          
+        }
+        else{
+            return this.getNomjControle();
+        }               
     }
 }

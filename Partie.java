@@ -44,18 +44,20 @@ public class Partie {
                     boolean entier = false; 
                     int rep=0;
                     while (entier==false){
+                        String reponse=sc.next();
                         try{
-                             rep=sc.nextInt();
+                             rep=Integer.parseInt(reponse);
                              entier=true;
                         }
-                        catch(InputMismatchException e){
+                        catch(NumberFormatException e){
                             System.out.println("Il faut entrer un entier ! Combien de joueurs êtes vous ?");
                             entier=false;
                         }
                     }
-                    for (int i=0; i<rep;i++){
+                    for (int i=1; i<rep+1;i++){
                         w.creationJoueur();
-                        w.getlJoueur().get(i).setNumero(i);
+                        w.getlJoueur().get(i-1).setNumero(i);
+                        w.getlJoueur().get(i-1).getPerso().setNomjControle("J"+i+" ");
                     }
                     w.creeMondeAlea();
                     break;
@@ -81,8 +83,8 @@ public class Partie {
                 default :
                     System.out.println("Ce n'est pas une action possible!");
                     System.out.println("Voulez vous :" +
-                        "\n - Commencer une nouvelle partie : tapez 'new' ;" +
-                        "\n - Charger une partie existante : tapez 'charger' ;");
+                        "\n - Commencer une nouvelle partie : tapez 'n' ;" +
+                        "\n - Charger une partie existante : tapez 'c' ;");
             }
         }
     return testi;

@@ -148,7 +148,6 @@ public abstract class Personnage extends Creature {
             tokenizer.nextToken();
             tokenizer2.nextToken();
             tokenizer2.nextToken();
-            tokenizer2.nextToken();
         }
         else { //sinon on construit chaque objet
             

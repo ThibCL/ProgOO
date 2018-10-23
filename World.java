@@ -22,7 +22,7 @@ public class World {
      * Liste des objets dans le monde
      */
     private ArrayList<Objet> lObjet = new ArrayList<>();
-    
+
     /**
      * Taille du monde
      */
@@ -36,23 +36,23 @@ public class World {
      * Liste des joueurs dans le monde
      */
     private ArrayList<Joueur> lJoueur = new ArrayList<>();
-    
-    
+
     /**
      * Constructeur du monde de hauteur h et de largeur l
+     *
      * @param h hauteur du monde
      * @param l largeur du monde
      */
-    public World (int h, int l){
-        hauteur=h;
-        largeur=l;
-        matMonde= new Case[hauteur][largeur];
+    public World(int h, int l) {
+        hauteur = h;
+        largeur = l;
+        matMonde = new Case[hauteur][largeur];
         for (int k = 0; k < hauteur; k++) {
             for (int i = 0; i < largeur; i++) {
                 this.matMonde[k][i] = new Case(new Point2D(k, i));
             }
         }
-        
+
     }
 
     /**
@@ -62,16 +62,16 @@ public class World {
      */
     public World(int nbr, int h, int l) {
         Random nbralea = new Random();
-        this.hauteur=h;
-        this.largeur=l;
-        this.matMonde= new Case[hauteur][largeur];
+        this.hauteur = h;
+        this.largeur = l;
+        this.matMonde = new Case[hauteur][largeur];
         //initialisation de la matrice par l'ajout de cases vides
         for (int li = 0; li < hauteur; li++) {
             for (int ti = 0; ti < largeur; ti++) {
                 this.matMonde[li][ti] = new Case(new Point2D(li, ti));
             }
         }
-        for (int k = 0; k <nbralea.nextInt(nbr); k++) {
+        for (int k = 0; k < nbralea.nextInt(nbr); k++) {
             Archer arch = new Archer();
             this.ajouterCrea(arch);
         }
@@ -99,7 +99,7 @@ public class World {
             Soin vdk = new Soin();
             this.ajouterObjet(vdk);
         }
-        for (int k = 0; k< nbralea.nextInt(nbr); k++) {
+        for (int k = 0; k < nbralea.nextInt(nbr); k++) {
             Mana rhm = new Mana();
             this.ajouterObjet(rhm);
         }
@@ -108,17 +108,10 @@ public class World {
             this.ajouterObjet(burger);
         }
 
-        for(int k=0; k<7;k++){
-            NuageToxique cumulus=new NuageToxique();
+        for (int k = 0; k < 7; k++) {
+            NuageToxique cumulus = new NuageToxique();
             this.ajouterObjet(cumulus);
         }
-        //initialisation de la matrice par l'ajout de cases vides
-        for (int li = 0; li < hauteur; li++) {
-            for (int ti = 0; ti < largeur; ti++) {
-                this.matMonde[li][ti] = new Case(new Point2D(li, ti));
-            }
-        }
-
 
     }
 
@@ -150,7 +143,6 @@ public class World {
         this.largeur = largeur;
     }
 
-
     public Case[][] getMatMonde() {
         return matMonde;
     }
@@ -171,10 +163,12 @@ public class World {
         this.lJoueur = lJoueur;
     }
 
-
     /**
-     * Méthode pour ajouter des personnages au tableau des personnages et compléter la matrice du monde par leur ajout à leur position
-     * @param crea personnage à ajouter au monde et donc au tableau des personnages
+     * Méthode pour ajouter des personnages au tableau des personnages et
+     * compléter la matrice du monde par leur ajout à leur position
+     *
+     * @param crea personnage à ajouter au monde et donc au tableau des
+     * personnages
      */
     public void ajouterCrea(Creature crea) {
         this.lCrea.add(crea);
@@ -185,7 +179,9 @@ public class World {
     }
 
     /**
-     * Méthode pour ajouter des objets au tableau des objets et compléter la matrice du monde par leur ajout à leur position
+     * Méthode pour ajouter des objets au tableau des objets et compléter la
+     * matrice du monde par leur ajout à leur position
+     *
      * @param o objet à ajouter au tableau des objets
      */
     public void ajouterObjet(Objet o) {
@@ -195,9 +191,11 @@ public class World {
         int y = pos.getY();
         matMonde[x][y].setObjet(o);
     }
-    
+
     /**
-     * Méthode pour ajouter des joueurs au tableau des joueurs et compléter la matrice du monde par l'ajout de son personnage à sa position
+     * Méthode pour ajouter des joueurs au tableau des joueurs et compléter la
+     * matrice du monde par l'ajout de son personnage à sa position
+     *
      * @param j joueur à ajouter au tableau des joueurs
      */
     public void ajouterJoueur(Joueur j) {
@@ -208,10 +206,11 @@ public class World {
         int y = pos.getY();
         matMonde[x][y].setCreature(p);
     }
-    
+
     /**
      * Méthode vérifiant si une Creature est bien a une distance inférieure à la
-     * distance minimale à laquelle doivent être placés les différentes Créatures
+     * distance minimale à laquelle doivent être placés les différentes
+     * Créatures
      *
      * @param distMin distance minimale entre deux créatures à la création du
      * monde
@@ -242,7 +241,8 @@ public class World {
                 y = posAlea.nextInt(this.largeur);
                 pt = new Point2D(x, y);
             }
-            c.setPos(pt);
+            getMatMonde()[c.getPos().getX()][c.getPos().getY()].setCreature(null);
+            c.setPos(pt);           
             getMatMonde()[x][y].setCreature(c);
 
         }
@@ -253,6 +253,7 @@ public class World {
                 x = posAlea.nextInt(this.hauteur);
                 y = posAlea.nextInt(this.largeur);
             } else {
+                getMatMonde()[o.getPos().getX()][o.getPos().getY()].setObjet(null);
                 o.getPos().setPosition(x, y);
                 getMatMonde()[x][y].setObjet(o);
             }
@@ -271,7 +272,7 @@ public class World {
             o.affiche();
             System.out.println();
         }
-        for (Joueur j : this.getlJoueur()){
+        for (Joueur j : this.getlJoueur()) {
             j.affiche();
             System.out.println();
         }
@@ -280,8 +281,8 @@ public class World {
     public void afficheMat() {
         for (int i = 0; i < hauteur; i++) {
             for (int j = 0; j < largeur; j++) {
-                Creature c=this.matMonde[i][j].getCreature();
-                Objet o=this.matMonde[i][j].getObjet();
+                Creature c = this.matMonde[i][j].getCreature();
+                Objet o = this.matMonde[i][j].getObjet();
                 if (this.matMonde[i][j].getCreature() == null && this.matMonde[i][j].getObjet() == null) {
                     System.out.print(" [" + "   " + "," + "   " + "]");
                 } else if (this.matMonde[i][j].getCreature() == null && this.matMonde[i][j].getObjet() != null) {                    
@@ -290,6 +291,7 @@ public class World {
                     System.out.print(" [" + c.getAffichage() + "," + "   " + "]");
                 } else if (this.matMonde[i][j].getCreature() != null && this.matMonde[i][j].getObjet() != null) {                    
                         System.out.print(" [" + c.getAffichage() + "," + o.getAffichage() + "]");                    }
+
             }
             System.out.println();
             System.out.println();
@@ -306,39 +308,49 @@ public class World {
      */
     public void tourDeJeu(SauvegardePartie testi) throws IOException {
         Scanner sc = new Scanner(System.in);
+        System.out.println();
+        System.out.println("Voici la carte du monde :");
         this.afficheMat();
-        System.out.println("Voulez-vous continuer à jouer ? (Tapez 'q' si vous souhaitez quitter.)");
-        String choix = sc.next();
-        while (Objects.equals(choix, "quit") == false) {
-            SauvegardePartie testo=new SauvegardePartie(testi.getFilename());
-            System.out.println("Nouveau tour");
+        String choix = "rien";
+        SauvegardePartie testo = new SauvegardePartie(testi.getFilename());
+        testo.sauvegarderPartie(this);
+
+        while (Objects.equals(choix, "n") == false) {
+            System.out.println("Nouveau tour !");
+            System.out.println();
             for (Joueur j : this.getlJoueur()) {
-                System.out.println("C'est au joueur "+j.getNumero()+":" + j.getPerso().getNom()+ " de jouer. ");
+                System.out.println("C'est au joueur "+j.getNumero()+" : " + j.getPerso().getNom()+ " de jouer. ");
                 j.getPerso().affiche();
+                System.out.println();
                 System.out.println("Voulez vous  : "
                         + "\n - Combattre : tapez 'c' ;" 
-                        + "\n - te Deplacer : tapez 'd' ;" 
+                        + "\n - vous Deplacer : tapez 'd' ;" 
                         + "\n - Manger : tapez 'm' ;"
                         + "\n - Boire : tapez 'b' ;");
+
                 boolean choisi = false;
                 while (choisi == false) {
                     choix = sc.next();
                     switch (choix) {
-                        case "Combattre": case "c":
-                            j.combattreperso(this);
+                        case "Combattre":
+                        case "c":
+                            j.combattrePerso(this);
                             choisi = true;
                             break;
-                        case "Deplacer": case "d":
-                            j.deplaceperso(this);
+                        case "Deplacer":
+                        case "d":
+                            j.deplacePerso(this);
                             choisi = true;
                             break;
-                        case "Manger": case "m":
-                            j.mangerperso(this);
-                            choisi=true;
+                        case "Manger":
+                        case "m":
+                            j.mangerPerso(this);
+                            choisi = true;
                             break;
-                        case "Boire": case "b":
+                        case "Boire":
+                        case "b":
                             j.boirePerso(this);
-                            choisi=true;
+                            choisi = true;
                             break;
                         default:
                             System.out.println("Ce n'est pas une action valide !"
@@ -352,63 +364,75 @@ public class World {
                 }
 
             }
-            
+
             //faire jouer les autres entitees sur le terrain
-            int i=0;
-            while(i<this.getlCrea().size()){
-                Creature c=this.getlCrea().get(i);
-            //for (Creature c : this.getlCrea()) {
-                if (c.getControle() == 0 && c.getPtVie()>0) {
+            int i = 0;
+            while (i < this.getlCrea().size()) {
+                Creature c = this.getlCrea().get(i);
+                //for (Creature c : this.getlCrea()) {
+                if (c.getControle() == 0 && c.getPtVie() > 0) {
                     c.deplacer(this, 0, 0);
                 }
-                
+
                 if (c instanceof Personnage) {
                     int k = 0;
                     Nourriture n;
-                    while (k < ((Personnage) c).getBonusmalus().size()) {
-                        n = ((Personnage) c).getBonusmalus().get(k);
+                    while (k < ((Personnage) c).getBonusMalus().size()) {
+                        n = ((Personnage) c).getBonusMalus().get(k);
                         if (n.getEtat() == 1) {
                             n.setDuree(n.getDuree() - 1);
                             if (n.getDuree() < 1) {
-                                ((Personnage) c).effetnourriture(n, -1);
+                                ((Personnage) c).effetNourriture(n, -1);
                                 System.out.print("L'aliment suivant ne fait plus effet: ");
                                 n.affiche();
-                                ((Personnage) c).getBonusmalus().remove(n);
-                              
+                                ((Personnage) c).getBonusMalus().remove(n);
+
                             }
                         }
-                        k=k+1;
+                        k = k + 1;
 
                     }
 
                 }
-                if(c.getPtVie()<1){
+                if (c.getPtVie() < 1) {
                     this.getMatMonde()[c.getPos().getX()][c.getPos().getY()].setCreature(null);
                     this.getlCrea().remove(c);
-                    
+
                 }
-                i=i+1;
+                i = i + 1;
             }
 
             //on fait bouger les nuages
-            for(Objet o: this.getlObjet()){
-                if(o instanceof NuageToxique){
-                    ((NuageToxique) o).deplacer(this, 0, 0);
+            for (int j=0;j<this.getlObjet().size();j++) {
+                if (this.getlObjet().get(j) instanceof NuageToxique) {
+                    ((NuageToxique) this.getlObjet().get(j)).deplacer(this, 0, 0);
                 }
             }
+            
+            //on affiche la matrice à chaque tour de jeu
             this.afficheMat();
-
-            System.out.println("Si vous voulez sauvegarder taper save");
-            choix = sc.next();
-            switch(choix){
-                case "save":
-                    testo.sauvegarderPartie(this);
-                    break;
-            }
-            System.out.println("Si vous voulez arrêter de jouer entrez quit");
+            
+            System.out.println("Souhaitez-vous continuer à jouer ? o/n");
             choix = sc.next();
         }
-
+        System.out.println("Voulez-vous sauvegarder avant de quitter? o/n");
+            choix = sc.next();
+            boolean choisi =false;
+            while (choisi==false){
+                switch(choix){
+                    case "o":
+                        testo = new SauvegardePartie(testi.getFilename());
+                        testo.sauvegarderPartie(this);
+                        choisi=true;
+                        break;
+                    case "n":
+                        System.out.println("Partie non sauvegardée !");
+                        choisi=true;
+                        break;
+                    default :
+                        System.out.println("Entrée non valide ! Voulez-vous sauvegarder avant de quitter? o/n");
+                }
+            }
     }
 
     /**
@@ -420,30 +444,32 @@ public class World {
         Scanner saisie = new Scanner(System.in);
         String nmj = saisie.next();
         Joueur j = new Joueur();
-        j.choisirperso();
+        j.choisirPerso();
         j.getPerso().setNom(nmj);
         this.lJoueur.add(j);
         this.ajouterCrea(j.getPerso());
+        
 
     }
-    public int nombrePerso(){
-        int compt=0;
-        for(Creature c: this.getlCrea()){
-            if(c instanceof Personnage){
-                compt+=1;
+
+    public int nombrePerso() {
+        int compt = 0;
+        for (Creature c : this.getlCrea()) {
+            if (c instanceof Personnage) {
+                compt += 1;
             }
-            
+
         }
         return compt;
     }
-    
-    public int nombreMonstre(){
-        int compt=0;
-        for(Creature c: this.getlCrea()){
-            if(c instanceof Monstre){
-                compt+=1;
+
+    public int nombreMonstre() {
+        int compt = 0;
+        for (Creature c : this.getlCrea()) {
+            if (c instanceof Monstre) {
+                compt += 1;
             }
-            
+
         }
         return compt;
     }

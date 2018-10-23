@@ -131,7 +131,7 @@ public class Guerrier extends Personnage implements Combattant {
             System.out.println("C'est un nuage Toxique!");
             ((NuageToxique) o).combattre(this);
         } else if (o instanceof Nourriture) {
-            this.getBonusmalus().add((Nourriture) o);
+            this.getBonusMalus().add((Nourriture) o);
             int x = o.getPos().getX();
             int y = o.getPos().getY();
             w.getMatMonde()[x][y].setObjet(null);
@@ -147,6 +147,11 @@ public class Guerrier extends Personnage implements Combattant {
     }
     
     public String getAffichage(){        
-        return "Gue";               
+        if(this.getControle()==0){
+            return "Gue";          
+        }
+        else{
+            return this.getNomjControle();
+        }               
     }
 }
