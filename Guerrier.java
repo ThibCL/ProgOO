@@ -119,8 +119,11 @@ public class Guerrier extends Personnage implements Combattant {
                 System.out.println("Attaque ratée!");
             }
         }
-        if (c.getPtVie() < 1) {
-            System.out.println("Le défenseur est mort");
+        if (c.getPtVie() < 1 && c.getControle()==0) {
+            System.out.println("Le"+c.getClass().getSimpleName() +"est mort");
+        }
+        else if(c.getPtVie() < 1 && c.getControle()==1){
+            System.out.println(((Personnage)c).getNom()+"est mort");
         }
     }
 

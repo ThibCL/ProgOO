@@ -319,52 +319,53 @@ public class World {
             System.out.println("Nouveau tour !");
             System.out.println();
             for (Joueur j : this.getlJoueur()) {
-                System.out.println("C'est au joueur "+j.getNumero()+" (" + j.getPerso().getNom()+ ") de jouer. ");
-                j.getPerso().affiche();
-                System.out.println();
-                System.out.println("Voulez vous  : "
-                        + "\n - Combattre : tapez 'c' ;" 
-                        + "\n - vous Deplacer : tapez 'd' ;" 
-                        + "\n - Manger : tapez 'm' ;"
-                        + "\n - Boire : tapez 'b' ;");
+                if(j.getPerso().getPtVie()>0){
+                    System.out.println("C'est au joueur "+j.getNumero()+" (" + j.getPerso().getNom()+ ") de jouer. ");
+                    j.getPerso().affiche();
+                    System.out.println();
+                    System.out.println("Voulez vous  : "
+                            + "\n - Combattre : tapez 'c' ;" 
+                            + "\n - vous Deplacer : tapez 'd' ;" 
+                            + "\n - Manger : tapez 'm' ;"
+                            + "\n - Boire : tapez 'b' ;");
 
-                boolean choisi = false;
-                while (choisi == false) {
-                    choix = sc.next();
-                    switch (choix) {
-                        case "Combattre":
-                        case "c":
-                            j.combattrePerso(this);
-                            choisi = true;
-                            break;
-                        case "Deplacer":
-                        case "d":
-                            j.deplacePerso(this);
-                            choisi = true;
-                            break;
-                        case "Manger":
-                        case "m":
-                            j.mangerPerso(this);
-                            choisi = true;
-                            break;
-                        case "Boire":
-                        case "b":
-                            j.boirePerso(this);
-                            choisi = true;
-                            break;
-                        default:
-                            System.out.println("Ce n'est pas une action valide !"
-                                + "Voulez vous  : "
-                                + "\n - Combattre : tapez 'c' ;" 
-                                + "\n - te Deplacer : tapez 'd' ;" 
-                                + "\n - Manger : tapez 'm' ;"
-                                + "\n - Boire : tapez 'b' ;");
-                            break;
+                    boolean choisi = false;
+                    while (choisi == false) {
+                        choix = sc.next();
+                        switch (choix) {
+                            case "Combattre":
+                            case "c":
+                                j.combattrePerso(this);
+                                choisi = true;
+                                break;
+                            case "Deplacer":
+                            case "d":
+                                j.deplacePerso(this);
+                                choisi = true;
+                                break;
+                            case "Manger":
+                            case "m":
+                                j.mangerPerso(this);
+                                choisi = true;
+                                break;
+                            case "Boire":
+                            case "b":
+                                j.boirePerso(this);
+                                choisi = true;
+                                break;
+                            default:
+                                System.out.println("Ce n'est pas une action valide !"
+                                    + "Voulez vous  : "
+                                    + "\n - Combattre : tapez 'c' ;" 
+                                    + "\n - te Deplacer : tapez 'd' ;" 
+                                    + "\n - Manger : tapez 'm' ;"
+                                    + "\n - Boire : tapez 'b' ;");
+                                break;
+                        }
                     }
-                }
 
+                }
             }
-            
             //faire jouer les autres entitees sur le terrain
             System.out.println();
             System.out.println("C'est au tour du monde de jouer");
@@ -399,12 +400,24 @@ public class World {
                 }
                 
                 //On supprime les créatures mortes 
-                if (c.getPtVie() < 1) {
+                if (c.getPtVie() < 1 && c.getControle()==0) {
                     this.getMatMonde()[c.getPos().getX()][c.getPos().getY()].setCreature(null);
                     this.getlCrea().remove(c);
                     i=i-1;
-                }
+                }                
                 i = i + 1;
+            }
+            
+            //on retire les joueurs morts
+            for(int r=0;r<this.getlJoueur().size();r++){
+                if(this.getlJoueur().get(r).getPerso().getPtVie()<1){
+                    this.getMatMonde()[this.getlJoueur().get(r).getPerso().getPos().getX()][this.getlJoueur().get(r).getPerso().getPos().getY()].setCreature(null);
+                    this.getlCrea().remove(this.getlJoueur().get(r).getPerso());
+                    System.out.println("Le joueur "+ this.getlJoueur().get(r).getPerso().getNom()+" est mort ce soir" );
+                    this.getlJoueur().remove(this.getlJoueur().get(r));
+                    r=r-1;
+                    
+                }    
             }
 
             //on fait bouger les nuages
