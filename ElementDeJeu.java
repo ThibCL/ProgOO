@@ -6,10 +6,6 @@ import java.util.StringTokenizer;
  */
 public abstract class ElementDeJeu {
     
-    
-    
     public abstract String getAffichage();
-    
-    
     
 }

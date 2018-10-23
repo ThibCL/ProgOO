@@ -174,7 +174,7 @@ public class Archer extends Personnage implements Combattant {
         int y = o.getPos().getY();
         w.getMatMonde()[x][y].setObjet(null);
         w.getlObjet().remove(o);
-        this.effetnourriture((Nourriture)o,1);
+        this.effetNourriture((Nourriture)o,1);
     }
         else {
             getSac().add(o);

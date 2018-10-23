@@ -298,9 +298,7 @@ public class World {
     }
 
     /**
-     * Lancement
-     */
-    /**
+     * Lancement : 
      * méthode qui définit le tour de jeu et qui fait jouer les joueurs un par
      * un avant de faire joueur les autres entitées Le joueur à le choix de se
      * déplacer ou de combattre Si on veut arrêter de jouer il faut rentrer quit
@@ -309,7 +307,7 @@ public class World {
     public void tourDeJeu(SauvegardePartie testi) throws IOException {
         Scanner sc = new Scanner(System.in);
         this.afficheMat();
-        System.out.println("si vous ne voulez pas jouer tapez quit");
+        System.out.println("Voulez-vous continuer à jouer ? (Tapez 'q' si vous souhaitez quitter.)");
         String choix = sc.next();
         while (Objects.equals(choix, "quit") == false) {
             SauvegardePartie testo=new SauvegardePartie(testi.getFilename());

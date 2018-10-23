@@ -149,7 +149,7 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
      * @param w monde dans lequel se trouve la creature
      * @return verif qui retourne faux s'il n'y apas de place autour pour se deplacer et vrai s'il y a de la place autour pour se deplacer
      */
-    public boolean deplpossible(World w){
+    public boolean deplPossible(World w){
         boolean verif=false;
         for(int i=0;i<3;i++){
             for(int j=0;j<3;j++){
@@ -175,7 +175,7 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
      * @param j Entier pour se déplacer de -1,0,1 en Y
      */
     public void deplacer(World w,int i,int j){
-        if(deplpossible(w)==false){
+        if(deplPossible(w)==false){
             System.out.println("La creature ne peut pas se déplacer");
             
         }

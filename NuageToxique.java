@@ -89,7 +89,7 @@ public class NuageToxique extends Objet implements Deplacable,Combattant {
             i=posAlea.nextInt(3)-1;
             j=posAlea.nextInt(3)-1;
         }
-        Objet o =w.getMatMonde()[this.getPos().getX()+i-1][this.getPos().getY()+j-1].getObjet();
+        Objet o =w.getMatMonde()[this.getPos().getX()+i][this.getPos().getY()+j].getObjet();
         if (o!=null){
             w.getlObjet().remove(o);
         }
