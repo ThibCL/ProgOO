@@ -139,7 +139,57 @@ public class Joueur {
             }
             }
     }
-       
+    
+    /**
+     * Permet de demander quelle deplacement le joueur veut faire en utilisant les touches du clavier
+     */
+    public Point2D demanderDepl(){
+        System.out.println("Veuillez entrer deplacement: ");
+        System.out.println(" [a] [z] [e]");
+        System.out.println(" [q]" +" J"+this.getNumero()+ "  [d]");
+        System.out.println(" [w] [x] [c]");
+        Point2D pos=new Point2D();
+        Scanner saisieUtilisateur = new Scanner(System.in); 
+        boolean choisi = false;
+        while (choisi == false) {
+            String str = saisieUtilisateur.next(); 
+            choisi = true;
+            switch(str){
+                case "z": 
+                    pos.setPosition(-1, 0);
+                    break;
+                case "e":
+                    pos.setPosition(-1, 1);
+                    break;
+                case "a":
+                    pos.setPosition(-1, -1);
+                    break;
+                case "q":
+                    pos.setPosition(0,-1);
+                    break;
+                case "d": 
+                    pos.setPosition(0, 1);
+                    break;
+                case "w": 
+                    pos.setPosition(1,-1);
+                    break;
+                case "x":
+                    pos.setPosition(1,0);
+                    break;
+                case "c": 
+                    pos.setPosition(1, 1);
+                    break;
+                default :
+                    System.out.println("Ce n'est pas un deplacement possible!");
+                    System.out.println("Veuillez entrer deplacement: ");
+                
+                    choisi = false;
+                    break;
+            }
+        }
+        return pos;
+    }
+    
             
     /**
      * méthode qui permet au joueur de décider ou deplacer son perso, la méthode vérifie si il y a une case autour de libre
@@ -153,18 +203,16 @@ public class Joueur {
             //this.combattreperso();
         }
         
-        else{
-            Scanner scan = new Scanner(System.in);
-            System.out.println("Entrez une position X :");
-            int x=scan.nextInt();
-            System.out.println("Entrez une position Y :");
-            int y=scan.nextInt();
+        else{            
+            Point2D pos;
+            pos=demanderDepl();
+            int x=pos.getX();
+            int y=pos.getY();
             while (this.getPerso().getPos().getX()+x<0 || this.getPerso().getPos().getX()+x>w.getHauteur()-1 || this.getPerso().getPos().getY()+y<0 || this.getPerso().getPos().getY()+y>w.getLargeur()-1 || w.getMatMonde()[this.perso.getPos().getX()+x][this.perso.getPos().getY()+y].getCreature()!=null){
                 System.out.println("Position déjà occupée, entrez une autre position!");
-                System.out.println("Entrez une position X :");
-                x=scan.nextInt();
-                System.out.println("Entrez une position Y :");
-                y=scan.nextInt();
+                pos=demanderDepl();
+                x=pos.getX();
+                y=pos.getY();
 
             }
             this.perso.deplacer(w, x, y);

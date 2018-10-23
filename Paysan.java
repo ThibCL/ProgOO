@@ -93,12 +93,19 @@ public class Paysan extends Personnage {
         } else if (o instanceof NuageToxique) {
             System.out.println("C'est un nuage Toxique!");
             ((NuageToxique) o).combattre(this);
-        } else {
+        } else if (o instanceof Soin ){
             getSac().add(o);
             int x = o.getPos().getX();
             int y = o.getPos().getY();
             w.getMatMonde()[x][y].setObjet(null);
             w.getlObjet().remove(o);
+        } else {
+            this.getBonusmalus().add((Nourriture) o);
+            int x = o.getPos().getX();
+            int y = o.getPos().getY();
+            w.getMatMonde()[x][y].setObjet(null);
+            w.getlObjet().remove(o);
+            
         }
     }
     
