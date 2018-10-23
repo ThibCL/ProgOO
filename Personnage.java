@@ -144,6 +144,7 @@ public abstract class Personnage extends Creature {
         StringTokenizer tokenizer2 = new StringTokenizer(element, delimiteurs2);
 
         if (objSac==0){
+            sac = new ArrayList<>();
             //si le sac est vide on passe juste le [;] avec le premier cusreur et le deuxième pour pouvoir l'utiliser pour la nourriture portée par le personnage
             tokenizer.nextToken();
             tokenizer2.nextToken();
@@ -413,6 +414,9 @@ public abstract class Personnage extends Creature {
         writer.write(Integer.toString(this.getPtPar()) + " ");
         writer.write(Integer.toString(this.getPos().getX()) + " ");
         writer.write(Integer.toString(this.getPos().getY()) + " ");
+        if (this.getControle()==1){
+            writer.write(this.getNomjControle());
+        }
 
     }
 }

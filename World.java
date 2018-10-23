@@ -386,6 +386,7 @@ public class World {
                                 System.out.print("L'aliment suivant ne fait plus effet: ");
                                 n.affiche();
                                 ((Personnage) c).getBonusMalus().remove(n);
+                                k=k-1;
 
                             }
                         }
@@ -397,6 +398,7 @@ public class World {
                 if (c.getPtVie() < 1) {
                     this.getMatMonde()[c.getPos().getX()][c.getPos().getY()].setCreature(null);
                     this.getlCrea().remove(c);
+                    i=i-1;
 
                 }
                 i = i + 1;

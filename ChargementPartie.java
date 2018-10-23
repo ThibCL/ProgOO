@@ -138,6 +138,9 @@ public class ChargementPartie {
                 String typePerso = tokenizer.nextToken();
                 j.setPerso((Personnage)(creerElementJeu(ligne, typePerso)));
                 j.getPerso().setControle(1);
+                int h=i+1;
+                j.setNumero(h);
+                j.getPerso().setNomjControle("J"+h+" ");
                 w.ajouterCrea(j.getPerso());
                 w.ajouterJoueur(j);
             }

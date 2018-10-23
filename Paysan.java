@@ -100,7 +100,7 @@ public class Paysan extends Personnage {
             w.getMatMonde()[x][y].setObjet(null);
             w.getlObjet().remove(o);
         } else {
-            this.getBonusmalus().add((Nourriture) o);
+            this.getBonusMalus().add((Nourriture) o);
             int x = o.getPos().getX();
             int y = o.getPos().getY();
             w.getMatMonde()[x][y].setObjet(null);
