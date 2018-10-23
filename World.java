@@ -79,11 +79,11 @@ public class World {
             Paysan pays = new Paysan();
             this.ajouterCrea(pays);
         }
-        for (int k = 0; k < nbralea.nextInt(nbr); k++) {
+        for (int k = 0; k < 8/*nbralea.nextInt(nbr)*/; k++) {
             Guerrier guer = new Guerrier();
             this.ajouterCrea(guer);
         }
-        for (int k = 0; k < nbralea.nextInt(nbr); k++) {
+        for (int k = 0; k <6 /*nbralea.nextInt(nbr)*/; k++) {
             Mage mge = new Mage();
             this.ajouterCrea(mge);
         }
@@ -370,11 +370,23 @@ public class World {
             System.out.println();
             System.out.println("C'est au tour du monde de jouer");
             int i = 0;
+            Random rf=new Random();
+            int ji;
             while (i < this.getlCrea().size()) {
                 Creature c = this.getlCrea().get(i);
                 //for (Creature c : this.getlCrea()) {
+                ji=rf.nextInt(2);
                 if (c.getControle() == 0 && c.getPtVie() > 0) {
-                    c.deplacer(this, 0, 0);
+                    if(ji==0){
+                        c.deplacer(this, 0, 0);
+                    }
+                    else if((ji==1) && (c.creaAttaquables(this)!=null) && (c instanceof Combattant)){
+                        ((Combattant)c).combattre(c.creaAttaquables(this));
+                        
+                    }
+                    else{
+                        
+                    }
                 }
 
                 if (c instanceof Personnage) {

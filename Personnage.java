@@ -3,6 +3,7 @@ package org.centrale.projet.objet;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.io.*;
+import java.util.Random;
 
 /**
  * Classe qui est une super classe de tous les personnages possibles tels que
@@ -418,5 +419,24 @@ public abstract class Personnage extends Creature {
             writer.write(this.getNomjControle());
         }
 
+    }
+    
+    public Creature creaAttaquables (World w){
+        ArrayList <Creature> cAtt=new ArrayList<>();
+        Creature ci;
+        Random rf=new Random();
+        for (Creature c : w.getlCrea()){
+            if (this.getPos().distance(c.getPos())!=0 && this.getPos().distance(c.getPos())<=1.42){
+                cAtt.add(c);
+            }
+        }
+        if(cAtt.size()==0){
+            ci=null;
+        }
+        else{
+            ci=cAtt.get(rf.nextInt(cAtt.size()));
+        }
+        
+        return ci;
     }
 }
