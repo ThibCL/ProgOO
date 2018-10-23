@@ -192,6 +192,6 @@ public class Archer extends Personnage implements Combattant {
     }
     
     public String getAffichage(){        
-        return "Archer";               
+        return "Arc";               
     }
 }

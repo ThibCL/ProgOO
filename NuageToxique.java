@@ -27,6 +27,10 @@ public class NuageToxique extends Objet implements Deplacable,Combattant {
         
     }
     
+    /**
+     * Constructeur de Element à partir d'une ligne de la sauvegarde
+     * @param element ligne de la sauvegarde comportant les caractéristiques du nuage à créer
+     */
     public NuageToxique(String element){
         String delimiteurs = " ";
         StringTokenizer tokenizer;
@@ -71,34 +75,23 @@ public class NuageToxique extends Objet implements Deplacable,Combattant {
         System.out.println("Ce nuage est toxique");
     }
     
-    public boolean deplpossible(World w){
-        boolean verif=false;
-        for(int i=0;i<3;i++){
-            for(int j=0;j<3;j++){
-                if(this.getPos().getX()+i-1>-1 && this.getPos().getX()+i-1<w.getHauteur()-1 && this.getPos().getY()+j-1>-1 && this.getPos().getY()+j-1<w.getLargeur()-1){
-                    if(w.getMatMonde()[this.getPos().getX()+i-1][this.getPos().getY()+j-1].getObjet()==null){
-                        verif=true;
-                    }
-                }
-            }
-        }
-        return verif;
-        
-    }
-    
+
+ /**
+  * Méthode pour le déplacement du nuage toxique 
+  * @param w monde dans lequel le nuage se déplace
+  * @param i 
+  * @param j 
+  */   
     public void deplacer(World w, int i, int j){
-        if(deplpossible(w)==false){
-            System.out.println("La creature ne peut pas se déplacer");
-            
+        Random posAlea= new Random();
+        while (this.getPos().getX()+i<0 || this.getPos().getX()+i>w.getHauteur()-1 || 
+                this.getPos().getY()+j<0 || this.getPos().getY()+j>w.getLargeur()-1){
+            i=posAlea.nextInt(3)-1;
+            j=posAlea.nextInt(3)-1;
         }
-        else {
-            Random posAlea= new Random();
-            while (this.getPos().getX()+i<0 || this.getPos().getX()+i>w.getHauteur()-1 || 
-                    this.getPos().getY()+j<0 || this.getPos().getY()+j>w.getLargeur()-1 || 
-                    w.getMatMonde()[this.getPos().getX()+i][this.getPos().getY()+j].getObjet()!=null){
-                i=posAlea.nextInt(3)-1;
-                j=posAlea.nextInt(3)-1;
-            }
+        Objet o =w.getMatMonde()[this.getPos().getX()+i-1][this.getPos().getY()+j-1].getObjet();
+        if (o!=null){
+            w.getlObjet().remove(o);
         }
         w.getMatMonde()[this.getPos().getX()][this.getPos().getY()].setObjet(null);
         this.getPos().translate(i, j);
@@ -107,6 +100,11 @@ public class NuageToxique extends Objet implements Deplacable,Combattant {
             this.combattre(w.getMatMonde()[this.getPos().getX()][this.getPos().getY()].getCreature());
         }
     }
+    
+    /**
+     * Méthode permettant au nuage d'attaquer une créature lorsqu'il la rencontre en se déplaçant
+     * @param c créature à attaquer
+     */
     public void combattre(Creature c){
         Random r= new Random();
         if(r.nextInt(101)<=this.pourcentageAtt){
@@ -119,6 +117,11 @@ public class NuageToxique extends Objet implements Deplacable,Combattant {
         
     }
     
+    /**
+     * 
+     * @param writer
+     * @throws IOException 
+     */
     public void getTexteSauvegarde(BufferedWriter writer) throws IOException{
         super.getTexteSauvegarde(writer);
         writer.write(Integer.toString(degAtt)+" ");
@@ -129,6 +132,6 @@ public class NuageToxique extends Objet implements Deplacable,Combattant {
     
     
     public String getAffichage(){        
-        return "NuaTox";               
+        return "Tox";               
     }
 }
