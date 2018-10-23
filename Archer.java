@@ -166,6 +166,7 @@ public class Archer extends Personnage implements Combattant {
         }
         else if (o instanceof NuageToxique){
             System.out.println("C'est un nuage Toxique!");
+            ((NuageToxique) o).combattre(this);
         }
         else if(o instanceof Nourriture){
         this.getBonusmalus().add((Nourriture)o);
@@ -188,5 +189,9 @@ public class Archer extends Personnage implements Combattant {
         writer.write("*");
         writer.write(Integer.toString(nbFleches));
         
+    }
+    
+    public String getAffichage(){        
+        return "A";               
     }
 }

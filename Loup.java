@@ -100,4 +100,7 @@ public void combattre(Creature c){
                 }
     }
 
+    public String getAffichage(){        
+        return "L";               
+    }
 }

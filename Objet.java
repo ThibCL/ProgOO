@@ -66,6 +66,8 @@ public abstract class Objet extends ElementDeJeu {
         writer.write(Integer.toString(this.getPos().getY())+" ");
 
     }
+    
+    public abstract String getAffichage();
 
 }
     

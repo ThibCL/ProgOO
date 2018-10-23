@@ -107,6 +107,19 @@ public class World {
             Nourriture burger = new Nourriture();
             this.ajouterObjet(burger);
         }
+
+        for(int k=0; k<7;k++){
+            NuageToxique cumulus=new NuageToxique();
+            this.ajouterObjet(cumulus);
+        }
+        //initialisation de la matrice par l'ajout de cases vides
+        for (int li = 0; li < hauteur; li++) {
+            for (int ti = 0; ti < largeur; ti++) {
+                this.matMonde[li][ti] = new Case(new Point2D(li, ti));
+            }
+        }
+
+
     }
 
     public ArrayList<Joueur> getlJoueur() {
@@ -267,15 +280,16 @@ public class World {
     public void afficheMat() {
         for (int i = 0; i < hauteur; i++) {
             for (int j = 0; j < largeur; j++) {
+                Creature c=this.matMonde[i][j].getCreature();
+                Objet o=this.matMonde[i][j].getObjet();
                 if (this.matMonde[i][j].getCreature() == null && this.matMonde[i][j].getObjet() == null) {
                     System.out.print(" [" + "." + "," + "." + "]");
-                } else if (this.matMonde[i][j].getCreature() == null && this.matMonde[i][j].getObjet() != null) {
-                    System.out.print(" [" + "." + "," + 2 + "]");
+                } else if (this.matMonde[i][j].getCreature() == null && this.matMonde[i][j].getObjet() != null) {                    
+                        System.out.print(" [" + "." + "," + o.getAffichage() + "]");
                 } else if (this.matMonde[i][j].getCreature() != null && this.matMonde[i][j].getObjet() == null) {
-                    System.out.print(" [" + 1 + "," + "." + "]");
-                } else if (this.matMonde[i][j].getCreature() != null && this.matMonde[i][j].getObjet() != null) {
-                    System.out.print(" [" + 1 + "," + 2 + "]");
-                }
+                    System.out.print(" [" + c.getAffichage() + "," + "." + "]");
+                } else if (this.matMonde[i][j].getCreature() != null && this.matMonde[i][j].getObjet() != null) {                    
+                        System.out.print(" [" + c.getAffichage() + "," + o.getAffichage() + "]");                    }
             }
             System.out.println();
             System.out.println();
@@ -294,17 +308,24 @@ public class World {
      */
     public void tourDeJeu(SauvegardePartie testi) throws IOException {
         Scanner sc = new Scanner(System.in);
+        this.afficheMat();
         System.out.println("si vous ne voulez pas jouer tapez quit");
         String choix = sc.next();
         while (Objects.equals(choix, "quit") == false) {
+            SauvegardePartie testo=new SauvegardePartie(testi.getFilename());
             System.out.println("Nouveau tour");
             for (Joueur j : this.getlJoueur()) {
+<<<<<<< HEAD
                 System.out.println("C'est à " + j.getPerso().getNom()+ " de jouer. "
                         + "Voulez vous  : "
                         + "\n - Combattre : tapez 'c' ;" 
                         + "\n - te Deplacer : tapez 'd' ;" 
                         + "\n - Manger : tapez 'm' ;"
                         + "\n - Boire : tapez 'b' ;");
+=======
+                j.getPerso().affiche();
+                System.out.println("C'est au joueur "+j.getNumero()+":" + j.getPerso().getNom()+ " de jouer. Veux tu Combattre ,te Deplacer,Manger ou Boire?");
+>>>>>>> dd7c53068bc2fcea7aacb80021a9b66e10db3b51
                 boolean choisi = false;
                 while (choisi == false) {
                     choix = sc.next();
@@ -335,9 +356,9 @@ public class World {
                             break;
                     }
                 }
-                j.getPerso().affiche();
 
             }
+            
             //faire jouer les autres entitees sur le terrain
             int i=0;
             while(i<this.getlCrea().size()){
@@ -374,14 +395,24 @@ public class World {
                 }
                 i=i+1;
             }
+
+            //on fait bouger les nuages
+            for(Objet o: this.getlObjet()){
+                if(o instanceof NuageToxique){
+                    ((NuageToxique) o).deplacer(this, 0, 0);
+                }
+            }
             this.afficheMat();
-            System.out.println("Si vous voulez arrêter de jouer entrez quit si vous voulez sauvegarder taper save");
+
+            System.out.println("Si vous voulez sauvegarder taper save");
             choix = sc.next();
             switch(choix){
                 case "save":
-                    testi.sauvegarderPartie(this);
+                    testo.sauvegarderPartie(this);
                     break;
             }
+            System.out.println("Si vous voulez arrêter de jouer entrez quit");
+            choix = sc.next();
         }
 
     }

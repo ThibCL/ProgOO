@@ -65,4 +65,8 @@ public class Lapin extends Monstre{
         getPos().affiche();
     }
     
+        public String getAffichage(){        
+        return "l";               
+    }
+    
 }

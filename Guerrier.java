@@ -129,6 +129,7 @@ public class Guerrier extends Personnage implements Combattant {
             System.out.println("Le Guerrier ne peut pas ramasser de Potion Mana");
         } else if (o instanceof NuageToxique) {
             System.out.println("C'est un nuage Toxique!");
+            ((NuageToxique) o).combattre(this);
         } else if (o instanceof Nourriture) {
             this.getBonusmalus().add((Nourriture) o);
             int x = o.getPos().getX();
@@ -143,5 +144,9 @@ public class Guerrier extends Personnage implements Combattant {
             w.getMatMonde()[x][y].setObjet(null);
             w.getlObjet().remove(o);
         }
+    }
+    
+    public String getAffichage(){        
+        return "G";               
     }
 }

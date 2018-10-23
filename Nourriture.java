@@ -138,4 +138,9 @@ public class Nourriture extends Objet{
        
         
     }
+    
+    
+    public String getAffichage(){        
+        return "n";               
+    }
 }

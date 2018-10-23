@@ -43,4 +43,8 @@ public class Soin extends Potion{
         super.getTexteSauvegarde(writer);
 
     }
+    
+    public String getAffichage(){        
+        return "s";               
+    }
 }

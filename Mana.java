@@ -37,4 +37,9 @@ public class Mana extends Potion{
     public void caracteristiques(){
         System.out.println("Cette potion permet de récupérer "+getPtRecup()+" points de Mana");
     }
+    
+    
+    public String getAffichage(){        
+        return "m";               
+    }
 }

@@ -15,6 +15,19 @@ public class Joueur {
      */
     private Personnage perso;
     
+    /**
+     * numero du joueur
+     */
+    private int numero;
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+    
     
    
     public Personnage getPerso() {
@@ -207,8 +220,10 @@ public class Joueur {
             int rep=scani.nextInt();
             this.getPerso().effetPotion(this.getPerso().getSac().get(rep));
             
+            
             System.out.print("vous avez bu: ");
             this.getPerso().getSac().get(rep).affiche();
+            this.getPerso().getSac().remove(rep);
         }
     }
         
