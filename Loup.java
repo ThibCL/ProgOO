@@ -77,17 +77,17 @@ public void combattre(Creature c){
                 System.out.println("Attaque réussie!");
                 int RandDef = lanceDe.nextInt(101);
                 if (RandDef > c.getPourcentagePar()){
-                    System.out.println("Parade ratée! Le défenseur perd "+this.getDegAtt()+" points de vie");
+                    System.out.println("Parade ratée! Le "+c.getClass().getSimpleName()+  " perd "+this.getDegAtt()+" points de vie");
                     c.setPtVie(c.getPtVie()-this.getDegAtt());
                 }
                 else {
                     int res = this.getDegAtt()-c.getPtPar();
                     if (res>0) {
-                        System.out.println("Parade réussie! Le défenseur perd "+res +" points de vie");
+                        System.out.println("Parade réussie! Le "+c.getClass().getSimpleName()+  " perd "+res +" points de vie");
                         c.setPtVie(c.getPtVie()-res);
                     }
                     else {
-                        System.out.println("Parade réussie! Le défenseur ne reçoit aucun dégât");
+                        System.out.println("Parade réussie! Le "+c.getClass().getSimpleName()+  " ne reçoit aucun dégât");
                     }
                 }
             }
@@ -95,9 +95,12 @@ public void combattre(Creature c){
                 System.out.println("Attaque ratée!");
             }
         }
-        if(c.getPtVie()<1){
-                    System.out.println("Le défenseur est mort");
-                }
+        if (c.getPtVie() < 1 && c.getControle()==0) {
+            System.out.println("Le"+c.getClass().getSimpleName() +"est mort");
+        }
+        else if(c.getPtVie() < 1 && c.getControle()==1){
+            System.out.println(((Personnage)c).getNom()+"est mort");
+        }
     }
 
     public String getAffichage(){        

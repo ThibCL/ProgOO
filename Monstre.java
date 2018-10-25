@@ -3,6 +3,8 @@ package org.centrale.projet.objet;
 import java.util.StringTokenizer;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Random;
 
 
 /**
@@ -84,5 +86,25 @@ public abstract class Monstre extends Creature {
         writer.write(Integer.toString(this.getPos().getX()) + " ");
         writer.write(Integer.toString(this.getPos().getY()) + " ");
        
+    }
+    
+    
+    public Creature creaAttaquables (World w){
+        ArrayList <Creature> cAtt=new ArrayList<>();
+        Creature ci;
+        Random rf=new Random();
+        for (Creature c : w.getlCrea()){
+            if (this.getPos().distance(c.getPos())!=0 && this.getPos().distance(c.getPos())<=1.42){
+                cAtt.add(c);
+            }
+        }
+        if(cAtt.size()==0){
+            ci=null;
+        }
+        else{
+            ci=cAtt.get(rf.nextInt(cAtt.size()));
+        }
+        
+        return ci;
     }
 }

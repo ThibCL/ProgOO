@@ -79,11 +79,11 @@ public class World {
             Paysan pays = new Paysan();
             this.ajouterCrea(pays);
         }
-        for (int k = 0; k < nbralea.nextInt(nbr); k++) {
+        for (int k = 0; k < 8/*nbralea.nextInt(nbr)*/; k++) {
             Guerrier guer = new Guerrier();
             this.ajouterCrea(guer);
         }
-        for (int k = 0; k < nbralea.nextInt(nbr); k++) {
+        for (int k = 0; k <6 /*nbralea.nextInt(nbr)*/; k++) {
             Mage mge = new Mage();
             this.ajouterCrea(mge);
         }
@@ -318,62 +318,74 @@ public class World {
         while (Objects.equals(choix, "n") == false) {
             System.out.println("Nouveau tour !");
             for (Joueur j : this.getlJoueur()) {
-                System.out.println();
-                System.out.println("C'est au joueur "+j.getNumero()+" (" + j.getPerso().getNom()+ ") de jouer. ");
-                j.getPerso().affiche();
-                System.out.println();
-                System.out.println("Voulez vous  : "
-                        + "\n - Combattre : tapez 'c' ;" 
-                        + "\n - vous Deplacer : tapez 'd' ;" 
-                        + "\n - Manger : tapez 'm' ;"
-                        + "\n - Boire : tapez 'b' ;");
-                System.out.println();
-                boolean choisi = false;
-                while (choisi == false) {
-                    choix = sc.next();
-                    switch (choix) {
-                        case "Combattre":
-                        case "c":
-                            j.combattrePerso(this);
-                            choisi = true;
-                            break;
-                        case "Deplacer":
-                        case "d":
-                            j.deplacePerso(this);
-                            choisi = true;
-                            break;
-                        case "Manger":
-                        case "m":
-                            j.mangerPerso(this);
-                            choisi = true;
-                            break;
-                        case "Boire":
-                        case "b":
-                            j.boirePerso(this);
-                            choisi = true;
-                            break;
-                        default:
-                            System.out.println("Ce n'est pas une action valide !"
-                                + "Voulez vous  : "
-                                + "\n - Combattre : tapez 'c' ;" 
-                                + "\n - te Deplacer : tapez 'd' ;" 
-                                + "\n - Manger : tapez 'm' ;"
-                                + "\n - Boire : tapez 'b' ;");
-                            break;
-                    }
-                }
+                if(j.getPerso().getPtVie()>0){
+                    System.out.println("C'est au joueur "+j.getNumero()+" (" + j.getPerso().getNom()+ ") de jouer. ");
+                    j.getPerso().affiche();
+                    System.out.println();
+                    System.out.println("Voulez vous  : "
+                            + "\n - Combattre : tapez 'c' ;" 
+                            + "\n - vous Deplacer : tapez 'd' ;" 
+                            + "\n - Manger : tapez 'm' ;"
+                            + "\n - Boire : tapez 'b' ;");
 
+                    boolean choisi = false;
+                    while (choisi == false) {
+                        choix = sc.next();
+                        switch (choix) {
+                            case "Combattre":
+                            case "c":
+                                j.combattrePerso(this);
+                                choisi = true;
+                                break;
+                            case "Deplacer":
+                            case "d":
+                                j.deplacePerso(this);
+                                choisi = true;
+                                break;
+                            case "Manger":
+                            case "m":
+                                j.mangerPerso(this);
+                                choisi = true;
+                                break;
+                            case "Boire":
+                            case "b":
+                                j.boirePerso(this);
+                                choisi = true;
+                                break;
+                            default:
+                                System.out.println("Ce n'est pas une action valide !"
+                                    + "Voulez vous  : "
+                                    + "\n - Combattre : tapez 'c' ;" 
+                                    + "\n - te Deplacer : tapez 'd' ;" 
+                                    + "\n - Manger : tapez 'm' ;"
+                                    + "\n - Boire : tapez 'b' ;");
+                                break;
+                        }
+                    }
+
+                }
             }
-            
             //faire jouer les autres entitees sur le terrain
             System.out.println();
             System.out.println("C'est au tour du monde de jouer");
             int i = 0;
+            Random rf=new Random();
+            int ji;
             while (i < this.getlCrea().size()) {
                 Creature c = this.getlCrea().get(i);
                 //for (Creature c : this.getlCrea()) {
+                ji=rf.nextInt(2);
                 if (c.getControle() == 0 && c.getPtVie() > 0) {
-                    c.deplacer(this, 0, 0);
+                    if(ji==0){
+                        c.deplacer(this, 0, 0);
+                    }
+                    else if((ji==1) && (c.creaAttaquables(this)!=null) && (c instanceof Combattant)){
+                        ((Combattant)c).combattre(c.creaAttaquables(this));
+                        
+                    }
+                    else{
+                        
+                    }
                 }
 
                 if (c instanceof Personnage) {
@@ -399,12 +411,24 @@ public class World {
                 }
                 
                 //On supprime les créatures mortes 
-                if (c.getPtVie() < 1) {
+                if (c.getPtVie() < 1 && c.getControle()==0) {
                     this.getMatMonde()[c.getPos().getX()][c.getPos().getY()].setCreature(null);
                     this.getlCrea().remove(c);
                     i=i-1;
-                }
+                }                
                 i = i + 1;
+            }
+            
+            //on retire les joueurs morts
+            for(int r=0;r<this.getlJoueur().size();r++){
+                if(this.getlJoueur().get(r).getPerso().getPtVie()<1){
+                    this.getMatMonde()[this.getlJoueur().get(r).getPerso().getPos().getX()][this.getlJoueur().get(r).getPerso().getPos().getY()].setCreature(null);
+                    this.getlCrea().remove(this.getlJoueur().get(r).getPerso());
+                    System.out.println("Le joueur "+ this.getlJoueur().get(r).getPerso().getNom()+" est mort ce soir" );
+                    this.getlJoueur().remove(this.getlJoueur().get(r));
+                    r=r-1;
+                    
+                }    
             }
 
             //on fait bouger les nuages

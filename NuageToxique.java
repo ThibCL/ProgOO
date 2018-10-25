@@ -49,6 +49,7 @@ public class NuageToxique extends Objet implements Deplacable,Combattant {
         pourcentageAtt = Integer.parseInt(tokenizer.nextToken());
         //On récupère l'objet si le nuage était sur un objet lors de la sauvegarde
         int aObjet=Integer.parseInt(tokenizer.nextToken());
+        System.out.println(aObjet);
         if (aObjet==1){
             String delimiteurs2 = "[;]";
             StringTokenizer tokenizer2 = new StringTokenizer(element, delimiteurs2);
@@ -126,6 +127,8 @@ public class NuageToxique extends Objet implements Deplacable,Combattant {
   */   
     public void deplacer(World w, int i, int j){
         Random posAlea= new Random();
+        i=posAlea.nextInt(3)-1;
+        j=posAlea.nextInt(3)-1;
         while (this.getPos().getX()+i<0 || this.getPos().getX()+i>w.getHauteur()-1 || 
                 this.getPos().getY()+j<0 || this.getPos().getY()+j>w.getLargeur()-1 || 
                 w.getMatMonde()[this.getPos().getX()+i][this.getPos().getY()+j].getObjet() instanceof NuageToxique){

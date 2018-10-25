@@ -75,6 +75,9 @@ public class ChargementPartie {
             case "Soin":
                 e= new Soin(element);
                 break;
+            case "Nourriture":
+                e= new Nourriture(element);
+                break;
             default : //si la sauvegarde a été bien faite, le seul type restant possible est nuage toxique
                 e=new NuageToxique(element);
                 break;

@@ -1,4 +1,5 @@
 package org.centrale.projet.objet;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -87,7 +88,7 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
  * des valeurs aléatoires
  */
     public Creature(){
-        ptVie=100;
+        ptVie=20;
         pourcentageAtt=50;
         pourcentagePar=50;
         degAtt=20;
@@ -245,6 +246,8 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
  */
     
     public abstract void affiche();
-
+    
+    public abstract Creature creaAttaquables (World w);
+    
 
 }
