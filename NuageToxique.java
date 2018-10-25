@@ -127,7 +127,8 @@ public class NuageToxique extends Objet implements Deplacable,Combattant {
     public void deplacer(World w, int i, int j){
         Random posAlea= new Random();
         while (this.getPos().getX()+i<0 || this.getPos().getX()+i>w.getHauteur()-1 || 
-                this.getPos().getY()+j<0 || this.getPos().getY()+j>w.getLargeur()-1){
+                this.getPos().getY()+j<0 || this.getPos().getY()+j>w.getLargeur()-1 || 
+                w.getMatMonde()[this.getPos().getX()+i][this.getPos().getY()+j].getObjet() instanceof NuageToxique){
             i=posAlea.nextInt(3)-1;
             j=posAlea.nextInt(3)-1;
         }
