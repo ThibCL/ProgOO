@@ -1,4 +1,3 @@
-
 package org.centrale.projet.objet;
 
 import java.io.FileNotFoundException;
@@ -52,8 +51,27 @@ public class Partie {
                         }
                     }
                     testi=new SauvegardePartie(choix);
-                    w= new World(5,10,10);
-                    System.out.println("Combien de joueurs êtes vous ?");
+                    System.out.println("Quelle taille de monde voulez vous ? Entrez un nombre entre 10 et 30 :");
+                    boolean tailleCorrecte=false;
+                    int t=0;
+                    while (tailleCorrecte == false){
+                        String taille=sc.next();
+                        try{
+                             t=Integer.parseInt(taille);
+                             if (t<31&&t>9){
+                                 tailleCorrecte=true;
+                             }
+                             else {
+                                 System.out.println("Il faut entrer un entier entre 10 et 30!");
+                             }
+                        }
+                        catch(NumberFormatException e){
+                            System.out.println("Il faut entrer un entier ! Quelle taille de monde souhaitez-vous ? Entrez un nombre entre 10 et 30 :");
+                            
+                        }
+                    }
+                    w= new World(t/3,t,t);
+                    System.out.println("Combien de joueurs êtes vous ? (4 Joueurs maximum)");
                     boolean entier = false; 
                     int rep=0;
                     while (entier==false){
@@ -65,6 +83,10 @@ public class Partie {
                         catch(NumberFormatException e){
                             System.out.println("Il faut entrer un entier ! Combien de joueurs êtes vous ?");
                             entier=false;
+                        }
+                        if (rep<1 || rep>5){
+                            entier=false;
+                            System.out.println("Il ne peut y avoir qu'entre 1 et 4 joueurs ! Combien de joueurs êtes vous ?");
                         }
                     }
                     for (int i=1; i<rep+1;i++){
@@ -94,12 +116,13 @@ public class Partie {
                         }
                     }
                     testi=new SauvegardePartie(choix);
-                break;
+                    break;
                 default :
                     System.out.println("Ce n'est pas une action possible!");
                     System.out.println("Voulez vous :" +
                         "\n - Commencer une nouvelle partie : tapez 'n' ;" +
                         "\n - Charger une partie existante : tapez 'c' ;");
+                    break;
             }
         }
     return testi;

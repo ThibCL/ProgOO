@@ -171,7 +171,7 @@ public class NuageToxique extends Objet implements Deplacable,Combattant {
     }
     
     /**
-     * 
+     * Ecris dans le fichier la ligne de sauvegarde correspondant au NuageToxique
      * @param writer
      * @throws IOException 
      */

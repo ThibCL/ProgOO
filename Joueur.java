@@ -76,8 +76,7 @@ public class Joueur {
             }
                     
         }
-        this.perso.setControle(1);
-        
+        this.perso.setControle(1);        
     }
     
     /** fonction renvoyant la liste des personnages pouvant être attaqués par le joueur selon sa position et sa distance max d'attaque 

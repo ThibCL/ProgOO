@@ -79,11 +79,11 @@ public class World {
             Paysan pays = new Paysan();
             this.ajouterCrea(pays);
         }
-        for (int k = 0; k < 8/*nbralea.nextInt(nbr)*/; k++) {
+        for (int k = 0; k <nbralea.nextInt(nbr); k++) {
             Guerrier guer = new Guerrier();
             this.ajouterCrea(guer);
         }
-        for (int k = 0; k <6 /*nbralea.nextInt(nbr)*/; k++) {
+        for (int k = 0; k <nbralea.nextInt(nbr); k++) {
             Mage mge = new Mage();
             this.ajouterCrea(mge);
         }
@@ -314,7 +314,7 @@ public class World {
         String choix = "rien";
         SauvegardePartie testo = new SauvegardePartie(testi.getFilename());
         testo.sauvegarderPartie(this);
-
+        
         while (Objects.equals(choix, "n") == false) {
             System.out.println("Nouveau tour !");
             for (Joueur j : this.getlJoueur()) {
@@ -383,9 +383,7 @@ public class World {
                         ((Combattant)c).combattre(c.creaAttaquables(this));
                         
                     }
-                    else{
-                        
-                    }
+                    //Sinon la créature ne fait rien à ce tour
                 }
 
                 if (c instanceof Personnage) {
