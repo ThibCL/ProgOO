@@ -104,10 +104,12 @@ public class Joueur {
      *
      * @param w
      */
-    public void combattrePerso(World w) {
+    public boolean combattrePerso(World w) {
+        boolean reussite;
         ArrayList<Creature> cAtt = creaAttaquables(w);
         if (cAtt.size() == 0) {
             System.out.println("Impossible de te battre, tu n'as pas d'ennemi à portée d'attaque");
+            reussite=false;
         } else {
             Scanner scan = new Scanner(System.in);
             System.out.println("Entrez le personnage que vous voulez combattre parmis les suivants :");
@@ -148,7 +150,9 @@ public class Joueur {
 
                 ((Combattant) this.perso).combattre(cAtt.get(rep - 1));
             }
+            reussite=true;
         }
+        return reussite;
     }
 
     /**
@@ -294,10 +298,12 @@ public class Joueur {
      *
      * @param w monde dans lequel le joueur joue
      */
-    public void boirePerso(World w) {
+    public boolean boirePerso(World w) {
+        boolean reussite;
         Scanner scani = new Scanner(System.in);
         if (this.getPerso().getSac().size() == 0) {
             System.out.println("Pas de potion à boire.");
+            reussite=false;
 
         } else {
             System.out.println("Voici les potions que vous possédez: ");
@@ -314,7 +320,9 @@ public class Joueur {
             System.out.print("Vous avez bu: ");
             this.getPerso().getSac().get(rep).affiche();
             this.getPerso().getSac().remove(rep);
+            reussite=true;
         }
+        return reussite;
     }
 
     /**
