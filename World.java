@@ -103,12 +103,12 @@ public class World {
             Mana rhm = new Mana();
             this.ajouterObjet(rhm);
         }
-        for (int k = 0; k < nbralea.nextInt(40); k++) {
+        for (int k = 0; k < nbralea.nextInt(nbr); k++) {
             Nourriture burger = new Nourriture();
             this.ajouterObjet(burger);
         }
 
-        for (int k = 0; k < 7; k++) {
+        for (int k = 0; k < nbralea.nextInt(nbr); k++) {
             NuageToxique cumulus = new NuageToxique();
             this.ajouterObjet(cumulus);
         }

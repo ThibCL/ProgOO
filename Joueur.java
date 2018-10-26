@@ -281,10 +281,10 @@ public class Joueur {
                     
                 }
             }
-            this.getPerso().getBonusMalus().get(rep).setEtat(1);
             System.out.print("Vous avez mangé: ");
             this.getPerso().getBonusMalus().get(rep).afficheEffet();
             this.getPerso().effetNourriture(this.getPerso().getBonusMalus().get(rep), 1);
+            this.getPerso().getBonusMalus().get(rep).setEtat(1);
         }
     }
 
