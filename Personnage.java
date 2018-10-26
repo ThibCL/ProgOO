@@ -335,8 +335,9 @@ public abstract class Personnage extends Creature {
             //Pour chacune des caractéristiques, il faut vérifier si la caractéristique n'est pas <0 quand on applique l'effet malus
             switch (n.getCaracteristique()) {
                 case 1:
+                    
                     int diff = this.getPourcentageAtt() + n.getPtEffet();
-                    if (diff<0){
+                    if (diff<0){                        
                         n.setPtEffet(this.getPourcentageAtt());
                         this.setPourcentageAtt(0);
                     }
@@ -345,9 +346,11 @@ public abstract class Personnage extends Creature {
                     }
                     break;
                 case 2:
+                    
                     diff = this.getPourcentagePar() + n.getPtEffet();
                     if (diff<0){
                         n.setPtEffet(this.getPourcentagePar());
+                        
                         this.setPourcentagePar(0);
                     }
                     else {
