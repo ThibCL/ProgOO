@@ -35,20 +35,42 @@ public class Partie {
             switch (choix) {
                 case "n":
                     choisi=true;
-                    System.out.println("Nouvelle partie ! Entrez un nom de sauvegarde :");
-                    
-                    //On teste si la sauvegarde n'existe pas déjà afin de s'assurer que la nouvelle partie n'écrase pas une autre !
-                    boolean fichierExistant=true;
-                    while (fichierExistant == true){
-                        choix=sc.next();
-                        try{
-                            ChargementPartie partieExistante = new ChargementPartie(choix);
-                            System.out.println("Ce nom de sauvegarde existe déjà, choisissez en un autre.");
+                    System.out.println("Nouvelle partie ! Entrez un nom de sauvegarde ou tapez d si vous voulez"
+                            + "un nom par défault :");
+                    choix=sc.next();
+                    switch(choix){
+                        case "d":
+                            int compt=1;
+                            choix="partie"+Integer.toOctalString(compt);
+                            boolean fichierExistant=true;
+                            while (fichierExistant == true){
+                                choix="partie"+Integer.toOctalString(compt);
+                                try{
+                                    ChargementPartie partieExistante = new ChargementPartie(choix);
+                                    fichierExistant=true;
+                                }
+                                catch (FileNotFoundException e){
+                                    fichierExistant=false;
+                                }
+                                compt+=1;
+                            }
+                            System.out.println("Votre nom de partie est "+choix);
+                            break;
+                        default:
+                            //On teste si la sauvegarde n'existe pas déjà afin de s'assurer que la nouvelle partie n'écrase pas une autre !
                             fichierExistant=true;
-                        }
-                        catch (FileNotFoundException e){
-                            fichierExistant=false;
-                        }
+                            while (fichierExistant == true){
+                                choix=sc.next();
+                                try{
+                                    ChargementPartie partieExistante = new ChargementPartie(choix);
+                                    System.out.println("Ce nom de sauvegarde existe déjà, choisissez en un autre.");
+                                    fichierExistant=true;
+                                }
+                                catch (FileNotFoundException e){
+                                    fichierExistant=false;
+                                }
+                            }
+                            break;
                     }
                     testi=new SauvegardePartie(choix);
                     System.out.println("Quelle taille de monde voulez vous ? Entrez un nombre entre 10 et 30 :");
@@ -70,7 +92,7 @@ public class Partie {
                             
                         }
                     }
-                    w= new World(t/3,t,t);
+                    w= new World(t/2,t,t);
                     System.out.println("Combien de joueurs êtes vous ? (4 Joueurs maximum)");
                     boolean entier = false; 
                     int rep=0;
@@ -100,7 +122,7 @@ public class Partie {
                 case "c":
                     choisi=true;
                     System.out.println("Chargement d'une partie : Entrez le nom de la sauvegarde :");
-                    fichierExistant=false;
+                    boolean fichierExistant=false;
                     while (fichierExistant == false){
                         choix=sc.next();
                         try{
