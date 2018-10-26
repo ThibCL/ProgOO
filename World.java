@@ -71,7 +71,7 @@ public class World {
                 this.matMonde[li][ti] = new Case(new Point2D(li, ti));
             }
         }
-        /*for (int k = 0; k < nbralea.nextInt(nbr); k++) {
+        for (int k = 0; k < nbralea.nextInt(nbr); k++) {
             Archer arch = new Archer();
             this.ajouterCrea(arch);
         }
@@ -79,11 +79,11 @@ public class World {
             Paysan pays = new Paysan();
             this.ajouterCrea(pays);
         }
-        for (int k = 0; k <nbralea.nextInt(nbr); k++) {
+        for (int k = 0; k < nbralea.nextInt(nbr); k++) {
             Guerrier guer = new Guerrier();
             this.ajouterCrea(guer);
         }
-        for (int k = 0; k <nbralea.nextInt(nbr); k++) {
+        for (int k = 0; k < nbralea.nextInt(nbr); k++) {
             Mage mge = new Mage();
             this.ajouterCrea(mge);
         }
@@ -102,17 +102,17 @@ public class World {
         for (int k = 0; k < nbralea.nextInt(nbr); k++) {
             Mana rhm = new Mana();
             this.ajouterObjet(rhm);
-        }*/
+        }
         for (int k = 0; k < nbralea.nextInt(40); k++) {
             Nourriture burger = new Nourriture();
             this.ajouterObjet(burger);
         }
-        /*
+
         for (int k = 0; k < 7; k++) {
             NuageToxique cumulus = new NuageToxique();
             this.ajouterObjet(cumulus);
         }
-        */
+
     }
 
     public ArrayList<Joueur> getlJoueur() {
@@ -242,7 +242,7 @@ public class World {
                 pt = new Point2D(x, y);
             }
             getMatMonde()[c.getPos().getX()][c.getPos().getY()].setCreature(null);
-            c.setPos(pt);           
+            c.setPos(pt);
             getMatMonde()[x][y].setCreature(c);
 
         }
@@ -285,12 +285,13 @@ public class World {
                 Objet o = this.matMonde[i][j].getObjet();
                 if (this.matMonde[i][j].getCreature() == null && this.matMonde[i][j].getObjet() == null) {
                     System.out.print(" [" + "   " + "," + "   " + "]");
-                } else if (this.matMonde[i][j].getCreature() == null && this.matMonde[i][j].getObjet() != null) {                    
-                        System.out.print(" [" + "   " + "," + o.getAffichage() + "]");
+                } else if (this.matMonde[i][j].getCreature() == null && this.matMonde[i][j].getObjet() != null) {
+                    System.out.print(" [" + "   " + "," + o.getAffichage() + "]");
                 } else if (this.matMonde[i][j].getCreature() != null && this.matMonde[i][j].getObjet() == null) {
                     System.out.print(" [" + c.getAffichage() + "," + "   " + "]");
-                } else if (this.matMonde[i][j].getCreature() != null && this.matMonde[i][j].getObjet() != null) {                    
-                        System.out.print(" [" + c.getAffichage() + "," + o.getAffichage() + "]");                    }
+                } else if (this.matMonde[i][j].getCreature() != null && this.matMonde[i][j].getObjet() != null) {
+                    System.out.print(" [" + c.getAffichage() + "," + o.getAffichage() + "]");
+                }
 
             }
             System.out.println();
@@ -300,11 +301,10 @@ public class World {
     }
 
     /**
-     * Lancement : 
-     * méthode qui définit le tour de jeu et qui fait jouer les joueurs un par
-     * un avant de faire joueur les autres entitées Le joueur à le choix de se
-     * déplacer ou de combattre Si on veut arrêter de jouer il faut rentrer quit
-     * entre deux tour de jeu
+     * Lancement : méthode qui définit le tour de jeu et qui fait jouer les
+     * joueurs un par un avant de faire joueur les autres entitées Le joueur à
+     * le choix de se déplacer ou de combattre Si on veut arrêter de jouer il
+     * faut rentrer quit entre deux tour de jeu
      */
     public void tourDeJeu(SauvegardePartie testi) throws IOException {
         Scanner sc = new Scanner(System.in);
@@ -314,17 +314,17 @@ public class World {
         String choix = "rien";
         SauvegardePartie testo = new SauvegardePartie(testi.getFilename());
         testo.sauvegarderPartie(this);
-        
+
         while (Objects.equals(choix, "n") == false) {
             System.out.println("Nouveau tour !");
             for (Joueur j : this.getlJoueur()) {
-                if(j.getPerso().getPtVie()>0){
-                    System.out.println("C'est au joueur "+j.getNumero()+" (" + j.getPerso().getNom()+ ") de jouer. ");
+                if (j.getPerso().getPtVie() > 0) {
+                    System.out.println("C'est au joueur " + j.getNumero() + " (" + j.getPerso().getNom() + ") de jouer. ");
                     j.getPerso().affiche();
                     System.out.println();
                     System.out.println("Voulez vous  : "
-                            + "\n - Combattre : tapez 'c' ;" 
-                            + "\n - vous Deplacer : tapez 'd' ;" 
+                            + "\n - Combattre : tapez 'c' ;"
+                            + "\n - vous Deplacer : tapez 'd' ;"
                             + "\n - Manger : tapez 'm' ;"
                             + "\n - Boire : tapez 'b' ;");
 
@@ -354,11 +354,11 @@ public class World {
                                 break;
                             default:
                                 System.out.println("Ce n'est pas une action valide ! "
-                                    + "Voulez vous  : "
-                                    + "\n - Combattre : tapez 'c' ;" 
-                                    + "\n - te Deplacer : tapez 'd' ;" 
-                                    + "\n - Manger : tapez 'm' ;"
-                                    + "\n - Boire : tapez 'b' ;");
+                                        + "Voulez vous  : "
+                                        + "\n - Combattre : tapez 'c' ;"
+                                        + "\n - te Deplacer : tapez 'd' ;"
+                                        + "\n - Manger : tapez 'm' ;"
+                                        + "\n - Boire : tapez 'b' ;");
                                 break;
                         }
                     }
@@ -369,19 +369,18 @@ public class World {
             System.out.println();
             System.out.println("C'est au tour du monde de jouer");
             int i = 0;
-            Random rf=new Random();
+            Random rf = new Random();
             int ji;
             while (i < this.getlCrea().size()) {
                 Creature c = this.getlCrea().get(i);
                 //for (Creature c : this.getlCrea()) {
-                ji=rf.nextInt(2);
+                ji = rf.nextInt(2);
                 if (c.getControle() == 0 && c.getPtVie() > 0) {
-                    if(ji==0){
+                    if (ji == 0) {
                         c.deplacer(this, 0, 0);
-                    }
-                    else if((ji==1) && (c.creaAttaquables(this)!=null) && (c instanceof Combattant)){
-                        ((Combattant)c).combattre(c.creaAttaquables(this));
-                        
+                    } else if ((ji == 1) && (c.creaAttaquables(this) != null) && (c instanceof Combattant)) {
+                        ((Combattant) c).combattre(c.creaAttaquables(this));
+
                     }
                     //Sinon la créature ne fait rien à ce tour
                 }
@@ -398,7 +397,7 @@ public class World {
                                 System.out.print("L'aliment suivant ne fait plus effet: ");
                                 n.affiche();
                                 ((Personnage) c).getBonusMalus().remove(n);
-                                k=k-1;
+                                k = k - 1;
 
                             }
                         }
@@ -407,59 +406,59 @@ public class World {
                     }
 
                 }
-                
+
                 //On supprime les créatures mortes 
-                if (c.getPtVie() < 1 && c.getControle()==0) {
+                if (c.getPtVie() < 1 && c.getControle() == 0) {
                     this.getMatMonde()[c.getPos().getX()][c.getPos().getY()].setCreature(null);
                     this.getlCrea().remove(c);
-                    i=i-1;
-                }                
+                    i = i - 1;
+                }
                 i = i + 1;
             }
-            
+
             //on retire les joueurs morts
-            for(int r=0;r<this.getlJoueur().size();r++){
-                if(this.getlJoueur().get(r).getPerso().getPtVie()<1){
+            for (int r = 0; r < this.getlJoueur().size(); r++) {
+                if (this.getlJoueur().get(r).getPerso().getPtVie() < 1) {
                     this.getMatMonde()[this.getlJoueur().get(r).getPerso().getPos().getX()][this.getlJoueur().get(r).getPerso().getPos().getY()].setCreature(null);
                     this.getlCrea().remove(this.getlJoueur().get(r).getPerso());
-                    System.out.println("Le joueur "+ this.getlJoueur().get(r).getPerso().getNom()+" est mort ce soir" );
+                    System.out.println("Le joueur " + this.getlJoueur().get(r).getPerso().getNom() + " est mort ce soir");
                     this.getlJoueur().remove(this.getlJoueur().get(r));
-                    r=r-1;
-                    
-                }    
+                    r = r - 1;
+
+                }
             }
 
             //on fait bouger les nuages
-            for (int j=0;j<this.getlObjet().size();j++) {
+            for (int j = 0; j < this.getlObjet().size(); j++) {
                 if (this.getlObjet().get(j) instanceof NuageToxique) {
                     ((NuageToxique) this.getlObjet().get(j)).deplacer(this, 0, 0);
                 }
             }
-            
+
             //on affiche la matrice à chaque tour de jeu
             this.afficheMat();
-            
+
             System.out.println("Souhaitez-vous continuer à jouer ? o/n");
             choix = sc.next();
         }
         System.out.println("Voulez-vous sauvegarder avant de quitter? o/n");
-            choix = sc.next();
-            boolean choisi =false;
-            while (choisi==false){
-                switch(choix){
-                    case "o":
-                        testo = new SauvegardePartie(testi.getFilename());
-                        testo.sauvegarderPartie(this);
-                        choisi=true;
-                        break;
-                    case "n":
-                        System.out.println("Partie non sauvegardée !");
-                        choisi=true;
-                        break;
-                    default :
-                        System.out.println("Entrée non valide ! Voulez-vous sauvegarder avant de quitter? o/n");
-                }
+        choix = sc.next();
+        boolean choisi = false;
+        while (choisi == false) {
+            switch (choix) {
+                case "o":
+                    testo = new SauvegardePartie(testi.getFilename());
+                    testo.sauvegarderPartie(this);
+                    choisi = true;
+                    break;
+                case "n":
+                    System.out.println("Partie non sauvegardée !");
+                    choisi = true;
+                    break;
+                default:
+                    System.out.println("Entrée non valide ! Voulez-vous sauvegarder avant de quitter? o/n");
             }
+        }
     }
 
     /**
@@ -475,7 +474,6 @@ public class World {
         j.getPerso().setNom(nmj);
         this.lJoueur.add(j);
         this.ajouterCrea(j.getPerso());
-        
 
     }
 
