@@ -156,10 +156,10 @@ public class Archer extends Personnage implements Combattant {
             }
         }
         if (c.getPtVie() < 1 && c.getControle()==0) {
-            System.out.println("Le"+c.getClass().getSimpleName() +"est mort");
+            System.out.println("Le "+c.getClass().getSimpleName() +" est mort");
         }
         else if(c.getPtVie() < 1 && c.getControle()==1){
-            System.out.println(((Personnage)c).getNom()+"est mort");
+            System.out.println(((Personnage)c).getNom()+" est mort");
         }
     }
     

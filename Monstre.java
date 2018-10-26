@@ -75,7 +75,11 @@ public abstract class Monstre extends Creature {
         super.affiche();
     }*/
 
-
+    /**
+     * 
+     * @param writer
+     * @throws IOException 
+     */
     public void getTexteSauvegarde(BufferedWriter writer) throws IOException {
         writer.write(this.getClass().getSimpleName() + " ");
         writer.write(Integer.toString(this.getPtVie()) + " ");
