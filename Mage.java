@@ -16,18 +16,19 @@ public class Mage extends Personnage implements Combattant {
      * attributs a initialiser
      *
      * @param nom
+     * @param ptMana
+     * @param pourcentageMag
+     * @param pourcentageResisMag
+     * @param degMag
+     * @param distAttMax
+     * @param sac
+     * @param bonusmalus
      * @param pV
-     * @param ptM
      * @param pA
      * @param pP
-     * @param pM
-     * @param rM
      * @param dA
-     * @param dM
-     * @param distMax
      * @param ptP
-     * @param s
-     * @param p
+     * @param pos 
      */
     public Mage(String nom, int ptMana, int pourcentageMag, int pourcentageResisMag, int degMag, double distAttMax, ArrayList<Objet> sac, ArrayList<Nourriture> bonusmalus, int pV, int pA, int pP, int dA, int ptP, Point2D pos) {    
         super(nom, ptMana, pourcentageMag, pourcentageResisMag, degMag, distAttMax, sac, bonusmalus, pV, pA, pP, dA, ptP, pos);
@@ -101,8 +102,9 @@ public class Mage extends Personnage implements Combattant {
      * Méthode peremtttant au mage d'attaquer. Il utilise la magie et peut
      * atteindre toutes les créatures à moins de distMax de lui.
      *
-     * @param c
+     * @param c créature qu'il attaque
      */
+    @Override
     public void combattre(Creature c) {
         if (c.getControle()==0 && this.getControle()==0) {
             System.out.println("Le "+this.getClass().getSimpleName() +" engage le combat contre le "+ c.getClass().getSimpleName());
@@ -146,6 +148,7 @@ public class Mage extends Personnage implements Combattant {
      * @param o objet à ramasser
      * @param w monde dans lequel le mage vit
      */
+    @Override
     public void ramasser(Objet o, World w) {
         if (o instanceof NuageToxique) {
             System.out.println("C'est un nuage Toxique!");
@@ -188,7 +191,11 @@ public class Mage extends Personnage implements Combattant {
 
     }
     
-    
+    /**
+     * méthode permettant d'effectuer les effets des potions que le mage boit
+     * @param o potion en question
+     */
+    @Override
     public void effetPotion(Objet o){
         super.effetPotion(o);
         if(o instanceof Mana){
@@ -197,7 +204,11 @@ public class Mage extends Personnage implements Combattant {
         
     }
        
-    
+    /**
+    * Méthode qui renvoie l'affichage correspondant au mage
+    * @return Le string qui correspond à l'affichage du mage
+    */
+    @Override
     public String getAffichage(){
         if(this.getControle()==0){
             return "Mag";          

@@ -64,7 +64,13 @@ public class Lapin extends Monstre{
                 ";");
         getPos().affiche();
     }
+ 
     
+    /**
+    * Méthode qui renvoie l'affichage correspondant au lapin
+    * @return Le string qui correspond à l'affichage du lapin
+    */
+    @Override
         public String getAffichage(){        
         return "Lap";               
     }

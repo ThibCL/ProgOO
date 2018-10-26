@@ -46,11 +46,13 @@ public abstract class Potion extends Objet {
         this.ptRecup = ptRecup;
     }
     
+    @Override
     public abstract void affiche();
 
+    @Override
     public void getTexteSauvegarde(BufferedWriter writer) throws IOException{
         super.getTexteSauvegarde(writer);
         writer.write(Integer.toString(this.getPtRecup())+ "");
-        //writer.newLine();
+
     }
 }

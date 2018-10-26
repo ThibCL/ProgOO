@@ -67,7 +67,8 @@ public class Loup extends Monstre implements Combattant {
      * 
      * @param c créature attaquée
      */
-public void combattre(Creature c){
+    @Override
+    public void combattre(Creature c){
     
         //Combat corps à corps : on met 1.42 pour permettre d'attaquer les protagonistes sur les cases en diagonale
         if (c.getControle()==0 && this.getControle()==0) {
@@ -134,7 +135,11 @@ public void combattre(Creature c){
             System.out.println();
         }
     }
-
+    /**
+    * Méthode qui renvoie l'affichage correspondant au loup
+    * @return Le string qui correspond à l'affichage du loup
+    */
+    @Override
     public String getAffichage(){        
         return "Lou";               
     }

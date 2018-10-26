@@ -88,6 +88,8 @@ public class Joueur {
      * fonction renvoyant la liste des personnages pouvant être attaqués par le
      * joueur selon sa position et sa distance max d'attaque
      *
+     * @param w monde dans lequel le joueur joue
+     * @return liste des créatures attaquables
      */
     public ArrayList<Creature> creaAttaquables(World w) {
         ArrayList<Creature> cAtt = new ArrayList<>();
@@ -102,7 +104,8 @@ public class Joueur {
     /**
      * méthode qui permet au joeur d'attaquer une autre creature
      *
-     * @param w
+     * @param w monde dans lequel le joueur joue
+     * @return true s'il a réussi a se battre false s'il n'a pas de créature à attaquer
      */
     public boolean combattrePerso(World w) {
         boolean reussite;
@@ -158,6 +161,7 @@ public class Joueur {
     /**
      * Permet de demander quelle deplacement le joueur veut faire en utilisant
      * les touches du clavier
+     * @return position du personnage du joueur 
      */
     public Point2D demanderDepl() {
         System.out.println("Veuillez entrer deplacement: ");
@@ -215,7 +219,8 @@ public class Joueur {
      * fois que le deplacement est possible la méthode appelle la méthode
      * déplacer de creature
      * 
-     * @param w
+     * @param w monde dans lequel joue le joueur
+     * @return true s'il a reussi à se deplacer false sinon
      */
     public boolean deplacePerso(World w) {
         boolean reussite=true;
@@ -252,7 +257,9 @@ public class Joueur {
     /**
      * Méthode qui permet au joueur de faire manger un aliment à son personnage
      *
-     * @param w
+     * @param w monde dans lequel le joueur joue
+     * 
+     * @return true s'il avait de quoi manger false sinon 
      */
     public boolean mangerPerso(World w) {
         Scanner scani = new Scanner(System.in);
@@ -300,6 +307,7 @@ public class Joueur {
      * Mérhode qui permet au joueur de faire boire une potion à son personnage
      *
      * @param w monde dans lequel le joueur joue
+     * @return true s'il y a quelque chose à boire false sinon
      */
     public boolean boirePerso(World w) {
         boolean reussite;

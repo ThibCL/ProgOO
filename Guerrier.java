@@ -70,6 +70,7 @@ public class Guerrier extends Personnage implements Combattant {
     /**
      * Méthode permettant d'afficher un Guerrier
      */
+    @Override
     public void affiche() {
         System.out.println("C'est un personnage de type Guerrier :");
         System.out.println("Nom : " + getNom()
@@ -94,6 +95,7 @@ public class Guerrier extends Personnage implements Combattant {
      *
      * @param c créature attaquée
      */
+    @Override
     public void combattre(Creature c) {
 
         //Combat corps à corps : on met 1.42 pour permettre d'attaquer les protagonistes sur les cases en diagonale
@@ -162,6 +164,7 @@ public class Guerrier extends Personnage implements Combattant {
         }
     }
 
+    @Override
     public void ramasser(Objet o, World w) {
         if (o instanceof Mana) {
             System.out.println("Le Guerrier ne peut pas ramasser de Potion Mana");
@@ -182,7 +185,11 @@ public class Guerrier extends Personnage implements Combattant {
             w.getlObjet().remove(o);
         }
     }
-    
+    /**
+    * Méthode qui renvoie l'affichage correspondant au guerrier
+    * @return Le string qui correspond à l'affichage du guerrier
+    */
+    @Override
     public String getAffichage(){        
         if(this.getControle()==0){
             return "Gue";          

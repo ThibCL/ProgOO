@@ -19,21 +19,23 @@ public class Archer extends Personnage implements Combattant {
     private int nbFleches;
     
     /**
-     * Constucteur de Archer qui prend en parametre la valeur de tous les attributs de cette classe et de ses super-classes
+     * * Constucteur de Archer qui prend en parametre la valeur de 
+     * tous les attributs de cette classe et de ses super-classes
      * @param nom 
-     * @param pV 
-     * @param ptM 
+     * @param ptMana
+     * @param pourcentageMag
+     * @param pourcentageResisMag
+     * @param degMag
+     * @param distAttMax
+     * @param sac
+     * @param bonusmalus
+     * @param pV
      * @param pA
      * @param pP
-     * @param pM
-     * @param rM
      * @param dA
-     * @param dM
-     * @param distMax
      * @param ptP
-     * @param s 
-     * @param p
-     * @param nbF 
+     * @param pos
+     * @param nbFleches 
      */
     public Archer(String nom, int ptMana, int pourcentageMag, int pourcentageResisMag, int degMag, double distAttMax, ArrayList<Objet> sac, ArrayList<Nourriture> bonusmalus, int pV, int pA, int pP, int dA, int ptP, Point2D pos, int nbFleches){
         super(nom, ptMana, pourcentageMag, pourcentageResisMag, degMag, distAttMax, sac, bonusmalus, pV, pA, pP, dA, ptP, pos);
@@ -42,7 +44,7 @@ public class Archer extends Personnage implements Combattant {
 
     /**
      * Constructeur de Archer qui construit un archer en fonction des attributs de l'archer mis en paramètre
-     * @param a 
+     * @param a personnage dont les attributs vont être copiés
      */
     public Archer(Archer a) {
         super(a);
@@ -112,6 +114,7 @@ public class Archer extends Personnage implements Combattant {
      * et inflige alors des dégats si il réussi son attaque et que la créature est à portée atteignable
      * @param c 
      */
+    @Override
     public void combattre(Creature c){
         
         //Combat corps à corps : on met 1.42 pour permettre d'attaquer les protagonistes sur les cases en diagonale
@@ -205,7 +208,12 @@ public class Archer extends Personnage implements Combattant {
             System.out.println();
         }
     }
-    
+    /**
+     * Méthode qui permet à l'archer de ramasser un objet sur la carte
+     * @param o objet en question 
+     * @param w monde on se situe l'archer et l'objet
+     */
+    @Override
     public void ramasser(Objet o, World w){
         if (o instanceof Mana){
             System.out.println("L'archer ne peut pas ramasser de Potion Mana");
@@ -229,6 +237,12 @@ public class Archer extends Personnage implements Combattant {
             w.getlObjet().remove(o);
         }
     }
+    /**
+     * Méthode qui écrit dans le fichier de sauvegarde la ligne correspondant à l'archer
+     * @param writer bufferedWriter qui permet d'écrire dans le fichier de sauvegarde
+     * @throws IOException 
+     */
+    @Override
     public void getTexteSauvegarde(BufferedWriter writer) throws IOException{
         super.getTexteSauvegarde(writer);
         writer.write("*");
@@ -236,6 +250,11 @@ public class Archer extends Personnage implements Combattant {
         
     }
     
+    /**
+     * Méthode qui renvoie l'affichage correspondant à l'archer
+     * @return Le string qui correspond à l'affichage de l'archer
+     */
+    @Override
     public String getAffichage(){        
         if(this.getControle()==0){
             return "Arc";          

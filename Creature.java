@@ -192,6 +192,7 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
      * @param i Entier pour se déplacer de -1,0,1 en X
      * @param j Entier pour se déplacer de -1,0,1 en Y
      */
+    @Override
     public void deplacer(World w,int i,int j){
         if(deplPossible(w)==false){
             System.out.println("La creature ne peut pas se déplacer");

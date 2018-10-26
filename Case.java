@@ -21,6 +21,10 @@ public class Case {
      */
     private Objet objet;
 
+    /**
+     * Constructeur qui prend en parametre la position de la case
+     * @param pos 
+     */
     public Case(Point2D pos){
         this.pos = new Point2D(pos);
     }
