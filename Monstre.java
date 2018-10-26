@@ -76,7 +76,6 @@ public abstract class Monstre extends Creature {
     }*/
 
     /**
-     * 
      * @param writer
      * @throws IOException 
      */
@@ -98,7 +97,7 @@ public abstract class Monstre extends Creature {
         Creature ci;
         Random rf=new Random();
         for (Creature c : w.getlCrea()){
-            if (this.getPos().distance(c.getPos())!=0 && this.getPos().distance(c.getPos())<=1.42){
+            if (this.getPos().distance(c.getPos())!=0 && this.getPos().distance(c.getPos())<=1.42 && c.getPtVie()>0){
                 cAtt.add(c);
             }
         }

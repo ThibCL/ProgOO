@@ -64,7 +64,7 @@ public class Mage extends Personnage implements Combattant {
         setPtPar(i);
         i = 45 + intAlea.nextInt(20);
         setPourcentageResisMag(i);
-        i = 1 + intAlea.nextInt(5);
+        i = 2 + intAlea.nextInt(5);
         setDistAttMax(i);
     }
     
@@ -104,23 +104,39 @@ public class Mage extends Personnage implements Combattant {
      * @param c
      */
     public void combattre(Creature c) {
+        if (c.getControle()==0 && this.getControle()==0) {
+            System.out.println("Le "+this.getClass().getSimpleName() +" engage le combat contre le "+ c.getClass().getSimpleName());
+        }
+        else if (c.getControle()==1 && this.getControle()==0) {
+            System.out.println("Le "+this.getClass().getSimpleName() +" engage le combat contre "+ ((Personnage)c).getNom());
+        }
         if ((this.getPos().distance(c.getPos()) <= this.getDistAttMax()) && ((this.getPtMana() > 0))) {
             this.setPtMana(this.getPtMana() - 1);
             Random lanceDe = new Random();
             int RandAtt = lanceDe.nextInt(101);
             if (RandAtt <= this.getPourcentageMag()) {
-                System.out.println("Attaque réussie! Le défenseur perd " + this.getDegMag() + " points de vie");
+                if(c.getControle()==0){
+                    System.out.println("Attaque réussie! Le " +c.getClass().getSimpleName() +" perd "+this.getDegMag()+" points de vie");
+                    System.out.println();
+                }
+                else if(c.getControle()==1){
+                    System.out.println("Attaque réussie! "+((Personnage)c).getNom()+" perd "+this.getDegMag()+" points de vie");
+                    System.out.println();
+                }
                 c.setPtVie(c.getPtVie() - this.getDegMag());
                 
             } else {
                 System.out.println("Attaque ratée!");
+                System.out.println();
             }
         }
         if (c.getPtVie() < 1 && c.getControle()==0) {
-            System.out.println("Le"+c.getClass().getSimpleName() +"est mort");
+            System.out.println("Le "+c.getClass().getSimpleName() +" est mort");
+            System.out.println();
         }
         else if(c.getPtVie() < 1 && c.getControle()==1){
-            System.out.println(((Personnage)c).getNom()+"est mort");
+            System.out.println(((Personnage)c).getNom()+" est mort");
+            System.out.println();
         }
     }
     

@@ -115,6 +115,17 @@ public class Archer extends Personnage implements Combattant {
     public void combattre(Creature c){
         
         //Combat corps à corps : on met 1.42 pour permettre d'attaquer les protagonistes sur les cases en diagonale
+        if (c.getControle()==0 && this.getControle()==0) {
+            System.out.println("Le "+this.getClass().getSimpleName() +" engage le combat contre le "+ c.getClass().getSimpleName());
+        }
+        else if (c.getControle()==1 && this.getControle()==0) {
+            System.out.println("Le "+this.getClass().getSimpleName() +" engage le combat contre "+ ((Personnage)c).getNom());
+        }
+        else{
+            
+        }
+        
+        
         if (this.getPos().distance(c.getPos()) < 1.42 ){
             Random lanceDe = new Random();
             int RandAtt = lanceDe.nextInt(101);
@@ -122,44 +133,76 @@ public class Archer extends Personnage implements Combattant {
                 System.out.println("Attaque réussie!");
                 int RandDef = lanceDe.nextInt(101);
                 if (RandDef > c.getPourcentagePar()){
-                    System.out.println("Parade ratée! Le défenseur perd "+this.getDegAtt()+" points de vie");
+                    if (c.getControle()==0) {
+                        System.out.println("Parade ratée! Le "+c.getClass().getSimpleName() +" perd "+this.getDegAtt()+" points de vie");
+                        System.out.println();
+                    }
+                    else if(c.getControle()==1){
+                        System.out.println("Parade ratée!" +((Personnage)c).getNom()+" perd "+this.getDegAtt()+" points de vie");
+                        System.out.println();
+                    }   
                     c.setPtVie(c.getPtVie()-this.getDegAtt());
                 }
                 else {
                     int res = this.getDegAtt()-c.getPtPar();
                     if (res>0) {
-                        System.out.println("Parade réussie! Le défenseur perd "+res +" points de vie");
+                        if(c.getControle()==0){
+                            System.out.println("Parade réussie! Le " +c.getClass().getSimpleName() +" perd "+res +" points de vie");
+                            System.out.println();
+                        }
+                        else if(c.getControle()==1){
+                            System.out.println("Parade réussie! "+((Personnage)c).getNom()+" perd "+res +" points de vie");
+                            System.out.println();
+                        }
                         c.setPtVie(c.getPtVie()-res);
                     }
                     else {
-                        System.out.println("Parade réussie! Le défenseur ne reçoit aucun dégât");
+                        if(c.getControle()==0){
+                            System.out.println("Parade réussie! Le "+c.getClass().getSimpleName() +" ne reçois aucun dégats");
+                            System.out.println();
+                        }
+                        else if(c.getControle()==1){
+                            System.out.println("Parade réussie!"+ ((Personnage)c).getNom()+" ne reçoit aucun dégats");
+                            System.out.println();
+                        }
                     }
                 }
             }
             else {
                 System.out.println("Attaque ratée!");
+                System.out.println();
             }
             
         }
 
         //Combat à distance 
-        else if ((this.getPos().distance(c.getPos()) >1.42 )&&(this.getPos().distance(c.getPos()) < this.getDistAttMax())&&((this.getNbFleches() > 0))){
+        else if ((this.getPos().distance(c.getPos()) >=1.42 )&&(this.getPos().distance(c.getPos()) <= this.getDistAttMax())&&((this.getNbFleches() > 0))){
             this.setNbFleches(this.getNbFleches()-1);
             Random lanceDe = new Random();
             int RandAtt = lanceDe.nextInt(101);
             if (RandAtt <= this.getPourcentageAtt()) {
-                System.out.println("Attaque réussie! Le défenseur perd "+this.getDegAtt()+" points de vie");
+                if(c.getControle()==0){
+                    System.out.println("Attaque réussie! Le " +c.getClass().getSimpleName() +" perd "+this.getDegAtt()+" points de vie");
+                    System.out.println();
+                }
+                else if(c.getControle()==1){
+                    System.out.println("Attaque réussie! "+((Personnage)c).getNom()+" perd "+this.getDegAtt()+" points de vie");
+                    System.out.println();
+                }
                 c.setPtVie(c.getPtVie()-this.getDegAtt());
             }
             else {
                 System.out.println("Attaque ratée!");
+                System.out.println();
             }
         }
         if (c.getPtVie() < 1 && c.getControle()==0) {
             System.out.println("Le "+c.getClass().getSimpleName() +" est mort");
+            System.out.println();
         }
         else if(c.getPtVie() < 1 && c.getControle()==1){
             System.out.println(((Personnage)c).getNom()+" est mort");
+            System.out.println();
         }
     }
     

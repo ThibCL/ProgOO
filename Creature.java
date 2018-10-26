@@ -214,7 +214,6 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
             if (o instanceof NuageToxique){
                 ((NuageToxique) o).combattre(this);
                 if(this.getPtVie()<0){
-                    System.out.println("La créature meurt");
                     w.getlCrea().remove(this);
                 }
             }
