@@ -76,8 +76,7 @@ public class Joueur {
             }
                     
         }
-        this.perso.setControle(1);
-        
+        this.perso.setControle(1);        
     }
     
     /** fonction renvoyant la liste des personnages pouvant être attaqués par le joueur selon sa position et sa distance max d'attaque 
@@ -183,7 +182,9 @@ public class Joueur {
                 default :
                     System.out.println("Ce n'est pas un deplacement possible!");
                     System.out.println("Veuillez entrer deplacement: ");
-                
+                    System.out.println(" [a] [z] [e]");
+                    System.out.println(" [q]" +" J"+this.getNumero()+ "  [d]");
+                    System.out.println(" [w] [x] [c]");
                     choisi = false;
                     break;
             }
@@ -209,13 +210,24 @@ public class Joueur {
             pos=demanderDepl();
             int x=pos.getX();
             int y=pos.getY();
-            while (this.getPerso().getPos().getX()+x<0 || this.getPerso().getPos().getX()+x>w.getHauteur()-1 || this.getPerso().getPos().getY()+y<0 || this.getPerso().getPos().getY()+y>w.getLargeur()-1 || w.getMatMonde()[this.perso.getPos().getX()+x][this.perso.getPos().getY()+y].getCreature()!=null){
-                System.out.println("Position déjà occupée, entrez une autre position!");
-                pos=demanderDepl();
-                x=pos.getX();
-                y=pos.getY();
-
-            }
+            boolean bonnePos=false;
+            while (!bonnePos){
+                if (this.getPerso().getPos().getX()+x<0 || this.getPerso().getPos().getX()+x>w.getHauteur()-1 || this.getPerso().getPos().getY()+y<0 || this.getPerso().getPos().getY()+y>w.getLargeur()-1){
+                    System.out.println("Vous vous cognez à un mur! Entrez une autre position");
+                    pos=demanderDepl();
+                    x=pos.getX();
+                    y=pos.getY();
+                }
+                else if (w.getMatMonde()[this.perso.getPos().getX()+x][this.perso.getPos().getY()+y].getCreature()!=null){
+                    System.out.println("Position déjà occupée, entrez une autre position!");
+                    pos=demanderDepl();
+                    x=pos.getX();
+                    y=pos.getY();
+                }
+                else {
+                  bonnePos= true;
+                }
+            }     
             this.perso.deplacer(w, x, y);
             
         }
@@ -247,14 +259,15 @@ public class Joueur {
             this.getPerso().getBonusMalus().get(rep).affiche();
         }
     }
+    
     /**
      * Mérhode qui permet au joueur de faire boire une potion à son personnage
-     * @param w 
+     * @param w monde dans lequel le joueur joue
      */
     public void boirePerso(World w){
         Scanner scani = new Scanner(System.in);
         if(this.getPerso().getSac().size()==0){
-            System.out.println("Pas de potion à boire");
+            System.out.println("Pas de potion à boire.");
             
         }
         else{
@@ -270,7 +283,7 @@ public class Joueur {
             this.getPerso().effetPotion(this.getPerso().getSac().get(rep));
             
             
-            System.out.print("vous avez bu: ");
+            System.out.print("Vous avez bu: ");
             this.getPerso().getSac().get(rep).affiche();
             this.getPerso().getSac().remove(rep);
         }

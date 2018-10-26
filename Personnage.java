@@ -421,6 +421,11 @@ public abstract class Personnage extends Creature {
 
     }
     
+    /**
+     * Retourne une créature dans la liste des créatures 
+     * @param w
+     * @return 
+     */
     public Creature creaAttaquables (World w){
         ArrayList <Creature> cAtt=new ArrayList<>();
         Creature ci;

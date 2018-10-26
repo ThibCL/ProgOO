@@ -1,4 +1,3 @@
-
 package org.centrale.projet.objet;
 
 import java.io.FileNotFoundException;
@@ -37,10 +36,42 @@ public class Partie {
                 case "n":
                     choisi=true;
                     System.out.println("Nouvelle partie ! Entrez un nom de sauvegarde :");
-                    choix=sc.next();
+                    
+                    //On teste si la sauvegarde n'existe pas déjà afin de s'assurer que la nouvelle partie n'écrase pas une autre !
+                    boolean fichierExistant=true;
+                    while (fichierExistant == true){
+                        choix=sc.next();
+                        try{
+                            ChargementPartie partieExistante = new ChargementPartie(choix);
+                            System.out.println("Ce nom de sauvegarde existe déjà, choisissez en un autre.");
+                            fichierExistant=true;
+                        }
+                        catch (FileNotFoundException e){
+                            fichierExistant=false;
+                        }
+                    }
                     testi=new SauvegardePartie(choix);
-                    w= new World(5,10,10);
-                    System.out.println("Combien de joueurs êtes vous ?");
+                    System.out.println("Quelle taille de monde voulez vous ? Entrez un nombre entre 10 et 30 :");
+                    boolean tailleCorrecte=false;
+                    int t=0;
+                    while (tailleCorrecte == false){
+                        String taille=sc.next();
+                        try{
+                             t=Integer.parseInt(taille);
+                             if (t<31&&t>9){
+                                 tailleCorrecte=true;
+                             }
+                             else {
+                                 System.out.println("Il faut entrer un entier entre 10 et 30!");
+                             }
+                        }
+                        catch(NumberFormatException e){
+                            System.out.println("Il faut entrer un entier ! Quelle taille de monde souhaitez-vous ? Entrez un nombre entre 10 et 30 :");
+                            
+                        }
+                    }
+                    w= new World(t/3,t,t);
+                    System.out.println("Combien de joueurs êtes vous ? (4 Joueurs maximum)");
                     boolean entier = false; 
                     int rep=0;
                     while (entier==false){
@@ -53,8 +84,13 @@ public class Partie {
                             System.out.println("Il faut entrer un entier ! Combien de joueurs êtes vous ?");
                             entier=false;
                         }
+                        if (rep<1 || rep>5){
+                            entier=false;
+                            System.out.println("Il ne peut y avoir qu'entre 1 et 4 joueurs ! Combien de joueurs êtes vous ?");
+                        }
                     }
                     for (int i=1; i<rep+1;i++){
+                        System.out.println("\nJoueur "+ i +":");
                         w.creationJoueur();
                         w.getlJoueur().get(i-1).setNumero(i);
                         w.getlJoueur().get(i-1).getPerso().setNomjControle("J"+i+" ");
@@ -64,7 +100,7 @@ public class Partie {
                 case "c":
                     choisi=true;
                     System.out.println("Chargement d'une partie : Entrez le nom de la sauvegarde :");
-                    boolean fichierExistant=false;
+                    fichierExistant=false;
                     while (fichierExistant == false){
                         choix=sc.next();
                         try{
@@ -73,6 +109,7 @@ public class Partie {
                             fichierExistant=true;
                         }
                         catch (FileNotFoundException e){
+                            System.out.println("Sauvegarde introuvable !");
                             System.out.println("Entrez le nom de la sauvegarde :");
                             fichierExistant=false;
                             
@@ -85,6 +122,7 @@ public class Partie {
                     System.out.println("Voulez vous :" +
                         "\n - Commencer une nouvelle partie : tapez 'n' ;" +
                         "\n - Charger une partie existante : tapez 'c' ;");
+                    break;
             }
         }
     return testi;

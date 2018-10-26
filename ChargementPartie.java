@@ -27,7 +27,6 @@ public class ChargementPartie {
             lecteur = new BufferedReader(new FileReader(nomSauvegarde + ".txt"));
         }
         catch (FileNotFoundException e){
-            System.out.println("Sauvegarde introuvable !");
             throw new FileNotFoundException();
         }
     }

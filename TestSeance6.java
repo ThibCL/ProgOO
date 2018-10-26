@@ -18,5 +18,6 @@ public class TestSeance6 {
         w.afficheMat();
         NuageToxique n = new NuageToxique();
         n.affiche();*/
+        
     }   
 }
