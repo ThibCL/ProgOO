@@ -30,14 +30,7 @@ public class Mana extends Potion{
 
         System.out.println("Potion de Mana ("+getPtRecup()+" pts Mana)");
     }
-    
-        /**
-     * Méthode permettant d'afficher les caractéristqiues de l'objet : effet, quantité,...
-     */
-    public void caracteristiques(){
-        System.out.println("Cette potion permet de récupérer "+getPtRecup()+" points de Mana");
-    }
-    
+  
     
     public String getAffichage(){        
         return "Man";               

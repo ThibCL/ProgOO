@@ -123,11 +123,12 @@ public class Mage extends Personnage implements Combattant {
             System.out.println(((Personnage)c).getNom()+"est mort");
         }
     }
+    
     /**
-     * Méthode qui permet de ramasser un objet dans un mondequit
+     * Méthode qui permet de ramasser un objet dans un monde 
      * 
-     * @param o
-     * @param w 
+     * @param o objet à ramasser
+     * @param w monde dans lequel le mage vit
      */
     public void ramasser(Objet o, World w) {
         if (o instanceof NuageToxique) {
@@ -149,23 +150,28 @@ public class Mage extends Personnage implements Combattant {
         }
     }
 
+    /**
+     * Méthode permettant d'appliquer l'effet d'un bonus/malus mangé par le mage 
+     * Il est le seul personnage à pouvoir augmenter / diminuer ses caractéristiques magiques 
+     * @param n nourriture mangée
+     * @param i entier permettant d'activer l'effet de la nourriture (quand il vaut 1) ou de la désactiver (quand il vaut -1) 
+     * pour retrouver les caractéristiques initiales
+     */
     public void effetnourriture(Nourriture n, int i) {
         super.effetNourriture(n,i);
-
-        
-
             switch (n.getCaracteristique()) {
-                case 8:
-                    this.setPourcentageMag(this.getPourcentageMag() + n.getPteffet() * i);
+                case 7:
+                    this.setPourcentageMag(this.getPourcentageMag() + n.getPtEffet() * i);
                     break;
-                case 9:
-                    this.setDegMag(this.getDegMag() + n.getPteffet() * i);
+                case 8:
+                    this.setDegMag(this.getDegMag() + n.getPtEffet() * i);
                     break;
 
             }
         
 
     }
+    
     
     public void effetPotion(Objet o){
         super.effetPotion(o);
@@ -174,9 +180,7 @@ public class Mage extends Personnage implements Combattant {
         }
         
     }
-    
-
-    
+       
     
     public String getAffichage(){
         if(this.getControle()==0){

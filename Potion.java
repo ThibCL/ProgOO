@@ -47,7 +47,7 @@ public abstract class Potion extends Objet {
     }
     
     public abstract void affiche();
-    public abstract void caracteristiques();
+
     public void getTexteSauvegarde(BufferedWriter writer) throws IOException{
         super.getTexteSauvegarde(writer);
         writer.write(Integer.toString(this.getPtRecup())+ "");

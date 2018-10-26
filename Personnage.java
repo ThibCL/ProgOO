@@ -58,8 +58,8 @@ public abstract class Personnage extends Creature {
      * @param nom Nom du personnage créé
      * @param ptV Points de vie du personnage créé
      * @param ptM Points de mana du personnage créé
-     * @param pA Points d'attaque du personnage créé
-     * @param pP Points de parade du personnage créé
+     * @param pA Pourcentage d'attaque du personnage créé
+     * @param pP Pourcentage de parade du personnage créé
      * @param pM Points de magie du personnage créé
      * @param rM Resistance à la magie du personnage créé
      * @param dA Dégats d'attaque du personnage créé
@@ -323,40 +323,102 @@ public abstract class Personnage extends Creature {
     /**
      * méthode qui permet de modifier les caractéristiques du personnage en
      * fonction de la nourriture qu'il ramasse
-     *
-     * @param i vaut 1 ou -1 si le personnage ramasse ou si la duree s'est
-     * écoulé
+     * @param n nourriture mangée
+     * @param i entier permettant d'activer l'effet de la nourriture (quand il vaut 1) ou de la désactiver (quand il vaut -1) 
+     * pour retrouver les caractéristiques initiales
      */
     public void effetNourriture(Nourriture n, int i) {
-
-        switch (n.getCaracteristique()) {
-            case 1:
-                this.setPourcentageAtt(this.getPourcentageAtt() + n.getPteffet() * i);
-                break;
-            case 2:
-                this.setPourcentagePar(this.getPourcentagePar() + n.getPteffet() * i);
-                break;
-            case 3:
-                this.setDegAtt(this.getDegAtt() + n.getPteffet() * i);
-                break;
-            case 4:
-                this.setPtPar(this.getPtPar() + n.getPteffet() * i);
-                break;
-            case 5:
-                this.setPourcentageAtt(this.getPourcentageAtt() + n.getPteffet() * i);
-                break;
-            case 6:
-                this.setPourcentageResisMag(this.getPourcentageResisMag() + n.getPteffet() * i);
-                break;
-            case 7:
-                this.setDistAttMax(this.getDistAttMax() + n.getPteffet() * i);
-                break;
+        
+        //Si i vaut 1 on active l'effet de la nourriture
+        if (i==1){
+            
+            //Pour chacune des caractéristiques, il faut vérifier si la caractéristique n'est pas <0 quand on applique l'effet malus
+            switch (n.getCaracteristique()) {
+                case 1:
+                    int diff = this.getPourcentageAtt() + n.getPtEffet();
+                    if (diff<0){
+                        n.setPtEffet(this.getPourcentageAtt());
+                        this.setPourcentageAtt(0);
+                    }
+                    else {
+                        this.setPourcentageAtt(this.getPourcentageAtt() + n.getPtEffet());
+                    }
+                    break;
+                case 2:
+                    diff = this.getPourcentagePar() + n.getPtEffet();
+                    if (diff<0){
+                        n.setPtEffet(this.getPourcentagePar());
+                        this.setPourcentagePar(0);
+                    }
+                    else {
+                        this.setPourcentagePar(this.getPourcentagePar() + n.getPtEffet());
+                    }
+                    break;
+                case 3:
+                    diff = this.getDegAtt() + n.getPtEffet();
+                    if (diff<0){
+                        n.setPtEffet(this.getDegAtt());
+                        this.setDegAtt(0);
+                    }
+                    else {
+                        this.setDegAtt(this.getDegAtt() + n.getPtEffet());
+                    }
+                    break;
+                case 4:
+                    diff = this.getPtPar() + n.getPtEffet();
+                    if (diff<0){
+                        n.setPtEffet(this.getPtPar());
+                        this.setPtPar(0);
+                    }
+                    else {
+                        this.setPtPar(this.getPtPar() + n.getPtEffet());
+                    }
+                    break;
+                case 5:
+                    diff = this.getPourcentageResisMag() + n.getPtEffet();
+                    if (diff<0){
+                        n.setPtEffet(this.getPourcentageResisMag());
+                        this.setPourcentageResisMag(0);
+                    }
+                    else {
+                        this.setPourcentageResisMag(this.getPourcentageResisMag() + n.getPtEffet());
+                    }
+                    break;
+                case 6:
+                    /*¨Pour la distance d'attaque maximale, il sera possible qu'elle soit négative si la nourrtiture est un malus, mais cela ne pose pas de problème
+                    car dans tous les cas il ne pourra pas attaquer quelqu'un car distMax<=0*/
+                    this.setDistAttMax(this.getDistAttMax() + n.getPtEffet());
+                    break;
+            }
         }
-
+        
+        //Sinon on le désactive
+        else {
+            switch (n.getCaracteristique()) {
+                case 1:
+                    this.setPourcentageAtt(this.getPourcentageAtt() - n.getPtEffet());
+                    break;
+                case 2:
+                    this.setPourcentagePar(this.getPourcentagePar() - n.getPtEffet());
+                    break;
+                case 3:
+                    this.setDegAtt(this.getDegAtt() - n.getPtEffet());
+                    break;
+                case 4:
+                    this.setPtPar(this.getPtPar() - n.getPtEffet());
+                    break;
+                case 5:
+                    this.setPourcentageResisMag(this.getPourcentageResisMag() - n.getPtEffet());
+                    break;
+                case 6:
+                    this.setDistAttMax(this.getDistAttMax() - n.getPtEffet());
+                    break;
+            }
+        }
     }
 
     /**
-     * méthode qui applique les effet des potions aux personnages
+     * méthode qui applique les effets des potions aux personnages
      *
      * @param o
      */

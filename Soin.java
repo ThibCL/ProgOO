@@ -36,9 +36,7 @@ public class Soin extends Potion{
     /**
     * Méthode permettant d'afficher les caractéristqiues de l'objet : effet, quantité,...
     */
-    public void caracteristiques(){
-        System.out.println("Cette potion permet de récupérer "+getPtRecup()+" points de Vie");
-    }
+
     public void getTexteSauvegarde(BufferedWriter writer) throws IOException{
         super.getTexteSauvegarde(writer);
 

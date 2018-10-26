@@ -77,17 +77,20 @@ public class Partie {
                     while (entier==false){
                         String reponse=sc.next();
                         try{
-                             rep=Integer.parseInt(reponse);
-                             entier=true;
+                            rep=Integer.parseInt(reponse);
+                            if (rep<1 || rep>5){
+                                entier=false;
+                                System.out.println("Il ne peut y avoir qu'entre 1 et 4 joueurs ! Combien de joueurs êtes vous ?");
+                            }
+                            else {
+                                entier=true;
+                            }
                         }
                         catch(NumberFormatException e){
                             System.out.println("Il faut entrer un entier ! Combien de joueurs êtes vous ?");
                             entier=false;
                         }
-                        if (rep<1 || rep>5){
-                            entier=false;
-                            System.out.println("Il ne peut y avoir qu'entre 1 et 4 joueurs ! Combien de joueurs êtes vous ?");
-                        }
+                        
                     }
                     for (int i=1; i<rep+1;i++){
                         System.out.println("\nJoueur "+ i +":");

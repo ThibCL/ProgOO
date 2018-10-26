@@ -4,7 +4,8 @@ import java.io.*;
 import java.util.Random;
 import java.util.StringTokenizer;
 /**
- *
+ * Classe représentant les nuages toxiques. 
+ * Ces nuages attaquent les créatures qui le rencontrent 
  * @author Thibault
  */
 public class NuageToxique extends Objet implements Deplacable,Combattant {
@@ -49,7 +50,6 @@ public class NuageToxique extends Objet implements Deplacable,Combattant {
         pourcentageAtt = Integer.parseInt(tokenizer.nextToken());
         //On récupère l'objet si le nuage était sur un objet lors de la sauvegarde
         int aObjet=Integer.parseInt(tokenizer.nextToken());
-        System.out.println(aObjet);
         if (aObjet==1){
             String delimiteurs2 = "[;]";
             StringTokenizer tokenizer2 = new StringTokenizer(element, delimiteurs2);
@@ -106,16 +106,9 @@ public class NuageToxique extends Objet implements Deplacable,Combattant {
                 + "\n - "  + degAtt + " points de dégats d'attaque ;"
                 + "\n - " + pourcentageAtt + "% de poucentage d'attaque ;");
         if (getObjet()!=null){
-            System.out.println("Il est placé sur cet objet : "
-                    + "\n - "  + getObjet() );
+            System.out.println("Il est placé sur cet objet : ");
+            getObjet().affiche();
         }
-    }
-    
-    /**
-    * Méthode permettant d'afficher les caractéristqiues de l'objet : effet, quantité,...
-    */
-    public void caracteristiques(){
-        System.out.println("Ce nuage est toxique");
     }
     
 
@@ -190,7 +183,10 @@ public class NuageToxique extends Objet implements Deplacable,Combattant {
         }
     }
     
-    
+    /**
+     * Méthode retournant l'affichage du nuage toxique sur la matrice
+     * @return 
+     */
     public String getAffichage(){        
         return "Tox";               
     }
