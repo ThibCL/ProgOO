@@ -210,13 +210,14 @@ public class Joueur {
      * coordonnées au joueur jusqu'a ce que le deplacement soit possible. Une
      * fois que le deplacement est possible la méthode appelle la méthode
      * déplacer de creature
-     *
+     * 
      * @param w
      */
-    public void deplacePerso(World w) {
+    public boolean deplacePerso(World w) {
+        boolean reussite=true;
         if (this.perso.deplPossible(w) == false) {
             System.out.println("Impossible de te déplacer, tu dois te battre");
-            //this.combattreperso();
+            reussite=false;
         } else {
             Point2D pos;
             pos = demanderDepl();
@@ -241,7 +242,7 @@ public class Joueur {
             this.perso.deplacer(w, x, y);
 
         }
-
+        return reussite;
     }
 
     /**
@@ -249,10 +250,12 @@ public class Joueur {
      *
      * @param w
      */
-    public void mangerPerso(World w) {
+    public boolean mangerPerso(World w) {
         Scanner scani = new Scanner(System.in);
+        boolean reussite=true;
         if (!this.getPerso().nourritureNonActivee()) {
             System.out.println("Pas d'aliment à manger !");
+            reussite=false;
 
         } else {
             System.out.println("Voici les aliments que vous possédez: ");
@@ -286,6 +289,7 @@ public class Joueur {
             this.getPerso().effetNourriture(this.getPerso().getBonusMalus().get(rep), 1);
             this.getPerso().getBonusMalus().get(rep).setEtat(1);
         }
+        return reussite;
     }
 
     /**
