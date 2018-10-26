@@ -322,43 +322,34 @@ public class World {
                     System.out.println("C'est au joueur " + j.getNumero() + " (" + j.getPerso().getNom() + ") de jouer. ");
                     j.getPerso().affiche();
                     System.out.println();
-                    System.out.println("Voulez vous  : "
+                    
+                    boolean choisi = false;
+                    while (choisi == false) {
+                        System.out.println("Voulez vous  : "
                             + "\n - Combattre : tapez 'c' ;"
                             + "\n - vous Deplacer : tapez 'd' ;"
                             + "\n - Manger : tapez 'm' ;"
                             + "\n - Boire : tapez 'b' ;");
-
-                    boolean choisi = false;
-                    while (choisi == false) {
                         choix = sc.next();
                         switch (choix) {
                             case "Combattre":
                             case "c":
-                                j.combattrePerso(this);
-                                choisi = true;
+                                choisi=j.combattrePerso(this);
                                 break;
                             case "Deplacer":
                             case "d":
-                                j.deplacePerso(this);
-                                choisi = true;
+                                choisi=j.deplacePerso(this);
                                 break;
                             case "Manger":
                             case "m":
-                                j.mangerPerso(this);
-                                choisi = true;
+                                choisi=j.mangerPerso(this);
                                 break;
                             case "Boire":
                             case "b":
-                                j.boirePerso(this);
-                                choisi = true;
+                                choisi=j.boirePerso(this);
                                 break;
                             default:
-                                System.out.println("Ce n'est pas une action valide ! "
-                                        + "Voulez vous  : "
-                                        + "\n - Combattre : tapez 'c' ;"
-                                        + "\n - te Deplacer : tapez 'd' ;"
-                                        + "\n - Manger : tapez 'm' ;"
-                                        + "\n - Boire : tapez 'b' ;");
+                                System.out.println("Ce n'est pas une action valide ! ");
                                 break;
                         }
                     }
