@@ -97,10 +97,7 @@ public class Nourriture extends Objet{
     public void setEtat(int etat) {
         this.etat = etat;
     }
-    
-    
-    
-    
+
     public int getPtEffet() {
         return ptEffet;
     }
@@ -128,19 +125,29 @@ public class Nourriture extends Objet{
     }
     
     /**
-     * Méthode permettant d'afficher l'objet 
+     * Méthode permettant d'afficher la nourriture de manière globale (ne révèle pas son effet bonus ou malus) 
      */
     public void affiche(){
         System.out.print("Nourriture: ");
+        System.out.print("Modifie la caracteristique ");
+        this.caracteristiques();
+        System.out.println();
+    }
+    
+    /**
+    * Méthode permettant d'afficher l'effet de la nourriture ramassée
+    **/
+    public void afficheEffet(){
+        System.out.print("Nourriture: ");
         if (getPtEffet()<0){
-            System.out.print("Diminue la caracteristique ");
+            System.out.print("Malus! Diminue la caracteristique ");
         }
         else {
-             System.out.print("Augmente la caracteristique ");
+            System.out.print("Bonus! Augmente la caracteristique ");
         }
         this.caracteristiques();
-        System.out.print(" de "+this.getPtEffet()+" pt");
-        System.out.println(" pour une duree de "+ this.getDuree()+" tour");
+        System.out.print(" de "+this.getPtEffet()+" point(s)");
+        System.out.println(" pour une durée de "+ this.getDuree()+" tour(s)");
     }
     
     /**

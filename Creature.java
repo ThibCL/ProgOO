@@ -222,12 +222,13 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
                 if (o != null){
                     if (this.controle == 1){
                         Scanner scan = new Scanner(System.in);
-                        System.out.print("Voulez vous ramasser l'objet ? o/n :");
+                        System.out.print("Voulez vous ramasser l'objet suivant ? (o/n) : ");
                         o.affiche();
                         String reponse=scan.next();
                         switch(reponse){
                             case "o": 
                                 ((Personnage)this).ramasser(o,w);
+                                System.out.println("L'objet est dans votre sac !");
                                 break;
                             default :
                                 System.out.println("L'objet n'est pas ramassé");

@@ -251,7 +251,7 @@ public class Joueur {
     public void mangerPerso(World w) {
         Scanner scani = new Scanner(System.in);
         if (!this.getPerso().nourritureNonActivee()) {
-            System.out.println("Pas d'aliment à manger");
+            System.out.println("Pas d'aliment à manger !");
 
         } else {
             System.out.println("Voici les aliments que vous possédez: ");
@@ -259,14 +259,31 @@ public class Joueur {
                 if (this.getPerso().getBonusMalus().get(k).getEtat() == 0) {
                     System.out.print(k + ": ");
                     this.getPerso().getBonusMalus().get(k).affiche();
-                }
-                System.out.println("Taper le numéro de l'aliment que vous voulez mangez:");
+                }  
             }
-            int rep = scani.nextInt();
+            System.out.println("Tapez le numéro de l'aliment que vous voulez manger :");
+            boolean bonneRep = false;
+            int rep=-1;
+            while (bonneRep ==false){
+                try {
+                    rep = scani.nextInt();
+                    if (rep<0 ||  rep>this.getPerso().getBonusMalus().size()-1||this.getPerso().getBonusMalus().get(rep).getEtat()==1){
+                        System.out.println("Ce n'est pas un numéro valide! Tapez le numéro de l'aliment que vous voulez manger :");
+                    }
+                    else {
+                        System.out.println("Etat:");
+                        System.out.println(this.getPerso().getBonusMalus().get(rep).getEtat());
+                        bonneRep=true;
+                    }
+                }
+                catch (NumberFormatException e){
+                    System.out.println("Il faut entrer un entier! Tapez le numéro de l'aliment que vous voulez manger :");
+                }
+            }
             this.getPerso().effetNourriture(this.getPerso().getBonusMalus().get(rep), 1);
             this.getPerso().getBonusMalus().get(rep).setEtat(1);
-            System.out.print("vous avez mangé: ");
-            this.getPerso().getBonusMalus().get(rep).affiche();
+            System.out.print("Vous avez mangé: ");
+            this.getPerso().getBonusMalus().get(rep).afficheEffet();
         }
     }
 
