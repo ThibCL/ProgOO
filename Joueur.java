@@ -273,8 +273,6 @@ public class Joueur {
                         System.out.println("Ce n'est pas un numéro valide! Tapez le numéro de l'aliment que vous voulez manger :");
                     }
                     else {
-                        System.out.println("Etat:");
-                        System.out.println(this.getPerso().getBonusMalus().get(rep).getEtat());
                         bonneRep=true;
                     }
                 }
@@ -283,10 +281,10 @@ public class Joueur {
                     
                 }
             }
-            this.getPerso().effetNourriture(this.getPerso().getBonusMalus().get(rep), 1);
             this.getPerso().getBonusMalus().get(rep).setEtat(1);
             System.out.print("Vous avez mangé: ");
             this.getPerso().getBonusMalus().get(rep).afficheEffet();
+            this.getPerso().effetNourriture(this.getPerso().getBonusMalus().get(rep), 1);
         }
     }
 

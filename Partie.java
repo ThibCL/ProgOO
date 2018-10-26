@@ -22,6 +22,11 @@ public class Partie {
         this.w = w;
     }
     
+    /**
+     * Méthode permettant le lancement de la partie. 
+     * La sauvegarde renvoyée est soit celle de la partie chargée soit celle de la nouvelle partie lancée
+     * @return 
+     */
     public SauvegardePartie lancerPartie(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Bienvenue dans World of ECN !");
@@ -35,8 +40,8 @@ public class Partie {
             switch (choix) {
                 case "n":
                     choisi=true;
-                    System.out.println("Nouvelle partie ! Entrez un nom de sauvegarde ou tapez d si vous voulez"
-                            + "un nom par défault :");
+                    System.out.println("Nouvelle partie ! Entrez un nom de sauvegarde ou tapez 'd' si vous voulez "
+                            + "un nom par défaut :");
                     choix=sc.next();
                     switch(choix){
                         case "d":
