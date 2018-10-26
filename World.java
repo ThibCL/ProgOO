@@ -95,11 +95,11 @@ public class World {
             Loup lp = new Loup();
             this.ajouterCrea(lp);
         }
-        for (int k = 0; k < nbralea.nextInt(nbr); k++) {
+        for (int k = 0; k < nbralea.nextInt(nbr*2); k++) {
             Soin vdk = new Soin();
             this.ajouterObjet(vdk);
         }
-        for (int k = 0; k < nbralea.nextInt(nbr); k++) {
+        for (int k = 0; k < nbralea.nextInt(nbr*2); k++) {
             Mana rhm = new Mana();
             this.ajouterObjet(rhm);
         }
