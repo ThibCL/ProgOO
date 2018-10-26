@@ -60,15 +60,18 @@ public class Partie {
                             //On teste si la sauvegarde n'existe pas déjà afin de s'assurer que la nouvelle partie n'écrase pas une autre !
                             fichierExistant=true;
                             while (fichierExistant == true){
-                                choix=sc.next();
+                                
                                 try{
                                     ChargementPartie partieExistante = new ChargementPartie(choix);
                                     System.out.println("Ce nom de sauvegarde existe déjà, choisissez en un autre.");
                                     fichierExistant=true;
+                                    choix=sc.next();
                                 }
                                 catch (FileNotFoundException e){
                                     fichierExistant=false;
+
                                 }
+                                
                             }
                             break;
                     }
