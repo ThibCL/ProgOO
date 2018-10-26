@@ -38,13 +38,7 @@ public abstract class Objet extends ElementDeJeu {
     /**
      * Méthode permettant d'afficher l'objet 
      */
-    public abstract void affiche();
-    
-    /**
-     * Méthode permettant d'afficher les caractéristqiues de l'objet : effet, quantité,...
-     */
-    public abstract void caracteristiques();
-    
+    public abstract void affiche();    
     
     public void getTexteSauvegarde(BufferedWriter writer) throws IOException{
         writer.write(this.getClass().getSimpleName()+" ");

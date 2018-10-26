@@ -210,6 +210,7 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
             pos.translate(i, j);
             w.getMatMonde()[this.pos.getX()][this.pos.getY()].setCreature(this);
             Objet o = w.getMatMonde()[this.pos.getX()][this.pos.getY()].getObjet();
+            //Si la créature se déplace sur un nuage toxique celui-ci l'attaque
             if (o instanceof NuageToxique){
                 ((NuageToxique) o).combattre(this);
                 if(this.getPtVie()<0){

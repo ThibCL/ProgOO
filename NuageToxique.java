@@ -5,7 +5,8 @@ import java.util.Random;
 import java.util.StringTokenizer;
 
 /**
- *
+ * Classe représentant les nuages toxiques. 
+ * Ces nuages attaquent les créatures qui le rencontrent 
  * @author Thibault
  */
 public class NuageToxique extends Objet implements Deplacable, Combattant {
@@ -50,9 +51,8 @@ public class NuageToxique extends Objet implements Deplacable, Combattant {
         degAtt = Integer.parseInt(tokenizer.nextToken());
         pourcentageAtt = Integer.parseInt(tokenizer.nextToken());
         //On récupère l'objet si le nuage était sur un objet lors de la sauvegarde
-        int aObjet = Integer.parseInt(tokenizer.nextToken());
-        System.out.println(aObjet);
-        if (aObjet == 1) {
+        int aObjet=Integer.parseInt(tokenizer.nextToken());
+        if (aObjet==1){
             String delimiteurs2 = "[;]";
             StringTokenizer tokenizer2 = new StringTokenizer(element, delimiteurs2);
             tokenizer2.nextToken();
@@ -107,36 +107,28 @@ public class NuageToxique extends Objet implements Deplacable, Combattant {
         System.out.println("Nuage Toxique ! Il a :"
                 + "\n - " + degAtt + " points de dégats d'attaque ;"
                 + "\n - " + pourcentageAtt + "% de poucentage d'attaque ;");
-        if (getObjet() != null) {
-            System.out.println("Il est placé sur cet objet : "
-                    + "\n - " + getObjet());
+        if (getObjet()!=null){
+            System.out.println("Il est placé sur cet objet : ");
+            getObjet().affiche();
         }
     }
+    
 
-    /**
-     * Méthode permettant d'afficher les caractéristqiues de l'objet : effet,
-     * quantité,...
-     */
-    public void caracteristiques() {
-        System.out.println("Ce nuage est toxique");
-    }
-
-    /**
-     * Méthode pour le déplacement du nuage toxique
-     *
-     * @param w monde dans lequel le nuage se déplace
-     * @param i
-     * @param j
-     */
-    public void deplacer(World w, int i, int j) {
-        Random posAlea = new Random();
-        i = posAlea.nextInt(3) - 1;
-        j = posAlea.nextInt(3) - 1;
-        while (this.getPos().getX() + i < 0 || this.getPos().getX() + i > w.getHauteur() - 1
-                || this.getPos().getY() + j < 0 || this.getPos().getY() + j > w.getLargeur() - 1
-                || w.getMatMonde()[this.getPos().getX() + i][this.getPos().getY() + j].getObjet() instanceof NuageToxique) {
-            i = posAlea.nextInt(3) - 1;
-            j = posAlea.nextInt(3) - 1;
+ /**
+  * Méthode pour le déplacement du nuage toxique 
+  * @param w monde dans lequel le nuage se déplace
+  * @param i 
+  * @param j 
+  */   
+    public void deplacer(World w, int i, int j){
+        Random posAlea= new Random();
+        i=posAlea.nextInt(3)-1;
+        j=posAlea.nextInt(3)-1;
+        while (this.getPos().getX()+i<0 || this.getPos().getX()+i>w.getHauteur()-1 || 
+                this.getPos().getY()+j<0 || this.getPos().getY()+j>w.getLargeur()-1 || 
+                w.getMatMonde()[this.getPos().getX()+i][this.getPos().getY()+j].getObjet() instanceof NuageToxique){
+            i=posAlea.nextInt(3)-1;
+            j=posAlea.nextInt(3)-1;
         }
         Objet o1 = getObjet();
         if (o1 != null) {
@@ -204,8 +196,12 @@ public class NuageToxique extends Objet implements Deplacable, Combattant {
             writer.write("] ");
         }
     }
-
-    public String getAffichage() {
-        return "Tox";
+    
+    /**
+     * Méthode retournant l'affichage du nuage toxique sur la matrice
+     * @return 
+     */
+    public String getAffichage(){        
+        return "Tox";               
     }
 }

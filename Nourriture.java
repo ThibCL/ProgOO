@@ -15,9 +15,17 @@ public class Nourriture extends Objet{
     
     /**
      *Atttibut qui précise la caractèristique impacté par le bonus/malus
-     * 1 correspond à
+     * 1 correspond à PourcentageAtt ; 
+     * 2 correspond à PourcentagePar ; 
+     * 3 correspond à DegAtt ; 
+     * 4 correspond à PtPar ;
+     * 5 correspond à PourcentageResisMag ; 
+     * 6 correspond à DistAttMax ;
+     * 7 correspond à PourcentageMag ; 
+     * 8 correspond à DegMag ; 
      */
     private int caracteristique;
+    
     /**
     * Indique le nombre de tour que l'objet fait effet
     */
@@ -49,11 +57,18 @@ public class Nourriture extends Objet{
             switch(this.caracteristique){//a voir pour les malus
                 case 1: case 2: case 5: case 6: case 8:
                     this.ptEffet=nbralea.nextInt(11)+5;
+                    break;
                 case 3: case 4: case 9:
                     this.ptEffet=nbralea.nextInt(6)+1;
+                    break;
                 case 7:
                     this.ptEffet=nbralea.nextInt(3)+1;
+                    break;
             }
+        int i=nbralea.nextInt(2);
+        if (i==0){
+            ptEffet=-ptEffet;
+        }
         this.etat=0;
     }
     
@@ -86,11 +101,11 @@ public class Nourriture extends Objet{
     
     
     
-    public int getPteffet() {
+    public int getPtEffet() {
         return ptEffet;
     }
 
-    public void setPteffet(int ptEffet) {
+    public void setPtEffet(int ptEffet) {
         this.ptEffet = ptEffet;
     }
     
@@ -117,8 +132,14 @@ public class Nourriture extends Objet{
      */
     public void affiche(){
         System.out.print("Nourriture: ");
-        System.out.print("Augmente la caracteristique "+this.getCaracteristique());
-        System.out.print(" de "+this.getPteffet()+" pt");
+        if (getPtEffet()<0){
+            System.out.print("Diminue la caracteristique ");
+        }
+        else {
+             System.out.print("Augmente la caracteristique ");
+        }
+        this.caracteristiques();
+        System.out.print(" de "+this.getPtEffet()+" pt");
         System.out.println(" pour une duree de "+ this.getDuree()+" tour");
     }
     
@@ -126,7 +147,32 @@ public class Nourriture extends Objet{
     * Méthode permettant d'afficher les caractéristqiues de l'objet : effet, quantité,...
     */
     public void caracteristiques(){
-        
+        switch (getCaracteristique()){
+            case(1):
+                System.out.print("Pourcentage d'Attaque");
+                break;
+            case(2):
+                System.out.print("Pourcentage de Parade");
+                break;
+            case(3):
+                System.out.print("Dégats d'Attaque");
+                break;
+            case(4):
+                System.out.print("Points de Parade");
+                break;
+            case(5):
+                System.out.print("Pourcentage de résitance à la magie");
+                break;
+            case(6):
+                System.out.print("Distance maximale d'attaque");
+                break;
+            case(7):
+                System.out.print("Pourcentage de Magie");
+                break;
+            case(8):
+                System.out.print("Dégâts de Magie");
+                break;
+        }
     }
     
     public void getTexteSauvegarde(BufferedWriter writer) throws IOException{
