@@ -215,12 +215,11 @@ public class Archer extends Personnage implements Combattant {
             ((NuageToxique) o).combattre(this);
         }
         else if(o instanceof Nourriture){
-        this.getBonusMalus().add((Nourriture)o);
-        int x = o.getPos().getX();
-        int y = o.getPos().getY();
-        w.getMatMonde()[x][y].setObjet(null);
-        w.getlObjet().remove(o);
-        this.effetNourriture((Nourriture)o,1);
+            this.getBonusMalus().add((Nourriture)o);
+            int x = o.getPos().getX();
+            int y = o.getPos().getY();
+            w.getMatMonde()[x][y].setObjet(null);
+            w.getlObjet().remove(o);
     }
         else {
             getSac().add(o);

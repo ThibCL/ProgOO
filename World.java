@@ -71,7 +71,7 @@ public class World {
                 this.matMonde[li][ti] = new Case(new Point2D(li, ti));
             }
         }
-        for (int k = 0; k < nbralea.nextInt(nbr); k++) {
+        /*for (int k = 0; k < nbralea.nextInt(nbr); k++) {
             Archer arch = new Archer();
             this.ajouterCrea(arch);
         }
@@ -102,17 +102,17 @@ public class World {
         for (int k = 0; k < nbralea.nextInt(nbr); k++) {
             Mana rhm = new Mana();
             this.ajouterObjet(rhm);
-        }
-        for (int k = 0; k < nbralea.nextInt(nbr); k++) {
+        }*/
+        for (int k = 0; k < nbralea.nextInt(40); k++) {
             Nourriture burger = new Nourriture();
             this.ajouterObjet(burger);
         }
-
+        /*
         for (int k = 0; k < 7; k++) {
             NuageToxique cumulus = new NuageToxique();
             this.ajouterObjet(cumulus);
         }
-
+        */
     }
 
     public ArrayList<Joueur> getlJoueur() {
@@ -353,7 +353,7 @@ public class World {
                                 choisi = true;
                                 break;
                             default:
-                                System.out.println("Ce n'est pas une action valide !"
+                                System.out.println("Ce n'est pas une action valide ! "
                                     + "Voulez vous  : "
                                     + "\n - Combattre : tapez 'c' ;" 
                                     + "\n - te Deplacer : tapez 'd' ;" 

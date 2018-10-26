@@ -17,6 +17,7 @@ public class TestSeance6 {
         w.creeMondeAlea();
         w.afficheMat();*/
        
+
        /*//nuage qui n'est pas sur un objet
         NuageToxique n1 = new NuageToxique("NuageToxique 0 3 9 67 0");
         n1.affiche();
@@ -26,6 +27,6 @@ public class TestSeance6 {
         //nuage placé sur un objet de type Soin
         NuageToxique n2 = new NuageToxique("NuageToxique 6 9 9 70 1 [Soin 9 6 16]");
         n2.affiche();*/
-        
+
     }   
 }

@@ -174,7 +174,6 @@ public class Guerrier extends Personnage implements Combattant {
             int y = o.getPos().getY();
             w.getMatMonde()[x][y].setObjet(null);
             w.getlObjet().remove(o);
-            this.effetNourriture((Nourriture) o, 1);
         } else {
             getSac().add(o);
             int x = o.getPos().getX();
